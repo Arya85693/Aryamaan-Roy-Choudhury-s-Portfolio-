@@ -24,7 +24,7 @@ const projects = [
   {
     title: "Quantifying Lyricism in Hip-Hop",
     description:
-      "Structured NLP pipeline to quantify lyrical complexity across rap discographies. Engineered custom feature extraction and scoring metrics for lexical diversity, rhyme density, and thematic variation. Normalized multi-dimensional features for cross-artist comparison and generated visual analyses to identify stylistic patterns.",
+      "Structured NLP pipeline to quantify lyrical complexity across rap discographies. Engineered custom feature extraction and scoring metrics for lexical diversity, rhyme density, and thematic variation. Normalized multi-dimensional features for cross-artist comparison and generated visual analyses to identify stylistic patterns. This project is an active work in progress as I refine the methodology and expand the analysis.",
     highlight: "Designed feature pipelines and normalized metrics for cross-artist comparison.",
     tech: ["Python", "Pandas", "NLP Tooling", "Data Processing", "Data Visualization"],
     github: "https://github.com/Arya85693/Quantifying-Lyricism-in-Hip-Hop-A-Multi-Dimensional-NLP-Analysis-of-Rap-Discographies",
@@ -33,6 +33,16 @@ const projects = [
 ];
 
 const experience = [
+  {
+    company: "AdaptSkillAI",
+    role: "Software Engineering Intern",
+    location: "Remote",
+    period: "Feb 2026 - Present",
+    bullets: [
+      "Contributing to development of an adaptive learning platform MVP; implementing platform features and improving reliability within an evolving early-stage codebase supporting personalized learning workflows",
+      "Collaborating with engineering and product teams to translate learning workflow requirements into scalable technical implementations for future platform deployment",
+    ],
+  },
   {
     company: "PL4TFORM",
     role: "Writer & Editor",
@@ -183,8 +193,35 @@ export default function Home() {
                   ))}
                 </div>
                 <p className="mt-4 text-slate-400 text-base leading-relaxed">
-                  {project.description}{project.highlight && ` ${project.highlight}`}
+                  {project.description}
+                  {project.highlight && ` ${project.highlight}`}
                 </p>
+                {project.title === "Supplement Recommender" && (
+                  <div className="mt-5 grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <figure className="flex flex-col">
+                      <div className="h-56 w-full overflow-hidden rounded-lg shadow-md">
+                        <Image
+                          src="/project-images/supplement-landing.png"
+                          alt="Landing page of SuppleMatch supplement recommendation platform"
+                          width={600}
+                          height={380}
+                          className="w-full h-full object-cover"
+                        />
+                      </div>
+                    </figure>
+                    <figure className="flex flex-col">
+                      <div className="h-56 w-full overflow-hidden rounded-lg shadow-md">
+                        <Image
+                          src="/project-images/supplement-about.png"
+                          alt="About section of SuppleMatch describing recommendation workflow"
+                          width={600}
+                          height={380}
+                          className="w-full h-full object-cover"
+                        />
+                      </div>
+                    </figure>
+                  </div>
+                )}
                 <div className="mt-6">
                   <Link
                     href={project.github}
@@ -247,6 +284,11 @@ export default function Home() {
                     </li>
                   ))}
                 </ul>
+                {exp.company === "AdaptSkillAI" && (
+                  <p className="mt-3 text-sm text-slate-500">
+                    Note: Certain technical details omitted due to NDA while product remains in pre-release.
+                  </p>
+                )}
               </div>
             ))}
           </div>
