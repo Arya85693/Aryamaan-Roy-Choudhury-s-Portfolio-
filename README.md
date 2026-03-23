@@ -13,7 +13,7 @@ Open [http://localhost:3000](http://localhost:3000).
 
 ## Resume
 
-Place your resume PDF at `public/Aryamaan_Roy_Choudhury_Resume.pdf` for the Resume link to work.
+The Resume button links to `public/resume.pdf`. When you update your resume, replace that file (or copy your PDF to `resume.pdf`).
 
 ## Build
 

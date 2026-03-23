@@ -1,6 +1,7 @@
 import Link from "next/link";
 import Image from "next/image";
 import Navbar from "@/components/Navbar";
+import LightboxImage from "@/components/LightboxImage";
 
 const links = [
   { href: "https://github.com/Arya85693", label: "GitHub" },
@@ -8,7 +9,7 @@ const links = [
     href: "https://www.linkedin.com/in/aryamaan-roy-choudhury-7830b6352/",
     label: "LinkedIn",
   },
-  { href: "/Aryamaan_Roy_Choudhury_Resume.pdf", label: "Resume" },
+  { href: "/resume.pdf", label: "Resume" },
 ];
 
 const projects = [
@@ -20,6 +21,15 @@ const projects = [
     tech: ["React", "JavaScript", "GPT-3.5 API"],
     github: "https://github.com/asrinivasan75/supplement-recommender",
     live: null,
+  },
+  {
+    title: "StratEdge Africa Website",
+    description:
+      "Built and deployed a production-ready advisory website for a founder-led Africa-focused strategy and market intelligence practice. Designed a clean multi-page architecture across Services, Insights, About, and Contact, and implemented structured content pipelines for service and editorial updates to keep publishing low-friction and consistent.",
+    highlight: "Refined information hierarchy and conversion flow through iterative UX and copy improvements.",
+    tech: ["Next.js 14", "TypeScript", "React", "Vercel"],
+    github: null,
+    live: "https://strat-edge-africa-website.vercel.app/",
   },
   {
     title: "Quantifying Lyricism in Hip-Hop",
@@ -41,6 +51,16 @@ const experience = [
     bullets: [
       "Contributing to development of an adaptive learning platform MVP; implementing platform features and improving reliability within an evolving early-stage codebase supporting personalized learning workflows",
       "Collaborating with engineering and product teams to translate learning workflow requirements into scalable technical implementations for future platform deployment",
+    ],
+  },
+  {
+    company: "StratEdge Africa",
+    role: "Web Development Intern",
+    location: "Remote",
+    period: "Jan 2026 - Present",
+    bullets: [
+      "Built and deployed a production-ready advisory website, structuring the information architecture across Services, Insights, About, and Contact to improve clarity and conversion flow",
+      "Implemented reusable App Router components and structured content models for services and insights, enabling low-friction updates and scalable publishing",
     ],
   },
   {
@@ -168,12 +188,12 @@ export default function Home() {
 
       {/* Projects */}
       <section id="projects" className="w-full bg-navy py-24 scroll-mt-20">
-        <div className="max-w-4xl mx-auto px-6 sm:px-8">
+        <div className="max-w-6xl mx-auto px-6 sm:px-8">
           <div className="mb-10">
             <h2 className="text-4xl font-semibold text-slate-100">Projects</h2>
             <div className="mt-3 w-12 h-0.5 bg-accent rounded-full" />
           </div>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {projects.map((project) => (
               <article
                 key={project.title}
@@ -199,8 +219,8 @@ export default function Home() {
                 {project.title === "Supplement Recommender" && (
                   <div className="mt-5 grid grid-cols-1 md:grid-cols-2 gap-4">
                     <figure className="flex flex-col">
-                      <div className="h-56 w-full overflow-hidden rounded-lg shadow-md">
-                        <Image
+                      <div className="h-40 md:h-44 w-full overflow-hidden rounded-lg shadow-md">
+                        <LightboxImage
                           src="/project-images/supplement-landing.png"
                           alt="Landing page of SuppleMatch supplement recommendation platform"
                           width={600}
@@ -210,8 +230,8 @@ export default function Home() {
                       </div>
                     </figure>
                     <figure className="flex flex-col">
-                      <div className="h-56 w-full overflow-hidden rounded-lg shadow-md">
-                        <Image
+                      <div className="h-40 md:h-44 w-full overflow-hidden rounded-lg shadow-md">
+                        <LightboxImage
                           src="/project-images/supplement-about.png"
                           alt="About section of SuppleMatch describing recommendation workflow"
                           width={600}
@@ -222,21 +242,49 @@ export default function Home() {
                     </figure>
                   </div>
                 )}
+                {project.title === "StratEdge Africa Website" && (
+                  <div className="mt-5 grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <figure className="flex flex-col">
+                      <div className="h-40 md:h-44 w-full overflow-hidden rounded-lg shadow-md">
+                        <LightboxImage
+                          src="/project-images/stratedgeafrica-landing.png"
+                          alt="StratEdge Africa landing page"
+                          width={600}
+                          height={380}
+                          className="w-full h-full object-cover"
+                        />
+                      </div>
+                    </figure>
+                    <figure className="flex flex-col">
+                      <div className="h-40 md:h-44 w-full overflow-hidden rounded-lg shadow-md">
+                        <LightboxImage
+                          src="/project-images/stratedgeafrica-about.png"
+                          alt="StratEdge Africa about us section"
+                          width={600}
+                          height={380}
+                          className="w-full h-full object-cover"
+                        />
+                      </div>
+                    </figure>
+                  </div>
+                )}
                 <div className="mt-6">
-                  <Link
-                    href={project.github}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="inline-flex items-center text-sm font-medium text-accent hover:text-blue-400 transition-all duration-200 hover:underline underline-offset-4 hover:scale-[1.02]"
-                  >
-                    GitHub →
-                  </Link>
+                  {project.github && (
+                    <Link
+                      href={project.github}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center text-sm font-medium text-accent hover:text-blue-400 transition-all duration-200 hover:underline underline-offset-4 hover:scale-[1.02]"
+                    >
+                      GitHub →
+                    </Link>
+                  )}
                   {project.live && (
                     <Link
                       href={project.live}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="ml-4 inline-flex items-center text-sm font-medium text-accent hover:text-blue-400 transition-colors duration-200 hover:underline underline-offset-4"
+                      className={`${project.github ? "ml-4 " : ""}inline-flex items-center text-sm font-medium text-accent hover:text-blue-400 transition-colors duration-200 hover:underline underline-offset-4`}
                     >
                       Live Demo →
                     </Link>
