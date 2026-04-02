@@ -51,7 +51,7 @@ const projects: Project[] = [
   },
   {
     key: "dls",
-    title: "Dream League Soccer Playstyle Analysis",
+    title: "Dream League Soccer Analysis",
     tags: ["Data / Analytics", "In Progress"],
     techStack: "Python • Pandas • NumPy",
     hook:
@@ -293,7 +293,7 @@ export default function Home() {
                 key={project.key}
                 className="p-8 rounded-xl border border-slate-700 bg-navy-secondary hover:border-blue-400/50 hover:-translate-y-1 hover:shadow-lg transition-all duration-200 flex flex-col"
               >
-                <h3 className="text-2xl font-semibold text-slate-100 tracking-tight">
+                <h3 className="text-lg font-semibold text-slate-100 tracking-tight">
                   {project.title}
                 </h3>
                 <div className="mt-4 flex flex-wrap gap-2">
