@@ -272,10 +272,10 @@ export default function Home() {
             <div className="mt-3 w-12 h-0.5 bg-accent rounded-full" />
           </div>
           <p className="text-slate-100 text-lg leading-relaxed mb-6">
-            I study Computer Engineering and Computer Science at Northeastern, with a focus on <strong className="font-semibold text-slate-100">systems thinking</strong> - how components connect, how data flows, and how to build reliable software that serves clear objectives.
+            I&apos;m a Computer Engineering and Computer Science student at Northeastern University focused on building real-world software systems. I&apos;m particularly interested in how data flows through systems and how to design applications that are reliable, scalable, and easy to maintain.
           </p>
           <p className="text-slate-100 text-lg leading-relaxed">
-            My work spans full-stack development, LLM integration, and quantitative analysis. I prioritize <strong className="font-semibold text-slate-100">clean architecture</strong> and <strong className="font-semibold text-slate-100">structured inputs</strong>, and I&apos;ve built production-facing projects while contributing to editorial and research teams where clarity and rigor matter.
+            I&apos;ve built production-facing applications and data-driven systems across full-stack development, analytics, and LLM integration. My work emphasizes clean architecture, structured inputs, and predictable system behavior, with a focus on turning ideas into systems people can actually use.
           </p>
         </div>
       </section>
