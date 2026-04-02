@@ -12,33 +12,75 @@ const links = [
   { href: "/resume.pdf", label: "Resume" },
 ];
 
-const projects = [
+type ProjectGallery = "stratedge" | "supplement" | null;
+
+type Project = {
+  key: string;
+  title: string;
+  tags: string[];
+  techStack: string;
+  hook: string;
+  bullets: string[];
+  featureLine?: string;
+  github: string | null;
+  live: string | null;
+  /** true = Live Demo styled as primary; false = GitHub primary when both exist */
+  liveDemoPrimary: boolean;
+  gallery: ProjectGallery;
+};
+
+const projects: Project[] = [
   {
-    title: "Supplement Recommender",
-    description:
-      "A recommendation system that maps structured user inputs (goals, constraints, preferences) to tailored supplement suggestions via the GPT-3.5 API. Designed the pipeline to enforce consistent outputs despite LLM non-determinism, and built a minimal front-end that keeps the user flow linear and predictable.",
-    highlight: "Focused on deterministic outputs and a linear, predictable UX.",
-    tech: ["React", "JavaScript", "GPT-3.5 API"],
-    github: "https://github.com/asrinivasan75/supplement-recommender",
-    live: null,
-  },
-  {
-    title: "StratEdge Africa Website",
-    description:
-      "Built and deployed a production-ready advisory website for a founder-led Africa-focused strategy and market intelligence practice. Designed a clean multi-page architecture across Services, Insights, About, and Contact, and implemented structured content pipelines for service and editorial updates to keep publishing low-friction and consistent.",
-    highlight: "Refined information hierarchy and conversion flow through iterative UX and copy improvements.",
-    tech: ["Next.js 14", "TypeScript", "React", "Vercel"],
+    key: "stratedge",
+    title: "StratEdge Africa Platform",
+    tags: ["Production"],
+    techStack: "Next.js • React • TypeScript • Vercel",
+    hook:
+      "Live production website for a consulting firm, built end-to-end as a solo developer.",
+    bullets: [
+      "Built full-stack application using Next.js, React, TypeScript, and Vercel.",
+      "Designed multi-page architecture with reusable components and structured routing.",
+      "Deployed live with optimized performance and responsive UI.",
+    ],
+    featureLine:
+      "Features: multi-page navigation, responsive design, structured content system.",
     github: null,
     live: "https://strat-edge-africa-website.vercel.app/",
+    liveDemoPrimary: true,
+    gallery: "stratedge",
   },
   {
-    title: "Quantifying Lyricism in Hip-Hop",
-    description:
-      "Structured NLP pipeline to quantify lyrical complexity across rap discographies. Engineered custom feature extraction and scoring metrics for lexical diversity, rhyme density, and thematic variation. Normalized multi-dimensional features for cross-artist comparison and generated visual analyses to identify stylistic patterns. This project is an active work in progress as I refine the methodology and expand the analysis.",
-    highlight: "Designed feature pipelines and normalized metrics for cross-artist comparison.",
-    tech: ["Python", "Pandas", "NLP Tooling", "Data Processing", "Data Visualization"],
-    github: "https://github.com/Arya85693/Quantifying-Lyricism-in-Hip-Hop-A-Multi-Dimensional-NLP-Analysis-of-Rap-Discographies",
+    key: "dls",
+    title: "Dream League Soccer Playstyle Analysis",
+    tags: ["Data / Analytics", "In Progress"],
+    techStack: "Python • Pandas • NumPy",
+    hook:
+      "Building a data-driven system to model player performance and role efficiency.",
+    bullets: [
+      "Developing Python pipeline (pandas, numpy) to convert cumulative stats into per-game metrics.",
+      "Designing role classification and reliability-adjusted scoring system.",
+      "Exploring validation and prediction techniques for player performance.",
+    ],
+    github: "https://github.com/Arya85693/Dream-League-Soccer-Playstyle-Analysis",
     live: null,
+    liveDemoPrimary: false,
+    gallery: null,
+  },
+  {
+    key: "supplement",
+    title: "Supplement Recommender",
+    tags: ["AI / Full-Stack"],
+    techStack: "React • JavaScript • GPT API",
+    hook: "AI-powered system for personalized supplement recommendations.",
+    bullets: [
+      "Built full-stack app using React and GPT-based API for structured recommendations.",
+      "Designed prompt and logic flow to improve output consistency.",
+      "Created user-friendly interface for predictable interaction.",
+    ],
+    github: "https://github.com/asrinivasan75/supplement-recommender",
+    live: null,
+    liveDemoPrimary: false,
+    gallery: "supplement",
   },
 ];
 
@@ -114,6 +156,58 @@ const experience = [
     ],
   },
 ];
+
+function ProjectGalleryBlock({ gallery }: { gallery: ProjectGallery }) {
+  if (gallery === "supplement") {
+    return (
+      <div className="mt-6 grid grid-cols-1 md:grid-cols-2 gap-4">
+        <div className="h-40 md:h-44 w-full overflow-hidden rounded-lg shadow-md">
+          <LightboxImage
+            src="/project-images/supplement-landing.png"
+            alt="Supplement recommender landing page"
+            width={600}
+            height={380}
+            className="w-full h-full object-cover"
+          />
+        </div>
+        <div className="h-40 md:h-44 w-full overflow-hidden rounded-lg shadow-md">
+          <LightboxImage
+            src="/project-images/supplement-about.png"
+            alt="Supplement recommender about section"
+            width={600}
+            height={380}
+            className="w-full h-full object-cover"
+          />
+        </div>
+      </div>
+    );
+  }
+  if (gallery === "stratedge") {
+    return (
+      <div className="mt-6 grid grid-cols-1 md:grid-cols-2 gap-4">
+        <div className="h-40 md:h-44 w-full overflow-hidden rounded-lg shadow-md ring-1 ring-slate-600/40">
+          <LightboxImage
+            src="/project-images/stratedgeafrica-landing.png"
+            alt="StratEdge Africa landing page"
+            width={600}
+            height={380}
+            className="w-full h-full object-cover"
+          />
+        </div>
+        <div className="h-40 md:h-44 w-full overflow-hidden rounded-lg shadow-md ring-1 ring-slate-600/40">
+          <LightboxImage
+            src="/project-images/stratedgeafrica-about.png"
+            alt="StratEdge Africa about section"
+            width={600}
+            height={380}
+            className="w-full h-full object-cover"
+          />
+        </div>
+      </div>
+    );
+  }
+  return null;
+}
 
 export default function Home() {
   return (
@@ -196,97 +290,75 @@ export default function Home() {
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {projects.map((project) => (
               <article
-                key={project.title}
-                className="p-8 rounded-xl border border-slate-700 bg-navy-secondary hover:border-blue-400/50 hover:-translate-y-1 hover:shadow-lg transition-all duration-200"
+                key={project.key}
+                className="p-8 rounded-xl border border-slate-700 bg-navy-secondary hover:border-blue-400/50 hover:-translate-y-1 hover:shadow-lg transition-all duration-200 flex flex-col"
               >
-                <h3 className="text-2xl font-semibold text-slate-100">
+                <h3 className="text-2xl font-semibold text-slate-100 tracking-tight">
                   {project.title}
                 </h3>
-                <div className="mt-3 flex flex-wrap gap-2">
-                  {project.tech.map((t) => (
+                <div className="mt-4 flex flex-wrap gap-2">
+                  {project.tags.map((tag) => (
                     <span
-                      key={t}
-                      className="px-2.5 py-1 text-xs font-medium text-accent bg-accent/10 rounded-md"
+                      key={tag}
+                      className="px-2.5 py-1 text-xs font-medium text-slate-300 border border-slate-600 rounded-md bg-navy/40"
                     >
-                      {t}
+                      {tag}
                     </span>
                   ))}
                 </div>
-                <p className="mt-4 text-slate-400 text-base leading-relaxed">
-                  {project.description}
-                  {project.highlight && ` ${project.highlight}`}
+                <p className="mt-3 text-slate-400 text-sm leading-snug">
+                  {project.techStack}
                 </p>
-                {project.title === "Supplement Recommender" && (
-                  <div className="mt-5 grid grid-cols-1 md:grid-cols-2 gap-4">
-                    <figure className="flex flex-col">
-                      <div className="h-40 md:h-44 w-full overflow-hidden rounded-lg shadow-md">
-                        <LightboxImage
-                          src="/project-images/supplement-landing.png"
-                          alt="Landing page of SuppleMatch supplement recommendation platform"
-                          width={600}
-                          height={380}
-                          className="w-full h-full object-cover"
-                        />
-                      </div>
-                    </figure>
-                    <figure className="flex flex-col">
-                      <div className="h-40 md:h-44 w-full overflow-hidden rounded-lg shadow-md">
-                        <LightboxImage
-                          src="/project-images/supplement-about.png"
-                          alt="About section of SuppleMatch describing recommendation workflow"
-                          width={600}
-                          height={380}
-                          className="w-full h-full object-cover"
-                        />
-                      </div>
-                    </figure>
-                  </div>
+                <p className="mt-5 text-slate-300 text-sm leading-relaxed">
+                  {project.hook}
+                </p>
+                <ul className="mt-5 space-y-2.5 text-slate-400 text-sm leading-relaxed">
+                  {project.bullets.map((b, i) => (
+                    <li key={i} className="flex gap-2">
+                      <span className="text-accent shrink-0">•</span>
+                      <span>{b}</span>
+                    </li>
+                  ))}
+                </ul>
+                {project.featureLine && (
+                  <p className="mt-4 text-xs text-slate-500 leading-relaxed">
+                    {project.featureLine}
+                  </p>
                 )}
-                {project.title === "StratEdge Africa Website" && (
-                  <div className="mt-5 grid grid-cols-1 md:grid-cols-2 gap-4">
-                    <figure className="flex flex-col">
-                      <div className="h-40 md:h-44 w-full overflow-hidden rounded-lg shadow-md">
-                        <LightboxImage
-                          src="/project-images/stratedgeafrica-landing.png"
-                          alt="StratEdge Africa landing page"
-                          width={600}
-                          height={380}
-                          className="w-full h-full object-cover"
-                        />
-                      </div>
-                    </figure>
-                    <figure className="flex flex-col">
-                      <div className="h-40 md:h-44 w-full overflow-hidden rounded-lg shadow-md">
-                        <LightboxImage
-                          src="/project-images/stratedgeafrica-about.png"
-                          alt="StratEdge Africa about us section"
-                          width={600}
-                          height={380}
-                          className="w-full h-full object-cover"
-                        />
-                      </div>
-                    </figure>
-                  </div>
-                )}
-                <div className="mt-6">
+                <ProjectGalleryBlock gallery={project.gallery} />
+                <div className="mt-8 flex flex-wrap gap-3">
+                  {project.live &&
+                    (project.liveDemoPrimary ? (
+                      <Link
+                        href={project.live}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="inline-flex items-center px-4 py-2.5 rounded-lg bg-accent text-navy text-sm font-semibold hover:bg-blue-400 hover:text-navy transition-colors duration-200"
+                      >
+                        Live Demo
+                      </Link>
+                    ) : (
+                      <Link
+                        href={project.live}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="inline-flex items-center px-4 py-2.5 rounded-lg border border-slate-600 text-slate-300 text-sm font-medium hover:border-accent hover:text-accent transition-colors duration-200"
+                      >
+                        Live Demo
+                      </Link>
+                    ))}
                   {project.github && (
                     <Link
                       href={project.github}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="inline-flex items-center text-sm font-medium text-accent hover:text-blue-400 transition-all duration-200 hover:underline underline-offset-4 hover:scale-[1.02]"
+                      className={`inline-flex items-center px-4 py-2.5 rounded-lg text-sm font-medium transition-colors duration-200 ${
+                        project.liveDemoPrimary && project.live
+                          ? "border border-slate-600 text-slate-300 hover:border-slate-500 hover:text-slate-100"
+                          : "bg-accent/15 border border-accent/40 text-accent hover:bg-accent/25 hover:text-blue-300"
+                      }`}
                     >
-                      GitHub →
-                    </Link>
-                  )}
-                  {project.live && (
-                    <Link
-                      href={project.live}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className={`${project.github ? "ml-4 " : ""}inline-flex items-center text-sm font-medium text-accent hover:text-blue-400 transition-colors duration-200 hover:underline underline-offset-4`}
-                    >
-                      Live Demo →
+                      GitHub
                     </Link>
                   )}
                 </div>
