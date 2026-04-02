@@ -272,10 +272,17 @@ export default function Home() {
             <div className="mt-3 w-12 h-0.5 bg-accent rounded-full" />
           </div>
           <p className="text-slate-100 text-lg leading-relaxed mb-6">
-            I&apos;m a Computer Engineering and Computer Science student at Northeastern University focused on building real-world software systems. I&apos;m particularly interested in how data flows through systems and how to design applications that are reliable, scalable, and easy to maintain.
+            I&apos;m a Computer Engineering and Computer Science student at Northeastern University focused on{" "}
+            <strong className="font-semibold text-slate-100">building real-world software systems</strong>. I&apos;m
+            particularly interested in how data flows through systems and how to design applications that are
+            reliable, scalable, and easy to maintain.
           </p>
           <p className="text-slate-100 text-lg leading-relaxed">
-            I&apos;ve built production-facing applications and data-driven systems across full-stack development, analytics, and LLM integration. My work emphasizes clean architecture, structured inputs, and predictable system behavior, with a focus on turning ideas into systems people can actually use.
+            I&apos;ve built{" "}
+            <strong className="font-semibold text-slate-100">production-facing applications</strong> and
+            data-driven systems across full-stack development, analytics, and LLM integration. My work emphasizes{" "}
+            <strong className="font-semibold text-slate-100">clean architecture</strong> and structured inputs, with
+            a focus on turning ideas into systems people can actually use.
           </p>
         </div>
       </section>
