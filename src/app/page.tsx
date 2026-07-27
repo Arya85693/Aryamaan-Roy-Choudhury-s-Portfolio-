@@ -34,7 +34,7 @@ const projects: Project[] = [
     key: "hoops",
     title: "Hoops Stock Market",
     tags: ["Production", "Full-Stack"],
-    techStack: "Next.js • React • TypeScript",
+    techStack: "Next.js • React • TypeScript • Python • Supabase",
     hook:
       "Live NBA player market and paper-trading platform where model prices move with real game performance.",
     bullets: [
