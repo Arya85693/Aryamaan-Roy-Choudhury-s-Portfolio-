@@ -12,7 +12,7 @@ const links = [
   { href: "/resume.pdf", label: "Resume" },
 ];
 
-type ProjectGallery = "stratedge" | "supplement" | null;
+type ProjectGallery = "hoops" | "stratedge" | "supplement" | null;
 
 type Project = {
   key: string;
@@ -30,6 +30,25 @@ type Project = {
 };
 
 const projects: Project[] = [
+  {
+    key: "hoops",
+    title: "Hoops Stock Market",
+    tags: ["Production", "Full-Stack"],
+    techStack: "Next.js • React • TypeScript",
+    hook:
+      "Live NBA player market and paper-trading platform where model prices move with real game performance.",
+    bullets: [
+      "Built end-to-end: market board, player insight, portfolio, and paper trading across 500+ tracked players.",
+      "Designed a repricing pipeline that updates quotes from on-court performance on ~30-minute ingestion cycles.",
+      "Shipped Fair Value vs Market Price insights, movers, and a $100k simulated portfolio with bid/ask spreads.",
+    ],
+    featureLine:
+      "Features: live market snapshot, player-level insight, watchlists, and paper trading — no real money.",
+    github: null,
+    live: "https://hoopsstockmarket.com/",
+    liveDemoPrimary: true,
+    gallery: "hoops",
+  },
   {
     key: "stratedge",
     title: "StratEdge Africa Platform",
@@ -158,6 +177,30 @@ const experience = [
 ];
 
 function ProjectGalleryBlock({ gallery }: { gallery: ProjectGallery }) {
+  if (gallery === "hoops") {
+    return (
+      <div className="mt-6 grid grid-cols-1 md:grid-cols-2 gap-4">
+        <div className="h-40 md:h-44 w-full overflow-hidden rounded-lg shadow-md ring-1 ring-slate-600/40">
+          <LightboxImage
+            src="/project-images/hoopsstockmarket-landing.png"
+            alt="Hoops Stock Market landing page"
+            width={600}
+            height={380}
+            className="w-full h-full object-cover"
+          />
+        </div>
+        <div className="h-40 md:h-44 w-full overflow-hidden rounded-lg shadow-md ring-1 ring-slate-600/40">
+          <LightboxImage
+            src="/project-images/hoopsstockmarket-player.png"
+            alt="Hoops Stock Market player insight and paper trade"
+            width={600}
+            height={380}
+            className="w-full h-full object-cover"
+          />
+        </div>
+      </div>
+    );
+  }
   if (gallery === "supplement") {
     return (
       <div className="mt-6 grid grid-cols-1 md:grid-cols-2 gap-4">
