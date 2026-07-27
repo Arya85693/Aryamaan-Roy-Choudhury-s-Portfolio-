@@ -5,3 +5,22 @@
 html {
   scroll-behavior: smooth;
 }
+
+.projects-scroll {
+  scrollbar-width: thin;
+  scrollbar-color: #60a5fa #12283f;
+}
+
+.projects-scroll::-webkit-scrollbar {
+  height: 8px;
+}
+
+.projects-scroll::-webkit-scrollbar-track {
+  background: #12283f;
+  border-radius: 9999px;
+}
+
+.projects-scroll::-webkit-scrollbar-thumb {
+  background: #60a5fa;
+  border-radius: 9999px;
+}

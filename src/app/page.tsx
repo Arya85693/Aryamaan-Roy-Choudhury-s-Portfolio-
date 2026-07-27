@@ -332,16 +332,16 @@ export default function Home() {
 
       {/* Projects */}
       <section id="projects" className="w-full bg-navy py-24 scroll-mt-20">
-        <div className="max-w-6xl mx-auto px-6 sm:px-8">
-          <div className="mb-10">
-            <h2 className="text-4xl font-semibold text-slate-100">Projects</h2>
-            <div className="mt-3 w-12 h-0.5 bg-accent rounded-full" />
-          </div>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div className="max-w-6xl mx-auto px-6 sm:px-8 mb-10">
+          <h2 className="text-4xl font-semibold text-slate-100">Projects</h2>
+          <div className="mt-3 w-12 h-0.5 bg-accent rounded-full" />
+        </div>
+        <div className="projects-scroll overflow-x-auto overscroll-x-contain snap-x snap-mandatory pb-4">
+          <div className="flex w-max gap-6 px-6 sm:px-8 lg:pl-[max(2rem,calc((100vw-72rem)/2+2rem))] lg:pr-8">
             {projects.map((project) => (
               <article
                 key={project.key}
-                className="p-8 rounded-xl border border-slate-700 bg-navy-secondary hover:border-blue-400/50 hover:-translate-y-1 hover:shadow-lg transition-all duration-200 flex flex-col"
+                className="w-[min(100vw-3rem,22rem)] sm:w-[22rem] shrink-0 snap-start p-8 rounded-xl border border-slate-700 bg-navy-secondary hover:border-blue-400/50 hover:-translate-y-1 hover:shadow-lg transition-all duration-200 flex flex-col"
               >
                 <h3 className="text-lg font-semibold text-slate-100 tracking-tight">
                   {project.title}
