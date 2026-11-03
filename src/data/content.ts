@@ -399,11 +399,11 @@ export const interests = [
     body: "Recruitment, draft and transfer evaluation, and performance data. The hard part is working out which statistics actually mean something, rather than ranking players just because the data exists. Most of my projects live here.",
   },
   {
-    title: "Quantitative systems",
-    body: "Markets and probability drew me in: pricing, risk, and simulation, from Monte Carlo portfolio modeling at Weiss Asset Management to the two-layer pricing engine behind Hoops Stock Market.",
-  },
-  {
     title: "Health & human performance",
     body: "Wearables and sensors produce huge amounts of noisy data about the body. I’m interested in turning it into information people can trust, while keeping them in control of how that sensitive data is used. It’s a big reason hardware matters to me.",
+  },
+  {
+    title: "Quantitative systems",
+    body: "Markets and probability drew me in: pricing, risk, and simulation, from Monte Carlo portfolio modeling at Weiss Asset Management to the two-layer pricing engine behind Hoops Stock Market.",
   },
 ];
