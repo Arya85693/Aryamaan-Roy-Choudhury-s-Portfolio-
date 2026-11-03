@@ -61,7 +61,13 @@ export default function CommandMenu() {
         },
       },
       { id: "github", group: "Links", label: "GitHub", hint: "github.com/Arya85693", run: external(profile.github) },
-      { id: "linkedin", group: "Links", label: "LinkedIn", run: external(profile.linkedin) },
+      {
+        id: "linkedin",
+        group: "Links",
+        label: "LinkedIn",
+        hint: profile.linkedin.replace(/^https:\/\/www\./, "").replace(/\/$/, ""),
+        run: external(profile.linkedin),
+      },
       {
         id: "hoops-live",
         group: "Links",
