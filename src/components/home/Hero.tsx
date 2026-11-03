@@ -12,10 +12,10 @@ const spec = [
 ];
 
 const facts = [
-  { value: "91,000+", label: "NBA games processed by my Hoops Stock Market pipeline" },
-  { value: "500+", label: "players repriced on a ~30-minute cycle" },
+  { value: "2", label: "live products designed, built & deployed end to end" },
+  { value: "3", label: "campuses across the U.S. & U.K. as a Northeastern Global Scholar" },
   { value: "3", label: "internships across software engineering & finance" },
-  { value: "3.81", label: "GPA · Dean’s List · Eta Kappa Nu" },
+  { value: "Global", label: "collaboration across time zones with teams in India, Mauritius & the U.S." },
 ];
 
 export default function Hero() {
