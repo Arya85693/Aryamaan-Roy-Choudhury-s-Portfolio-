@@ -107,7 +107,7 @@ export default function Hero() {
                 />
                 <div>
                   <p className="font-medium text-paper">{profile.name}</p>
-                  <p className="text-sm text-paper-muted">Software · Sports analytics · Data</p>
+                  <p className="text-sm text-paper-muted">Sports analytics · Performance tech · Quant</p>
                 </div>
               </div>
               <p className="mt-6 font-mono text-xs text-paper-dim">

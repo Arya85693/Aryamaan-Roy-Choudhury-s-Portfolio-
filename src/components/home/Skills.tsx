@@ -23,7 +23,7 @@ export default function Skills() {
             <Reveal
               as="li"
               key={group.label}
-              delay={i * 60}
+              delay={i * 40}
               className={`flex flex-col bg-ink p-6 transition-colors hover:bg-ink-850 sm:p-8 ${
                 i === 0 ? "md:col-span-2" : ""
               }`}

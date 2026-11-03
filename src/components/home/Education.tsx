@@ -75,7 +75,7 @@ export default function Education() {
             <Reveal
               as="li"
               key={item.org}
-              delay={i * 50}
+              delay={i * 40}
               className="grid gap-2 border-b border-line py-6 md:grid-cols-12 md:gap-8"
             >
               <p className="font-mono text-xs text-paper-dim md:col-span-3 md:pt-1">{item.period}</p>

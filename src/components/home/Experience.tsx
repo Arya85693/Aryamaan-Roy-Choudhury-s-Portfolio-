@@ -23,7 +23,7 @@ export default function Experience() {
 
         <ol className="border-t border-line">
           {experience.map((job, i) => (
-            <Reveal as="li" key={job.company} delay={i * 60} className="border-b border-line py-10 sm:py-12">
+            <Reveal as="li" key={job.company} delay={i * 40} className="border-b border-line py-10 sm:py-12">
               <article className="grid gap-6 md:grid-cols-12 md:gap-8">
                 <div className="md:col-span-3">
                   <p className="font-mono text-xs text-paper">{job.period}</p>

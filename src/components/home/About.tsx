@@ -47,7 +47,7 @@ export default function About() {
           </Reveal>
           <ul className="mt-6 grid gap-px overflow-hidden rounded-2xl border border-line bg-line md:grid-cols-3">
             {interests.map((item, i) => (
-              <Reveal as="li" key={item.title} delay={i * 80} className="bg-ink p-6 sm:p-8">
+              <Reveal as="li" key={item.title} delay={i * 50} className="bg-ink p-6 sm:p-8">
                 <p className="font-mono text-xs text-accent">{`0${i + 1}`}</p>
                 <h3 className="mt-6 font-display text-xl font-semibold tracking-tight text-paper">{item.title}</h3>
                 <p className="mt-3 text-[0.95rem] leading-relaxed text-paper-muted">{item.body}</p>

@@ -63,7 +63,7 @@ const config: Config = {
       animation: {
         "fade-up": "fade-up 0.7s cubic-bezier(0.22, 1, 0.36, 1) both",
         "fade-in": "fade-in 0.2s ease-out both",
-        blink: "blink 1.1s steps(1) infinite",
+        blink: "blink 1.1s steps(1) 5",
       },
     },
   },

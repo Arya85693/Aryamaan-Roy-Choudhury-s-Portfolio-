@@ -179,7 +179,7 @@ export default function Work() {
         <FeaturedProject project={featured} />
         <div className="mt-6 grid gap-6 lg:grid-cols-2">
           {rest.map((project, i) => (
-            <ProjectCard key={project.slug} project={project} delay={i * 100} />
+            <ProjectCard key={project.slug} project={project} delay={i * 60} />
           ))}
         </div>
       </div>

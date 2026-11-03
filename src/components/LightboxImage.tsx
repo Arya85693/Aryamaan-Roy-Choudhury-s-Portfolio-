@@ -54,7 +54,7 @@ export default function LightboxImage({
         ref={triggerRef}
         type="button"
         onClick={() => setOpen(true)}
-        className="group/lb relative block h-full w-full cursor-zoom-in text-left"
+        className="group/lb relative block h-full w-full cursor-zoom-in overflow-hidden text-left"
         aria-label={`Expand image: ${alt}`}
       >
         <Image
@@ -64,7 +64,7 @@ export default function LightboxImage({
           height={height}
           sizes={sizes}
           priority={priority}
-          className={className}
+          className={`transition-transform duration-500 ease-out motion-safe:group-hover/lb:scale-[1.02] ${className ?? ""}`}
         />
         <span className="pointer-events-none absolute right-3 top-3 flex h-8 w-8 items-center justify-center rounded-full bg-ink/80 text-paper opacity-0 ring-1 ring-line-strong backdrop-blur transition-opacity duration-200 group-hover/lb:opacity-100 group-focus-visible/lb:opacity-100">
           <ExpandIcon className="h-3.5 w-3.5" />
