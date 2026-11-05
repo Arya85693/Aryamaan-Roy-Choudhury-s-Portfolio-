@@ -10,13 +10,7 @@ export default function Skills() {
       className="border-t border-line bg-ink-850/50 py-24 sm:py-32"
     >
       <div className="mx-auto max-w-page px-5 sm:px-8">
-        <SectionHeading
-          id="skills-heading"
-          index="04"
-          label="Toolkit"
-          title="What I work with"
-          intro="Grouped by how I use each tool, with the project or role where I’ve actually used it."
-        />
+        <SectionHeading id="skills-heading" title="Skills" />
 
         <ul className="grid gap-px overflow-hidden rounded-2xl border border-line bg-line md:grid-cols-2 lg:grid-cols-3">
           {skills.map((group, i) => (
@@ -28,10 +22,7 @@ export default function Skills() {
                 i === 0 ? "md:col-span-2" : ""
               }`}
             >
-              <div className="flex items-baseline gap-3">
-                <span className="font-mono text-xs text-accent">{String(i + 1).padStart(2, "0")}</span>
-                <h3 className="font-display text-xl font-semibold tracking-tight text-paper">{group.label}</h3>
-              </div>
+              <h3 className="font-display text-xl font-semibold tracking-tight text-paper">{group.label}</h3>
               <p className="mt-3 max-w-prose text-sm leading-relaxed text-paper-muted">{group.evidence}</p>
               <ul className="mt-6 flex flex-wrap items-center gap-2 pt-1 md:mt-auto md:pt-6" aria-label={`${group.label} skills`}>
                 {group.items.map((item) => {

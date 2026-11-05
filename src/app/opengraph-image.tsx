@@ -47,14 +47,13 @@ export default function OpengraphImage() {
             Aryamaan Roy Choudhury
           </div>
           <div style={{ display: "flex", marginTop: 24, fontSize: 40, color: "#A3A39C" }}>
-            I build software that turns raw data into
-            <span style={{ color: "#F2A93B", marginLeft: 12 }}>decisions.</span>
+            Software, data, and sports analytics
           </div>
         </div>
 
         <div style={{ display: "flex", alignItems: "center", gap: 14, fontSize: 26, color: "#A3A39C" }}>
           <div style={{ width: 14, height: 14, borderRadius: 7, background: "#5BC48A" }} />
-          Seeking Spring 2027 co-op · Summer 2027 internships
+          Looking for a Spring 2027 co-op or Summer 2027 internship
         </div>
       </div>
     ),

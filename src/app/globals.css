@@ -29,7 +29,7 @@
 
 @layer components {
   .eyebrow {
-    @apply font-mono text-[0.72rem] uppercase tracking-[0.18em] text-paper-muted;
+    @apply text-sm font-medium text-paper-dim;
   }
 
   .link-underline {

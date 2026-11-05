@@ -6,51 +6,36 @@ export default function About() {
   return (
     <section id="about" aria-labelledby="about-heading" className="border-t border-line py-24 sm:py-32">
       <div className="mx-auto max-w-page px-5 sm:px-8">
-        <SectionHeading id="about-heading" index="03" label="About" title="The thread through it all" />
+        <SectionHeading id="about-heading" title="About me" />
 
-        <div className="grid gap-12 lg:grid-cols-12">
-          <Reveal className="lg:col-span-6">
-            <p className="font-display text-2xl font-medium leading-snug tracking-tight text-paper sm:text-3xl">
-              Most of what I build starts with a question I actually care about, like{" "}
-              <span className="font-serif text-[1.1em] italic text-accent">
-                how much should one game move a player’s value?
-              </span>
-            </p>
-          </Reveal>
+        <Reveal className="max-w-2xl space-y-5 text-lg leading-relaxed text-paper-muted">
+          <p>
+            Growing up, I wanted to play sport professionally. Then the pandemic lockdowns in Singapore took away
+            important years of training. I spent a lot of that time on a computer instead, and I slowly
+            went from playing sport to analyzing it.
+          </p>
+          <p>
+            What I keep coming back to is wasted potential. I like figuring out why a player or a team isn’t
+            performing at the level they could be. That’s why I liked reading Moneyball and Soccernomics, and why I
+            spend way too long on transfers and youth development in FIFA and 2K career modes.
+          </p>
+          <p>
+            When I build something, I want to know if it actually works. For a model that means testing it on data
+            it hasn’t seen and being upfront about where it falls short. I also like building projects from start
+            to finish so I understand every part of them.
+          </p>
+          <p>Outside of that, I play soccer and basketball, lift, and take sports photos.</p>
+        </Reveal>
 
-          <Reveal delay={100} className="space-y-5 text-lg leading-relaxed text-paper-muted lg:col-span-5 lg:col-start-8">
-            <p>
-              I grew up wanting to play sport professionally. When the pandemic lockdowns in Singapore took away
-              important years of development, I looked for other ways to stay close to the game and kept landing on
-              computing. My role shifted from playing to analyzing and building systems around the people who play.
-            </p>
-            <p>
-              The idea that stuck with me is <span className="text-paper">wasted potential</span>: helping a player,
-              a team, or a system get closer to what it’s capable of. It’s the Moneyball and Soccernomics side of me,
-              and the same instinct that has me deciding who to sign, trade, and develop in FIFA and 2K career modes.
-            </p>
-            <p>
-              As an engineer, I care whether a model actually predicts something, not just whether its output looks
-              convincing. That means validating it, being honest about its limits, and understanding the whole
-              system, from the first design sketch to the final UI polish. My long-term focus is{" "}
-              <span className="text-paper">Python, SQL, and C++</span>.
-            </p>
-            <p>
-              Away from the keyboard, I play soccer and basketball, lift, and shoot sports photography.
-            </p>
-          </Reveal>
-        </div>
-
-        <div className="mt-20">
+        <div className="mt-16">
           <Reveal>
-            <p className="eyebrow">Where my interests point</p>
+            <h3 className="font-display text-xl font-semibold tracking-tight text-paper">What I’m interested in</h3>
           </Reveal>
-          <ul className="mt-6 grid gap-px overflow-hidden rounded-2xl border border-line bg-line md:grid-cols-3">
+          <ul className="mt-6 grid gap-6 md:grid-cols-3">
             {interests.map((item, i) => (
-              <Reveal as="li" key={item.title} delay={i * 50} className="bg-ink p-6 sm:p-8">
-                <p className="font-mono text-xs text-accent">{`0${i + 1}`}</p>
-                <h3 className="mt-6 font-display text-xl font-semibold tracking-tight text-paper">{item.title}</h3>
-                <p className="mt-3 text-[0.95rem] leading-relaxed text-paper-muted">{item.body}</p>
+              <Reveal as="li" key={item.title} delay={i * 50} className="border-t border-line pt-5">
+                <h4 className="font-medium text-paper">{item.title}</h4>
+                <p className="mt-2 text-[0.95rem] leading-relaxed text-paper-muted">{item.body}</p>
               </Reveal>
             ))}
           </ul>

@@ -11,53 +11,32 @@ const spec = [
   { key: "based", value: profile.location },
 ];
 
-const facts = [
-  { value: "2", label: "live products designed, built & deployed end to end" },
-  { value: "3", label: "campuses across the U.S. & U.K. as a Northeastern Global Scholar" },
-  { value: "3", label: "internships across software engineering & finance" },
-  { value: "Global", label: "collaboration across time zones with teams in India, Mauritius & the U.S." },
-];
-
 export default function Hero() {
   return (
-    <section aria-labelledby="hero-title" className="relative overflow-hidden pt-28 sm:pt-36">
-      <div
-        aria-hidden
-        className="hairline-grid pointer-events-none absolute inset-0 [mask-image:radial-gradient(ellipse_70%_60%_at_30%_30%,black,transparent)]"
-      />
-
-      <div className="relative mx-auto grid max-w-page gap-14 px-5 sm:px-8 lg:grid-cols-12 lg:gap-10">
+    <section aria-labelledby="hero-title" className="pt-28 sm:pt-36">
+      <div className="mx-auto grid max-w-page gap-14 px-5 sm:px-8 lg:grid-cols-12 lg:gap-10">
         <div className="lg:col-span-7">
-          <p className="eyebrow flex animate-fade-up items-center gap-2.5">
-            <span className="relative flex h-2 w-2">
-              <span className="absolute inline-flex h-full w-full rounded-full bg-up/60 motion-safe:animate-ping" />
-              <span className="relative inline-flex h-2 w-2 rounded-full bg-up" />
-            </span>
-            Seeking Spring 2027 co-op · Summer 2027 internships
-          </p>
-
-          <p className="mt-8 animate-fade-up text-lg text-paper-muted [animation-delay:80ms]">
-            Hi, I’m {profile.name}.
-          </p>
           <h1
             id="hero-title"
-            className="mt-3 animate-fade-up font-display text-[clamp(2.6rem,6.4vw,5.4rem)] font-semibold leading-[0.98] tracking-tightest text-paper [animation-delay:140ms]"
+            className="animate-fade-up font-display text-[clamp(2.4rem,5.6vw,4.6rem)] font-semibold leading-[1.02] tracking-tightest text-paper"
           >
-            I build software that turns raw data into{" "}
-            <span className="font-serif font-normal italic tracking-normal text-accent">decisions.</span>
+            {profile.name}
           </h1>
-          <p className="mt-7 max-w-xl animate-fade-up text-lg leading-relaxed text-paper-muted [animation-delay:220ms]">
-            I study Computer Engineering and Computer Science at Northeastern, and I build Python data pipelines,
-            pricing models, and the full-stack products that sit on top of them. My most visible project is{" "}
+          <p className="mt-6 max-w-xl animate-fade-up text-lg leading-relaxed text-paper-muted [animation-delay:80ms]">
+            I study Computer Engineering and Computer Science at Northeastern. Most of what I build has to do with
+            sports and data. The biggest one is{" "}
             <a href="#work" className="link-underline text-paper">
               Hoops Stock Market
             </a>
-            , a live NBA player market.
+            , a site where NBA players trade like stocks and prices move based on how they actually play.
+          </p>
+          <p className="mt-4 max-w-xl animate-fade-up text-lg leading-relaxed text-paper-muted [animation-delay:120ms]">
+            I’m looking for a Spring 2027 co-op or a Summer 2027 internship.
           </p>
 
-          <div className="mt-10 flex animate-fade-up flex-wrap items-center gap-3 [animation-delay:300ms]">
+          <div className="mt-10 flex animate-fade-up flex-wrap items-center gap-3 [animation-delay:180ms]">
             <a href="#work" className="btn-primary group">
-              View selected work
+              See my projects
               <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" />
             </a>
             <a href={profile.resume} target="_blank" rel="noopener noreferrer" className="btn-ghost">
@@ -84,7 +63,7 @@ export default function Hero() {
           </div>
         </div>
 
-        <div className="animate-fade-up [animation-delay:260ms] lg:col-span-5 lg:pt-14">
+        <div className="animate-fade-up [animation-delay:200ms] lg:col-span-5">
           <div className="card mx-auto max-w-md overflow-hidden lg:ml-auto">
             <div className="flex items-center justify-between border-b border-line px-5 py-3">
               <span className="font-mono text-xs text-paper-dim">~/aryamaan</span>
@@ -128,22 +107,6 @@ export default function Hero() {
             </div>
           </div>
         </div>
-      </div>
-
-      <div className="relative mx-auto mt-20 max-w-page px-5 sm:mt-28 sm:px-8">
-        <dl className="grid grid-cols-2 border-y border-line lg:grid-cols-4">
-          {facts.map(({ value, label }, i) => (
-            <div
-              key={label}
-              className={`flex flex-col-reverse justify-end py-6 pr-4 sm:py-8 ${
-                i % 2 === 1 ? "border-l border-line pl-5 sm:pl-8" : ""
-              } ${i >= 2 ? "border-t border-line lg:border-t-0" : ""} ${i === 2 ? "lg:border-l lg:pl-8" : ""}`}
-            >
-              <dt className="mt-2 text-sm leading-snug text-paper-muted">{label}</dt>
-              <dd className="font-display text-3xl font-semibold tracking-tight text-paper sm:text-4xl">{value}</dd>
-            </div>
-          ))}
-        </dl>
       </div>
     </section>
   );

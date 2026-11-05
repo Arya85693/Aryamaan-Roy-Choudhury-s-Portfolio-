@@ -41,12 +41,8 @@ export default function ProjectPage({ params }: Params) {
 
         <header className="mt-10 grid gap-10 lg:grid-cols-12">
           <div className="animate-fade-up lg:col-span-8">
-            <p className="eyebrow flex items-center gap-3">
-              <span className="text-accent">{project.index}</span>
-              <span aria-hidden className="h-px w-8 bg-line-strong" />
-              {project.kind}
-            </p>
-            <h1 className="mt-6 font-display text-[clamp(2.4rem,6vw,4.75rem)] font-semibold leading-[1] tracking-tightest text-paper">
+            <p className="eyebrow">{project.kind}</p>
+            <h1 className="mt-3 font-display text-[clamp(2.4rem,6vw,4.75rem)] font-semibold leading-[1] tracking-tightest text-paper">
               {project.title}
             </h1>
             <p className="mt-6 max-w-2xl text-xl leading-relaxed text-paper-muted">{project.summary}</p>

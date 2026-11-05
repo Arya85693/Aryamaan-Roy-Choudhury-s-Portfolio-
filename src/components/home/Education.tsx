@@ -10,7 +10,7 @@ export default function Education() {
       className="border-t border-line py-24 sm:py-32"
     >
       <div className="mx-auto max-w-page px-5 sm:px-8">
-        <SectionHeading id="education-heading" index="05" label="Education & leadership" title="Background" />
+        <SectionHeading id="education-heading" title="Education" />
 
         <div className="grid gap-6 lg:grid-cols-12">
           <Reveal className="card p-6 sm:p-8 lg:col-span-7">

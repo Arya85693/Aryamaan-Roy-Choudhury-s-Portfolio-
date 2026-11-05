@@ -13,13 +13,7 @@ export default function Experience() {
       className="border-t border-line bg-ink-850/50 py-24 sm:py-32"
     >
       <div className="mx-auto max-w-page px-5 sm:px-8">
-        <SectionHeading
-          id="experience-heading"
-          index="02"
-          label="Experience"
-          title="Where I’ve worked"
-          intro="Internships across software engineering and investment analysis: shipping product features, owning a production website end to end, and modeling portfolio risk."
-        />
+        <SectionHeading id="experience-heading" title="Experience" />
 
         <ol className="border-t border-line">
           {experience.map((job, i) => (
