@@ -69,7 +69,7 @@ export const projects: Project[] = [
       { value: "65.9%", label: "winners picked, 31,791 matches" },
     ],
     live: "https://www.matchupdna.com/",
-    codeOnRequest: true,
+    github: "https://github.com/Arya85693/matchup-dna",
     featured: true,
     images: [
       {
@@ -180,7 +180,7 @@ export const projects: Project[] = [
       { value: "~30 min", label: "repricing cycle" },
     ],
     live: "https://hoopsstockmarket.com/",
-    codeOnRequest: true,
+    github: "https://github.com/Arya85693/NBA-superstar-prediction",
     images: [
       {
         src: "/project-images/hoopsstockmarket-landing.png",
