@@ -312,14 +312,14 @@ export const experience: Experience[] = [
     location: "Maharashtra, India · Remote",
     period: "Feb 2026 – Oct 2026",
     summary:
-      "An early-stage startup building an adaptive learning platform. I worked on the learner dashboard, the assessments, and company registration.",
+      "An early-stage startup developing an adaptive learning platform. Contributed to learner-facing interfaces, assessment workflows, and company registration functionality.",
     bullets: [
-      "Built the learner dashboard in Next.js and React: six training scenarios, category filters, module lists, and a weekly progress view, all driven by structured app data.",
-      "Wrote the assessment logic in TypeScript: six learning dimensions with four levels each, a 90% pass mark, targeted micro-learning, and a limit of three remediation attempts.",
-      "Built the company sign-up form with TypeScript and Zod. It validates the input, reshapes it into the payload the backend expects, and submits it to the registration API.",
+      "Built a learner dashboard using Next.js and React, integrating training scenarios, category filters, module listings, and progress indicators.",
+      "Developed adaptive assessment logic in TypeScript, implementing performance-based progression, targeted micro-learning, and remediation workflows.",
+      "Built company registration forms using TypeScript and Zod, implementing input validation, API payload transformation, and backend registration integration.",
     ],
     stack: ["TypeScript", "React", "Next.js", "Tailwind CSS", "Zod", "REST APIs"],
-    note: "Some technical details are omitted under NDA while the product is pre-release.",
+    note: "Additional implementation details are confidential while the product remains in development.",
   },
   {
     company: "StratEdge Africa",
