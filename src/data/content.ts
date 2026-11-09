@@ -311,12 +311,14 @@ export const experience: Experience[] = [
     role: "Software Engineering Intern",
     location: "Maharashtra, India · Remote",
     period: "Feb 2026 – Oct 2026",
-    summary: "An early-stage startup building an adaptive learning platform.",
+    summary:
+      "An early-stage startup building an adaptive learning platform. I worked on the learner dashboard, the assessments, and company registration.",
     bullets: [
-      "Built MVP features for the platform based on the product requirements.",
-      "Implemented and tested core parts of the platform.",
-      "Worked on the student and admin workflows, fixing how they behaved and making them faster and easier to use.",
+      "Built the learner dashboard in Next.js and React: six training scenarios, category filters, module lists, and a weekly progress view, all driven by structured app data.",
+      "Wrote the assessment logic in TypeScript: six learning dimensions with four levels each, a 90% pass mark, targeted micro-learning, and a limit of three remediation attempts.",
+      "Built the company sign-up form with TypeScript and Zod. It validates the input, reshapes it into the payload the backend expects, and submits it to the registration API.",
     ],
+    stack: ["TypeScript", "React", "Next.js", "Tailwind CSS", "Zod", "REST APIs"],
     note: "Some technical details are omitted under NDA while the product is pre-release.",
   },
   {
