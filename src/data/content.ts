@@ -16,6 +16,8 @@ export type ImageAsset = {
   alt: string;
   width: number;
   height: number;
+  /** Address shown in the browser-frame bar above the screenshot. */
+  frameUrl?: string;
 };
 
 export type Project = {
@@ -33,19 +35,132 @@ export type Project = {
   live?: string;
   github?: string;
   codeOnRequest?: boolean;
+  /** Featured projects get the large card on the home page. */
+  featured?: boolean;
   images: ImageAsset[];
   caseStudy: {
     problem: string;
     sections: { title: string; body?: string; points?: string[] }[];
-    sampleOutput?: { caption: string; columns: string[]; rows: string[][] };
+    sampleOutput?: { title?: string; caption: string; columns: string[]; rows: string[][] };
     notes?: string;
   };
 };
 
 export const projects: Project[] = [
   {
-    slug: "hoops-stock-market",
+    slug: "matchup-dna",
     index: "01",
+    title: "Matchup DNA",
+    kind: "Machine learning · Quantitative research",
+    period: "Oct 2026 – Present",
+    role: "Solo developer",
+    tagline: "Tennis win probabilities, locked in before the first serve.",
+    summary:
+      "A Python research system that rates every ATP and WTA player from their full match history and gives each upcoming match a win probability. Every forecast is stored before the match starts, and a Next.js site shows the forecasts, what drove them, and how they scored.",
+    stack: ["Python", "NumPy", "scikit-learn", "LightGBM", "SQLite", "Next.js", "TypeScript"],
+    highlights: [
+      "Built calibrated ATP and WTA prediction models from Elo, surface Elo, logistic regression, and opponent-adjusted serve and return features, each tested on later years than it was trained on.",
+      "Back-tested the models against betting-market prices on 13,846 matches, measuring calibration, whether the model adds anything to the price, and simulated returns.",
+      "Picked the winner in 65.9% of 31,791 matches from 2021 to October 2026, 1.7 percentage points more than always picking the higher-ranked player.",
+    ],
+    facts: [
+      { value: "361k+", label: "pro matches in the history" },
+      { value: "13,846", label: "matches tested against the market" },
+      { value: "65.9%", label: "winners picked, 31,791 matches" },
+    ],
+    live: "https://www.matchupdna.com/",
+    codeOnRequest: true,
+    featured: true,
+    images: [
+      {
+        src: "/project-images/matchupdna-home.png",
+        alt: "Matchup DNA home page asking who wins the next match and how sure we should be, over a photo of a clay-court rally",
+        width: 2524,
+        height: 1322,
+        frameUrl: "matchupdna.com",
+      },
+      {
+        src: "/project-images/matchupdna-model-lab.png",
+        alt: "Matchup DNA Model Lab comparing the log loss of Elo, surface Elo, and the Phase 3 and Phase 4 models with the betting market on the same 13,846 matches",
+        width: 2514,
+        height: 1320,
+        frameUrl: "matchupdna.com/lab",
+      },
+      {
+        src: "/project-images/matchupdna-compare.png",
+        alt: "Matchup DNA player comparison of Jannik Sinner and Carlos Alcaraz with their Elo ratings and a 17-match head-to-head record split by surface",
+        width: 2522,
+        height: 1322,
+        frameUrl: "matchupdna.com/players/compare",
+      },
+    ],
+    caseStudy: {
+      problem:
+        "Rankings and Elo tell you who is stronger, but not how likely an upset is, or whether a forecast deserves any trust. I wanted to build tennis forecasts the way a quant research team would: probabilities that mean what they say, tested only on matches the model had never seen, compared with the betting market, and recorded before every match so the track record can’t be edited afterwards.",
+      sections: [
+        {
+          title: "Data & point-in-time features",
+          body:
+            "The history is 361,571 tour-level ATP and WTA matches from Jeff Sackmann’s archive, plus two newer sources that I audited against it match by match, and ESPN scoreboards for upcoming fixtures. Every feature is built by replaying matches in date order, so a forecast only ever uses information from before its match. Players are linked across sources by a tested identity crosswalk rather than by name, because the sources spell names differently.",
+        },
+        {
+          title: "Models, one phase at a time",
+          points: [
+            "Elo and surface-adjusted Elo first, with their settings tuned on 1990–2009 and scored on later years.",
+            "A logistic regression that adds ranking, time away from the tour, and recent form. On 13,732 held-back matches from 2024 to May 2026 it beat recalibrated surface Elo by 0.0078 log loss per match, on both tours and in every year.",
+            "Opponent-adjusted serve and return estimates that shrink short records toward the tour average and give recent matches more weight.",
+            "A round-aware model that also uses the earlier rounds of the same tournament. It was the clearest gain, with an interval that excluded zero in every test period.",
+            "LightGBM was no better than the logistic model with the same inputs, so I kept the logistic model because it can be explained term by term.",
+          ],
+        },
+        {
+          title: "Testing without fooling myself",
+          points: [
+            "Chronological splits: training on 2010–2020, choosing models on 2021–2023, and scoring the final choice once on 2024 onward.",
+            "A keep rule fixed in advance for every new feature, and a frozen protocol, with hashes of the code and every input, written before each final test.",
+            "The pre-registered June–October 2026 test of the serve-return model gained 0.0040 log loss per match, but its interval just included zero (p = 0.055), so I report it as not proven.",
+            "After that test I found 65 matches counted twice when two sources were combined. I fixed it and published an erratum, and kept the original result as the official one.",
+            "Calibration is checked, not assumed: when the model gives a player about 75%, that player wins about 74% of the time.",
+          ],
+        },
+        {
+          title: "Against the betting market",
+          points: [
+            "Opening odds with the bookmaker’s margin removed, using a method chosen on 2021–2023 only.",
+            "The market beat the best model by 0.024 log loss per match on 13,846 matches. Blending the model into the price added nothing, and where the two disagreed, results followed the market.",
+            "A paper betting rule that backed the model’s value picks lost 8.9% per unit staked. That is a negative result, and the site reports it plainly.",
+          ],
+        },
+        {
+          title: "Live forecasting & the website",
+          points: [
+            "Both frozen models run twice a day and issue forecasts at least 30 minutes before each match starts.",
+            "Forecasts go into append-only SQLite tables with a hash chain, plus a public ledger committed to Git, so no forecast can be changed after its match.",
+            "A prospective record started on 9 November 2026 and gets its one final evaluation in July 2027.",
+            "The Next.js site on Vercel reads published snapshots, checks each file against a SHA-256 manifest, and never computes a probability in the browser. It has match forecasts with the inputs behind them, player profiles and head-to-heads, a Model Lab, and a forecast archive.",
+          ],
+        },
+      ],
+      sampleOutput: {
+        title: "Benchmark results",
+        caption: "Every forecast scored on the same 13,846 matches, January 2024 to October 2026. Lower log loss is better.",
+        columns: ["Forecast", "Accuracy", "Log loss"],
+        rows: [
+          ["Betting market (opening)", "68.07%", "0.5896"],
+          ["Phase 4 model", "65.42%", "0.6132"],
+          ["Phase 3 model", "65.27%", "0.6156"],
+          ["Surface Elo", "64.53%", "0.6266"],
+          ["Elo", "64.44%", "0.6267"],
+        ],
+      },
+      notes:
+        "Matchup DNA is a research project, not betting advice, and the betting market forecasts better than it does. The 65.9% accuracy figure pools 2021–2026, including years used to choose the model, so the pre-registered tests above are the stronger evidence.",
+    },
+  },
+  {
+    slug: "hoops-stock-market",
+    index: "02",
+    featured: true,
     title: "Hoops Stock Market",
     kind: "Sports analytics · Full-stack",
     period: "Sep 2024 – Present",
@@ -72,12 +187,14 @@ export const projects: Project[] = [
         alt: "Hoops Stock Market home page showing a near real-time market snapshot with board total, repricing pulse, and latest mover",
         width: 1024,
         height: 540,
+        frameUrl: "hoopsstockmarket.com",
       },
       {
         src: "/project-images/hoopsstockmarket-player.png",
         alt: "Hoops Stock Market player page for Anthony Edwards with a written player insight and a paper-trade panel",
         width: 1024,
         height: 486,
+        frameUrl: "hoopsstockmarket.com/player",
       },
     ],
     caseStudy: {
@@ -116,66 +233,6 @@ export const projects: Project[] = [
       ],
       notes:
         "Hoops Stock Market is a model-driven simulation with paper currency only. Prices refresh on ingestion cycles rather than tick by tick, and nothing on the platform is real money or investment advice.",
-    },
-  },
-  {
-    slug: "dream-league-soccer-analytics",
-    index: "02",
-    title: "Dream League Soccer Player Analytics",
-    kind: "Data analytics · Python",
-    period: "Mar 2026 – Present",
-    role: "Solo developer",
-    tagline: "A Python pipeline for ranking players fairly when they’ve played different amounts.",
-    summary:
-      "It takes exported season totals, turns them into per-game numbers, sorts players into roles, and scores them in a way that doesn’t overrate small sample sizes. It also predicts how a new player will do based on similar past players, and I checked those predictions against newer data.",
-    stack: ["Python", "pandas", "NumPy"],
-    highlights: [
-      "Python ETL pipeline that cleans the player data, calculates per-game metrics, and outputs rankings.",
-      "Scores are weighted by role and scaled down for players with few appearances, so a short hot streak doesn’t beat years of steady output.",
-      "A similarity-based prediction script, tested against an updated dataset with an error report.",
-    ],
-    github: "https://github.com/Arya85693/Dream-League-Soccer-Playstyle-Analysis",
-    images: [],
-    caseStudy: {
-      problem:
-        "Raw totals mix up opportunity and efficiency. Players who joined the squad at different times can’t be compared on total goals, and a single goals-plus-assists formula favours certain playing styles. I wanted a ranking that anyone could rerun and check.",
-      sections: [
-        {
-          title: "Pipeline design",
-          body:
-            "Each stage is its own script that writes a CSV or JSON file, so I can check every step as the data changes. The same input always gives the same output, and there are no manual steps in the scoring. If an export is malformed (missing columns, non-numeric values, zero or negative appearances, or negative counts), the pipeline stops with an error instead of quietly producing bad numbers.",
-        },
-        {
-          title: "Scoring methodology",
-          points: [
-            "Per-game normalization: goals, assists, and card rates are converted into per-appearance metrics, with a configurable minimum-appearances filter.",
-            "Role classification: a goal-contribution ratio tags each player as an Attacker, Playmaker, or Balanced contributor.",
-            "Role-adjusted impact: goal and assist weights depend on role, with penalties for yellow and red cards.",
-            "Reliability shrinkage: scores are multiplied by Apps / (Apps + K), with a default K of 50 that can be set from the CLI.",
-            "Rank tracking records how each player’s position changes across every stage of the pipeline.",
-          ],
-        },
-        {
-          title: "Prediction & validation",
-          points: [
-            "Projects a prospect’s output by comparing an eight-attribute profile with historical wingers using min–max normalization, cosine similarity, and softmax weighting.",
-            "A validation script compares predicted and observed per-game rates, reports percent error and role match, and re-ranks the player with the same scoring formulas.",
-          ],
-        },
-      ],
-      sampleOutput: {
-        caption: "Top five players by final rank from the default export (player_stats_final.csv)",
-        columns: ["Rank", "Player", "Apps", "Role", "Final score"],
-        rows: [
-          ["1", "Erling Haaland", "239", "Attacker", "2.189"],
-          ["2", "Omar Marmoush", "46", "Balanced", "1.711"],
-          ["3", "Alexander Isak", "440", "Attacker", "1.553"],
-          ["4", "Robert Lewandowski", "471", "Attacker", "1.491"],
-          ["5", "Harry Kane", "259", "Balanced", "1.206"],
-        ],
-      },
-      notes:
-        "This only covers attacking output for outfield players. Goalkeeping and defending aren’t part of the metrics, and the documentation says so.",
     },
   },
   {
@@ -349,12 +406,12 @@ export const skills: SkillGroup[] = [
     items: ["Python", "SQL", "C++", "TypeScript / JavaScript", "Java", "OCaml"],
     featured: ["Python", "SQL", "C++"],
     evidence:
-      "I use Python and SQL the most, mainly for Hoops Stock Market and the Dream League Soccer project. I use TypeScript for web work like the Hoops site and the StratEdge Africa site. Java and OCaml are from classes, and I’m working on getting better at C++.",
+      "I use Python and SQL the most, mainly for Matchup DNA and Hoops Stock Market. I use TypeScript for web work like the Matchup DNA, Hoops, and StratEdge Africa sites. Java and OCaml are from classes, and I’m working on getting better at C++.",
   },
   {
     label: "Data & quantitative",
-    items: ["pandas", "NumPy", "Monte Carlo simulation", "Excel modeling"],
-    evidence: "Used for the Hoops Stock Market pricing, the Dream League Soccer project, and my internship at Weiss Asset Management.",
+    items: ["pandas", "NumPy", "scikit-learn", "LightGBM", "Logistic regression", "Elo ratings", "Calibration & backtesting", "Monte Carlo simulation", "Excel modeling"],
+    evidence: "Used for the Matchup DNA models and market backtests, the Hoops Stock Market pricing, and my internship at Weiss Asset Management.",
   },
   {
     label: "Web & backend",
@@ -366,10 +423,11 @@ export const skills: SkillGroup[] = [
       "Node.js",
       "Express",
       "Supabase / PostgreSQL",
+      "SQLite",
       "MongoDB",
       "Vercel",
     ],
-    evidence: "Used for Hoops Stock Market, the StratEdge Africa website, and Supplement Recommender.",
+    evidence: "Used for Matchup DNA, Hoops Stock Market, the StratEdge Africa website, and Supplement Recommender.",
   },
   {
     label: "Developer & AI tools",
@@ -404,6 +462,6 @@ export const interests = [
   },
   {
     title: "Quantitative systems",
-    body: "I got into markets through probability, pricing, and risk. I used Monte Carlo simulations for portfolio modeling at Weiss Asset Management, and Hoops Stock Market runs on a two-layer pricing model.",
+    body: "I got into markets through probability, pricing, and risk. I used Monte Carlo simulations for portfolio modeling at Weiss Asset Management, Hoops Stock Market runs on a two-layer pricing model, and Matchup DNA tests its tennis forecasts against betting-market prices.",
   },
 ];

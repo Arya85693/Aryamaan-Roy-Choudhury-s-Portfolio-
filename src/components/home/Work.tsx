@@ -3,7 +3,6 @@ import { codeRequestHref, projects, type Project } from "@/data/content";
 import SectionHeading from "@/components/SectionHeading";
 import Reveal from "@/components/Reveal";
 import BrowserFrame from "@/components/BrowserFrame";
-import PipelineDiagram from "@/components/PipelineDiagram";
 import StackList from "@/components/StackList";
 import { ArrowRight, ArrowUpRight, GitHubIcon } from "@/components/Icons";
 
@@ -51,29 +50,27 @@ function FactGrid({ facts, className = "" }: { facts: NonNullable<Project["facts
   );
 }
 
-function FeaturedProject({ project }: { project: Project }) {
+function FeaturedProject({ project, flip = false }: { project: Project; flip?: boolean }) {
   const [primary, secondary] = project.images;
   return (
     <Reveal as="article" className="card relative overflow-hidden" aria-labelledby={`${project.slug}-title`}>
       <div className="grid gap-10 p-5 sm:p-8 lg:grid-cols-12 lg:gap-12 lg:p-12">
-        <div className="relative lg:col-span-7 lg:self-start lg:pt-2">
-          <BrowserFrame
-            image={primary}
-            url="hoopsstockmarket.com"
-            sizes="(min-width: 1024px) 640px, 100vw"
-          />
+        <div className={`relative lg:col-span-7 lg:self-start lg:pt-2 ${flip ? "lg:order-2" : ""}`}>
+          {primary && (
+            <BrowserFrame image={primary} url={primary.frameUrl} sizes="(min-width: 1024px) 640px, 100vw" />
+          )}
           {secondary && (
             <BrowserFrame
               image={secondary}
-              url="hoopsstockmarket.com/player"
+              url={secondary.frameUrl}
               sizes="(min-width: 1024px) 420px, 100vw"
-              className="relative mt-4 lg:-mr-6 lg:-mt-16 lg:ml-auto lg:w-[66%]"
+              className={`relative mt-4 lg:-mt-16 lg:w-[66%] ${flip ? "lg:-ml-6 lg:mr-auto" : "lg:-mr-6 lg:ml-auto"}`}
             />
           )}
           {project.facts && <FactGrid facts={project.facts} className="mt-10 hidden lg:grid" />}
         </div>
 
-        <div className="flex flex-col lg:col-span-5">
+        <div className={`flex flex-col lg:col-span-5 ${flip ? "lg:order-1" : ""}`}>
           <p className="text-sm text-paper-dim">
             {project.kind} · {project.period}
           </p>
@@ -109,45 +106,45 @@ function FeaturedProject({ project }: { project: Project }) {
   );
 }
 
-function ProjectCard({ project, delay }: { project: Project; delay: number }) {
-  const visual =
-    project.images.length > 0 ? (
-      <BrowserFrame image={project.images[0]} sizes="(min-width: 1024px) 560px, 100vw" />
-    ) : (
-      <PipelineDiagram />
-    );
-
+/** A full-width card for the projects below the featured ones: screenshot on one side, details on the other. */
+function ProjectCard({ project }: { project: Project }) {
+  const [image] = project.images;
   return (
     <Reveal
       as="article"
-      delay={delay}
-      className="card group flex flex-col overflow-hidden transition-colors duration-300 hover:border-line-strong"
+      className="card group overflow-hidden transition-colors duration-300 hover:border-line-strong"
       aria-labelledby={`${project.slug}-title`}
     >
-      <div className="border-b border-line bg-ink-800/40 p-5 sm:p-6">{visual}</div>
-      <div className="flex flex-1 flex-col p-5 sm:p-7">
-        <p className="text-sm text-paper-dim">
-          {project.kind} · {project.period}
-        </p>
-        <h3 id={`${project.slug}-title`} className="mt-2 font-display text-2xl font-semibold tracking-tight text-paper">
-          <Link href={`/projects/${project.slug}`} className="link-underline">
-            {project.title}
-          </Link>
-        </h3>
-        <p className="mt-2 text-paper">{project.tagline}</p>
-        <ul className="mt-5 space-y-2.5">
-          {project.highlights.map((h) => (
-            <li key={h} className="flex gap-3 text-sm leading-relaxed text-paper-muted">
-              <span aria-hidden className="mt-2 h-px w-3 shrink-0 bg-accent" />
-              {h}
-            </li>
-          ))}
-        </ul>
-        <div className="mt-6">
-          <StackList items={project.stack} />
-        </div>
-        <div className="mt-auto pt-8">
-          <ProjectLinks project={project} />
+      <div className="grid lg:grid-cols-12">
+        {image && (
+          <div className="border-b border-line bg-ink-800/40 p-5 sm:p-6 lg:col-span-5 lg:border-b-0 lg:border-r lg:p-8">
+            <BrowserFrame image={image} url={image.frameUrl} sizes="(min-width: 1024px) 460px, 100vw" />
+          </div>
+        )}
+        <div className={`flex flex-col p-5 sm:p-7 lg:p-8 ${image ? "lg:col-span-7" : "lg:col-span-12"}`}>
+          <p className="text-sm text-paper-dim">
+            {project.kind} · {project.period}
+          </p>
+          <h3 id={`${project.slug}-title`} className="mt-2 font-display text-2xl font-semibold tracking-tight text-paper">
+            <Link href={`/projects/${project.slug}`} className="link-underline">
+              {project.title}
+            </Link>
+          </h3>
+          <p className="mt-2 text-paper">{project.tagline}</p>
+          <ul className="mt-5 space-y-2.5">
+            {project.highlights.map((h) => (
+              <li key={h} className="flex gap-3 text-sm leading-relaxed text-paper-muted">
+                <span aria-hidden className="mt-2 h-px w-3 shrink-0 bg-accent" />
+                {h}
+              </li>
+            ))}
+          </ul>
+          <div className="mt-6">
+            <StackList items={project.stack} />
+          </div>
+          <div className="mt-auto pt-8">
+            <ProjectLinks project={project} />
+          </div>
         </div>
       </div>
     </Reveal>
@@ -155,7 +152,8 @@ function ProjectCard({ project, delay }: { project: Project; delay: number }) {
 }
 
 export default function Work() {
-  const [featured, ...rest] = projects;
+  const featured = projects.filter((p) => p.featured);
+  const rest = projects.filter((p) => !p.featured);
   return (
     <section id="work" aria-labelledby="work-heading" className="py-24 sm:py-32">
       <div className="mx-auto max-w-page px-5 sm:px-8">
@@ -164,10 +162,12 @@ export default function Work() {
           title="Projects"
           intro="Each one has a case study if you want more detail on how it works."
         />
-        <FeaturedProject project={featured} />
-        <div className="mt-6 grid gap-6 lg:grid-cols-2">
-          {rest.map((project, i) => (
-            <ProjectCard key={project.slug} project={project} delay={i * 60} />
+        <div className="space-y-6">
+          {featured.map((project, i) => (
+            <FeaturedProject key={project.slug} project={project} flip={i % 2 === 1} />
+          ))}
+          {rest.map((project) => (
+            <ProjectCard key={project.slug} project={project} />
           ))}
         </div>
       </div>

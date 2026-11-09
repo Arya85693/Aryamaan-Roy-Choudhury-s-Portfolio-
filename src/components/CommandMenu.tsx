@@ -69,6 +69,13 @@ export default function CommandMenu() {
         run: external(profile.linkedin),
       },
       {
+        id: "matchupdna-live",
+        group: "Links",
+        label: "Matchup DNA (live)",
+        hint: "matchupdna.com",
+        run: external("https://www.matchupdna.com/"),
+      },
+      {
         id: "hoops-live",
         group: "Links",
         label: "Hoops Stock Market (live)",

@@ -1,4 +1,5 @@
 import Image from "next/image";
+import Link from "next/link";
 import { education, profile } from "@/data/content";
 import { ArrowRight, GitHubIcon, LinkedInIcon, MailIcon } from "@/components/Icons";
 
@@ -24,11 +25,15 @@ export default function Hero() {
           </h1>
           <p className="mt-6 max-w-xl animate-fade-up text-lg leading-relaxed text-paper-muted [animation-delay:80ms]">
             I study Computer Engineering and Computer Science at Northeastern. Most of what I build has to do with
-            sports and data. The biggest one is{" "}
-            <a href="#work" className="link-underline text-paper">
+            sports and data. The newest is{" "}
+            <Link href="/projects/matchup-dna" className="link-underline text-paper">
+              Matchup DNA
+            </Link>
+            , which forecasts pro tennis matches and tests the forecasts against the betting market. Before that I built{" "}
+            <Link href="/projects/hoops-stock-market" className="link-underline text-paper">
               Hoops Stock Market
-            </a>
-            , a site where NBA players trade like stocks and prices move based on how they actually play.
+            </Link>
+            , a site where NBA players trade like stocks.
           </p>
           <p className="mt-4 max-w-xl animate-fade-up text-lg leading-relaxed text-paper-muted [animation-delay:120ms]">
             I’m looking for a Spring 2027 co-op or a Summer 2027 internship.

@@ -32,7 +32,7 @@ export const metadata: Metadata = {
     template: "%s · Aryamaan Roy Choudhury",
   },
   description:
-    "Computer Engineering & Computer Science student at Northeastern University building data pipelines, pricing systems, and full-stack products — including Hoops Stock Market, a live NBA player market.",
+    "Computer Engineering & Computer Science student at Northeastern University building machine-learning models, data pipelines, and full-stack products — including Matchup DNA, a tennis forecasting and quantitative research platform, and Hoops Stock Market, a live NBA player market.",
   openGraph: {
     title: "Aryamaan Roy Choudhury — Software, Data & Sports Analytics",
     description:

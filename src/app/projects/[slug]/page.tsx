@@ -3,7 +3,6 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { codeRequestHref, projects } from "@/data/content";
 import BrowserFrame from "@/components/BrowserFrame";
-import PipelineDiagram from "@/components/PipelineDiagram";
 import StackList from "@/components/StackList";
 import Reveal from "@/components/Reveal";
 import { ArrowLeft, ArrowRight, ArrowUpRight, GitHubIcon } from "@/components/Icons";
@@ -20,7 +19,21 @@ export function generateMetadata({ params }: Params): Metadata {
   return { title: project.title, description: project.summary };
 }
 
-const liveHost = (url: string) => new URL(url).host;
+const liveHost = (url: string) => new URL(url).host.replace(/^www\./, "");
+
+// One image fills the row; two sit side by side (wide + narrow); three or more put the first
+// full width with the rest in pairs beneath it.
+function imageSpan(count: number, i: number) {
+  if (count === 1) return "lg:col-span-12";
+  if (count === 2) return i === 0 ? "lg:col-span-7" : "lg:col-span-5";
+  return i === 0 ? "lg:col-span-12" : "lg:col-span-6";
+}
+
+function imageSizes(count: number, i: number) {
+  if (count === 1 || (count > 2 && i === 0)) return "(min-width: 1024px) 1200px, 100vw";
+  if (count === 2 && i === 0) return "(min-width: 1024px) 760px, 100vw";
+  return count === 2 ? "(min-width: 1024px) 460px, 100vw" : "(min-width: 1024px) 600px, 100vw";
+}
 
 export default function ProjectPage({ params }: Params) {
   const index = projects.findIndex((p) => p.slug === params.slug);
@@ -84,32 +97,22 @@ export default function ProjectPage({ params }: Params) {
           )}
         </div>
 
-        <div className="mt-16 animate-fade-up [animation-delay:240ms]">
-          {project.images.length > 0 ? (
+        {project.images.length > 0 && (
+          <div className="mt-16 animate-fade-up [animation-delay:240ms]">
             <div className="grid items-start gap-6 lg:grid-cols-12">
               {project.images.map((image, i) => (
                 <BrowserFrame
                   key={image.src}
                   image={image}
-                  url={project.live ? liveHost(project.live) : undefined}
+                  url={image.frameUrl ?? (project.live ? liveHost(project.live) : undefined)}
                   priority={i === 0}
-                  sizes={i === 0 ? "(min-width: 1024px) 760px, 100vw" : "(min-width: 1024px) 460px, 100vw"}
-                  className={
-                    project.images.length === 1
-                      ? "lg:col-span-12"
-                      : i === 0
-                        ? "lg:col-span-7"
-                        : "lg:col-span-5"
-                  }
+                  sizes={imageSizes(project.images.length, i)}
+                  className={imageSpan(project.images.length, i)}
                 />
               ))}
             </div>
-          ) : (
-            <div className="mx-auto max-w-2xl">
-              <PipelineDiagram />
-            </div>
-          )}
-        </div>
+          </div>
+        )}
 
         <div className="mt-24 grid gap-16 lg:grid-cols-12">
           <aside className="lg:col-span-4">
@@ -170,7 +173,7 @@ export default function ProjectPage({ params }: Params) {
             {caseStudy.sampleOutput && (
               <Reveal as="section" aria-labelledby="output-heading">
                 <h2 id="output-heading" className="font-display text-2xl font-semibold tracking-tight text-paper">
-                  Sample output
+                  {caseStudy.sampleOutput.title ?? "Sample output"}
                 </h2>
                 <div className="mt-5 overflow-x-auto rounded-xl border border-line">
                   <table className="w-full min-w-[30rem] text-left font-mono text-sm">
