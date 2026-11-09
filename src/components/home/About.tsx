@@ -10,21 +10,29 @@ export default function About() {
 
         <Reveal className="max-w-2xl space-y-5 text-lg leading-relaxed text-paper-muted">
           <p>
-            Growing up, I wanted to play sport professionally. Then the pandemic lockdowns in Singapore took away
-            important years of training. I spent a lot of that time on a computer instead, and I slowly
-            went from playing sport to analyzing it.
+            Growing up, I wanted to play sports professionally. Then the pandemic disrupted several important years of
+            training in Singapore, and I found myself spending more time behind a computer than on the field. Somewhere
+            along the way, my interest shifted from just playing sports to understanding what makes athletes and teams
+            successful.
           </p>
           <p>
-            What I keep coming back to is wasted potential. I like figuring out why a player or a team isn’t
-            performing at the level they could be. That’s why I liked reading Moneyball and Soccernomics, and why I
-            spend way too long on transfers and youth development in FIFA and 2K career modes.
+            I’ve always been fascinated by untapped potential. Why do some players thrive in one environment but
+            struggle in another? Why do talented teams underperform? And how much of success comes down to ability
+            versus the decisions made around it? That curiosity is what drew me to <em>Moneyball</em> and{" "}
+            <em>Soccernomics</em>, and it’s probably why I’ve spent an unreasonable amount of time rebuilding teams,
+            scouting obscure players, and developing youth prospects in FIFA and 2K.
           </p>
           <p>
-            When I build something, I want to know if it actually works. For a model that means testing it on data
-            it hasn’t seen and being upfront about where it falls short. I also like building projects from start
-            to finish so I understand every part of them.
+            That way of thinking extends beyond sports. I enjoy breaking complicated problems into smaller pieces,
+            questioning assumptions, and figuring out why something works rather than just accepting that it does. One
+            of the biggest things I’ve learned through building software is that getting something to work and
+            genuinely understanding it are two different achievements. I’m increasingly interested in the second:
+            testing ideas, recognizing limitations, and being able to explain the reasoning behind my decisions.
           </p>
-          <p>Outside of that, I play soccer and basketball, lift, and take sports photos.</p>
+          <p>
+            Outside of that, I’m usually playing soccer or basketball, lifting, following far too many sports leagues,
+            or watching movies.
+          </p>
         </Reveal>
 
         <div className="mt-16">
