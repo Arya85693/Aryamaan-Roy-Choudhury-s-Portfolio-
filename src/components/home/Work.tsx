@@ -19,7 +19,7 @@ function ProjectLinks({ project }: { project: Project }) {
           href={project.github}
           target="_blank"
           rel="noopener noreferrer"
-          className="btn-primary"
+          className="btn-secondary"
           aria-label={`${project.title} on GitHub`}
         >
           <GitHubIcon /> GitHub

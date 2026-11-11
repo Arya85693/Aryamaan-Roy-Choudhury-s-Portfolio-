@@ -86,7 +86,7 @@ export default function ProjectPage({ params }: Params) {
             </a>
           )}
           {project.github && (
-            <a href={project.github} target="_blank" rel="noopener noreferrer" className="btn-primary">
+            <a href={project.github} target="_blank" rel="noopener noreferrer" className="btn-secondary">
               <GitHubIcon /> View repository
             </a>
           )}

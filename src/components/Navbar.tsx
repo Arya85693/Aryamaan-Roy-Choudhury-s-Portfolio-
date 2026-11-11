@@ -131,7 +131,7 @@ export default function Navbar() {
             href={profile.resume}
             target="_blank"
             rel="noopener noreferrer"
-            className="hidden rounded-full bg-paper px-4 py-1.5 text-sm font-medium text-ink transition-colors hover:bg-accent hover:text-on-accent sm:inline-flex"
+            className="hidden rounded-full bg-secondary px-4 py-1.5 text-sm font-medium text-on-secondary transition-colors hover:bg-secondary-soft sm:inline-flex"
           >
             Résumé
           </a>

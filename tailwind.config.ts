@@ -42,6 +42,12 @@ const config: Config = {
           fg: "rgb(var(--accent-fg) / <alpha-value>)",
         },
         "on-accent": "rgb(var(--on-accent) / <alpha-value>)",
+        // Second brand color: stone blue in dark mode, mocha green in light mode.
+        secondary: {
+          DEFAULT: "rgb(var(--secondary) / <alpha-value>)",
+          soft: "rgb(var(--secondary-soft) / <alpha-value>)",
+        },
+        "on-secondary": "rgb(var(--on-secondary) / <alpha-value>)",
         up: "rgb(var(--up) / <alpha-value>)",
         down: "rgb(var(--down) / <alpha-value>)",
       },

@@ -4,7 +4,7 @@ export default function StackList({ items, label = "Tech stack" }: { items: stri
       {items.map((item) => (
         <li
           key={item}
-          className="rounded-md border border-line bg-paper/[0.02] px-2 py-1 font-mono text-[0.7rem] text-paper-muted"
+          className="rounded-md border border-secondary/30 bg-secondary/[0.08] px-2 py-1 font-mono text-[0.7rem] text-paper-muted"
         >
           {item}
         </li>

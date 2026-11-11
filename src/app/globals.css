@@ -28,6 +28,9 @@
   --accent-soft: 240 78 81;
   --accent-fg: 255 99 102;
   --on-accent: 255 255 255;
+  --secondary: 99 156 197; /* stone blue */
+  --secondary-soft: 127 176 211;
+  --on-secondary: 3 32 61;
   --up: 91 196 138;
   --down: 255 99 102;
   --frame-shadow: rgba(0, 8, 20, 0.8);
@@ -50,6 +53,9 @@
   --accent-soft: 184 79 109;
   --accent-fg: 155 59 86;
   --on-accent: 255 255 255;
+  --secondary: 71 67 41; /* mocha green */
+  --secondary-soft: 90 85 54;
+  --on-secondary: 240 229 219;
   --up: 47 125 79;
   --down: 155 59 86;
   --frame-shadow: rgba(71, 67, 41, 0.28);
@@ -73,6 +79,9 @@
     --accent-soft: 184 79 109;
     --accent-fg: 155 59 86;
     --on-accent: 255 255 255;
+    --secondary: 71 67 41;
+    --secondary-soft: 90 85 54;
+    --on-secondary: 240 229 219;
     --up: 47 125 79;
     --down: 155 59 86;
     --frame-shadow: rgba(71, 67, 41, 0.28);
@@ -127,6 +136,10 @@
 
   .btn-primary {
     @apply btn bg-accent text-on-accent hover:bg-accent-soft;
+  }
+
+  .btn-secondary {
+    @apply btn bg-secondary text-on-secondary hover:bg-secondary-soft;
   }
 
   .btn-ghost {
