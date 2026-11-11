@@ -228,6 +228,13 @@ export const projects: Project[] = [
         height: 486,
         frameUrl: "hoopsstockmarket.com/player",
       },
+      {
+        src: "/project-images/hoopsstockmarket-portfolio.png",
+        alt: "Hoops Stock Market portfolio page: $99,848.71 of buying power, an open Victor Wembanyama position with its average cost, current price, and unrealized P&L, inline buy and sell controls, and a recent-activity table of paper trades with realized P&L",
+        width: 2526,
+        height: 1328,
+        frameUrl: "hoopsstockmarket.com/portfolio",
+      },
     ],
     caseStudy: {
       problem:
@@ -411,8 +418,6 @@ export type Experience = {
   link?: { href: string; label: string };
   image?: ImageAsset;
   note?: string;
-  /** Older, less relevant roles: shown as one line under "Earlier". */
-  earlier?: boolean;
 };
 
 export const experience: Experience[] = [
@@ -457,8 +462,7 @@ export const experience: Experience[] = [
     role: "Investment Analyst Intern",
     location: "Boston, MA · Remote",
     period: "Jan 2022 – Feb 2022",
-    summary: "Built and presented a simulated $1M stock portfolio in Excel during a selective investment program.",
-    earlier: true,
+    summary: "Equity research and portfolio building in a selective investment program.",
     bullets: [
       "Did equity research and portfolio analysis as part of the program.",
       "Built and presented a simulated $1M stock portfolio in Excel, including the allocation strategy and risk modeling.",
@@ -501,6 +505,8 @@ export const education = {
   honors: ["Dean’s List — Fall 2025, Spring 2026", "Eta Kappa Nu — inducted March 2026"],
   certificates: [
     { name: "Machine Learning", issuer: "Crimson Data Science" },
+    { name: "3D Printing, AI & ML Fundamentals", issuer: "Singapore International Science Camp" },
+    { name: "Game Changers: AI and the Future of Live Sports", issuer: "IBM SkillsBuild" },
   ],
 };
 

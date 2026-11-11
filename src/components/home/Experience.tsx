@@ -5,9 +5,6 @@ import BrowserFrame from "@/components/BrowserFrame";
 import StackList from "@/components/StackList";
 import { ArrowUpRight } from "@/components/Icons";
 
-const current = experience.filter((job) => !job.earlier);
-const earlier = experience.filter((job) => job.earlier);
-
 export default function Experience() {
   return (
     <section
@@ -19,7 +16,7 @@ export default function Experience() {
         <SectionHeading id="experience-heading" title="Experience" />
 
         <ol className="border-t border-line">
-          {current.map((job, i) => (
+          {experience.map((job, i) => (
             <Reveal as="li" key={job.company} delay={i * 40} className="border-b border-line py-10 sm:py-12">
               <article className="grid gap-6 md:grid-cols-12 md:gap-8">
                 <div className="md:col-span-3">
@@ -72,29 +69,6 @@ export default function Experience() {
             </Reveal>
           ))}
         </ol>
-
-        {earlier.length > 0 && (
-          <Reveal className="mt-10">
-            <h3 className="text-sm font-medium text-paper-dim">Earlier</h3>
-            <ul className="mt-3 space-y-3">
-              {earlier.map((job) => (
-                <li
-                  key={job.company}
-                  className="grid gap-1 text-sm md:grid-cols-12 md:gap-8"
-                >
-                  <p className="font-mono text-xs text-paper-dim md:col-span-3 md:pt-0.5">{job.period}</p>
-                  <p className="leading-relaxed text-paper-muted md:col-span-9">
-                    <span className="font-medium text-paper">{job.role}</span>
-                    <span className="text-paper-dim"> · </span>
-                    <span className="text-secondary">{job.company}</span>
-                    <span className="text-paper-dim"> · </span>
-                    {job.summary}
-                  </p>
-                </li>
-              ))}
-            </ul>
-          </Reveal>
-        )}
       </div>
     </section>
   );

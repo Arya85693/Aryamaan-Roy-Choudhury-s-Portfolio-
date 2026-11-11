@@ -1,15 +1,23 @@
 "use client";
 
-import { useCallback, useEffect, useRef, useState, type KeyboardEvent, type TouchEvent } from "react";
+import { useCallback, useEffect, useRef, useState, type CSSProperties, type KeyboardEvent, type TouchEvent } from "react";
+import { createPortal } from "react-dom";
 import Image from "next/image";
-import type { InfographicSlide } from "@/data/content";
 import { ChevronLeft, ChevronRight, CloseIcon, ExpandIcon } from "@/components/Icons";
 
-type InfographicCarouselProps = {
+/** A slide's own size can differ from the frame's; it is then shown whole (letterboxed) inside the frame. */
+type Slide = { src: string; alt: string; width?: number; height?: number };
+
+type ImageCarouselProps = {
   title: string;
-  slides: InfographicSlide[];
+  slides: Slide[];
+  /** The frame's shape: every slide sits in a box of this aspect ratio. */
   width: number;
   height: number;
+  /** What the slides are, for screen readers ("infographic", "screenshots"). */
+  noun?: string;
+  /** The `sizes` attribute for the in-page images. */
+  sizes?: string;
 };
 
 const pad = (n: number) => String(n).padStart(2, "0");
@@ -18,13 +26,20 @@ const prefersReducedMotion = () =>
   typeof window !== "undefined" && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
 /**
- * An accessible slide carousel for the eight-panel infographic.
+ * An accessible slide carousel: the eight-panel infographic, and the screenshots on each case study.
  *
  * The track is a native horizontal scroller with scroll-snap, so touch swipe, trackpad scrolling and momentum all
  * come from the browser. Arrows, page indicators and the keyboard (when the track is focused) move it one slide at a
  * time. No autoplay. "Enlarge" opens the current slide in a dialog with the same controls.
  */
-export default function InfographicCarousel({ title, slides, width, height }: InfographicCarouselProps) {
+export default function ImageCarousel({
+  title,
+  slides,
+  width,
+  height,
+  noun = "infographic",
+  sizes = "(min-width: 640px) 448px, calc(100vw - 5rem)",
+}: ImageCarouselProps) {
   const total = slides.length;
   const [index, setIndex] = useState(0);
   const [near, setNear] = useState(false);
@@ -164,7 +179,7 @@ export default function InfographicCarousel({ title, slides, width, height }: In
           ref={trackRef}
           role="region"
           aria-roledescription="carousel"
-          aria-label={`${title}, ${total}-panel infographic. Use the left and right arrow keys to change slides, and Enter to enlarge.`}
+          aria-label={`${title}, ${noun === "infographic" ? `${total}-panel infographic` : `${total} ${noun}`}. Use the left and right arrow keys to change slides, and Enter to enlarge.`}
           tabIndex={0}
           onKeyDown={onTrackKeyDown}
           onClick={onTrackClick}
@@ -178,17 +193,18 @@ export default function InfographicCarousel({ title, slides, width, height }: In
               aria-roledescription="slide"
               aria-label={`${i + 1} of ${total}`}
               aria-hidden={i !== index}
-              className="w-full shrink-0 snap-center snap-always"
+              className="flex w-full shrink-0 snap-center snap-always items-center justify-center"
+              style={{ aspectRatio: `${width} / ${height}` }}
             >
               <Image
                 src={slide.src}
                 alt={slide.alt}
-                width={width}
-                height={height}
+                width={slide.width ?? width}
+                height={slide.height ?? height}
                 quality={90}
                 loading={near && Math.abs(i - index) <= 1 ? "eager" : "lazy"}
-                sizes="(min-width: 640px) 448px, calc(100vw - 5rem)"
-                className="block h-auto w-full select-none"
+                sizes={sizes}
+                className="block h-auto max-h-full w-full select-none object-contain"
                 draggable={false}
               />
             </div>
@@ -275,17 +291,22 @@ export default function InfographicCarousel({ title, slides, width, height }: In
         </button>
       </div>
 
-      {enlarged && (
-        <EnlargedSlides
-          title={title}
-          slides={slides}
-          width={width}
-          height={height}
-          index={index}
-          onChange={(i) => setIndex(Math.max(0, Math.min(total - 1, i)))}
-          onClose={closeEnlarged}
-        />
-      )}
+      {/* Rendered into <body>: a transformed ancestor (such as a fade-in animation) would otherwise trap the
+          full-screen overlay inside its own box. */}
+      {enlarged &&
+        createPortal(
+          <EnlargedSlides
+            title={title}
+            slides={slides}
+            width={width}
+            height={height}
+            noun={noun}
+            index={index}
+            onChange={(i) => setIndex(Math.max(0, Math.min(total - 1, i)))}
+            onClose={closeEnlarged}
+          />,
+          document.body
+        )}
     </div>
   );
 }
@@ -295,10 +316,11 @@ function EnlargedSlides({
   slides,
   width,
   height,
+  noun = "infographic",
   index,
   onChange,
   onClose,
-}: InfographicCarouselProps & { index: number; onChange: (i: number) => void; onClose: () => void }) {
+}: ImageCarouselProps & { index: number; onChange: (i: number) => void; onClose: () => void }) {
   const total = slides.length;
   const dialogRef = useRef<HTMLDivElement>(null);
   const closeRef = useRef<HTMLButtonElement>(null);
@@ -361,6 +383,10 @@ function EnlargedSlides({
   };
 
   const slide = slides[index];
+  const slideWidth = slide.width ?? width;
+  const slideHeight = slide.height ?? height;
+  // Width that lets the whole slide fit under the header (and the phone arrows).
+  const ratio = slideWidth / slideHeight;
   const navClass =
     "flex h-11 w-11 shrink-0 items-center justify-center rounded-full border border-line-strong bg-ink-800 text-paper transition-colors hover:text-accent-fg disabled:opacity-30 disabled:hover:text-paper";
 
@@ -387,7 +413,7 @@ function EnlargedSlides({
           type="button"
           onClick={onClose}
           className="flex h-10 w-10 items-center justify-center rounded-full border border-line-strong bg-ink-800 text-paper transition-colors hover:text-accent-fg"
-          aria-label="Close enlarged infographic"
+          aria-label={`Close enlarged ${noun}`}
         >
           <CloseIcon />
         </button>
@@ -417,12 +443,13 @@ function EnlargedSlides({
             key={slide.src}
             src={slide.src}
             alt={slide.alt}
-            width={width}
-            height={height}
+            width={slideWidth}
+            height={slideHeight}
             quality={90}
             priority
-            sizes="(orientation: landscape) 75vh, 100vw"
-            className="h-auto w-[min(100%,calc((100dvh_-_10rem)*0.8))] rounded-lg shadow-2xl sm:w-[min(100%,calc((100dvh_-_7rem)*0.8))]"
+            sizes={ratio > 1 ? "100vw" : "(orientation: landscape) 75vh, 100vw"}
+            style={{ "--ratio": ratio } as CSSProperties}
+            className="h-auto w-[min(100%,calc((100dvh_-_10rem)*var(--ratio)))] rounded-lg shadow-2xl sm:w-[min(100%,calc((100dvh_-_7rem)*var(--ratio)))]"
             draggable={false}
           />
         </div>

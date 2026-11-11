@@ -4,7 +4,6 @@ import SectionHeading from "@/components/SectionHeading";
 import Reveal from "@/components/Reveal";
 import BrowserFrame from "@/components/BrowserFrame";
 import StackList from "@/components/StackList";
-import Honesty from "@/components/Honesty";
 import { ArrowRight, ArrowUpRight, GitHubIcon } from "@/components/Icons";
 
 function ProjectLinks({ project }: { project: Project }) {
@@ -106,8 +105,6 @@ function FeaturedProject({ project, flip = false }: { project: Project; flip?: b
               </li>
             ))}
           </ul>
-
-          {project.honesty && <Honesty items={project.honesty} className="mt-8" />}
 
           <div className="mt-8">
             <StackList items={project.stack.slice(0, HOME_STACK_LIMIT)} />

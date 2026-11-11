@@ -51,34 +51,42 @@ export default function Education() {
                   ))}
                 </dd>
               </div>
-              <div className="sm:col-span-2">
-                <dt className="eyebrow">{education.certificates.length === 1 ? "Certificate" : "Certificates"}</dt>
-                <dd className="mt-2 space-y-1 text-sm text-paper">
-                  {education.certificates.map((c) => (
-                    <p key={c.name}>
-                      {c.name} <span className="text-paper-dim">· {c.issuer}</span>
-                    </p>
-                  ))}
-                </dd>
-              </div>
             </dl>
           </Reveal>
 
           <Reveal delay={100} className="card p-6 sm:p-8 lg:col-span-5">
-            <h3 className="eyebrow">Leadership & community</h3>
-            <ul className="mt-6 space-y-6">
-              {leadership.map((item) => (
-                <li key={item.org} className="border-l border-secondary/50 pl-4">
-                  <p className="font-medium text-paper">{item.role}</p>
-                  <p className="text-sm text-paper-muted">
-                    {item.org} <span className="text-paper-dim">· {item.period}</span>
-                  </p>
-                  <p className="mt-2 text-sm leading-relaxed text-paper-muted">{item.detail}</p>
+            <h3 className="eyebrow">Certificates</h3>
+            <ul className="mt-6 space-y-5">
+              {education.certificates.map((c) => (
+                <li key={c.name} className="border-l border-secondary/50 pl-4">
+                  <p className="text-paper">{c.name}</p>
+                  <p className="mt-0.5 text-sm text-paper-dim">{c.issuer}</p>
                 </li>
               ))}
             </ul>
           </Reveal>
         </div>
+
+        <Reveal className="mt-16">
+          <h3 className="eyebrow">Leadership & community</h3>
+        </Reveal>
+        <ul className="mt-6 border-t border-line">
+          {leadership.map((item, i) => (
+            <Reveal
+              as="li"
+              key={item.org}
+              delay={i * 40}
+              className="grid gap-2 border-b border-line py-6 md:grid-cols-12 md:gap-8"
+            >
+              <p className="font-mono text-xs text-paper-dim md:col-span-3 md:pt-1">{item.period}</p>
+              <div className="md:col-span-4">
+                <p className="font-medium text-paper">{item.role}</p>
+                <p className="text-sm text-paper-muted">{item.org}</p>
+              </div>
+              <p className="text-sm leading-relaxed text-paper-muted md:col-span-5">{item.detail}</p>
+            </Reveal>
+          ))}
+        </ul>
       </div>
     </section>
   );

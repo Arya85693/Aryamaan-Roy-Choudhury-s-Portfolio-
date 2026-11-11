@@ -2,7 +2,7 @@ import { infographic, profile, researchCourse, researchPaper } from "@/data/cont
 import SectionHeading from "@/components/SectionHeading";
 import Reveal from "@/components/Reveal";
 import StackList from "@/components/StackList";
-import InfographicCarousel from "@/components/InfographicCarousel";
+import ImageCarousel from "@/components/ImageCarousel";
 import { ArrowUp, ArrowUpRight, FileIcon } from "@/components/Icons";
 
 // A supporting piece, so it gets a compact card: the carousel on one side, the research question,
@@ -27,7 +27,7 @@ export default function Research() {
         >
           <div className="grid gap-10 p-5 sm:p-8 lg:grid-cols-12 lg:gap-10 lg:p-10">
             <div className="mx-auto w-full max-w-[24rem] sm:px-12 lg:col-span-5 lg:max-w-none">
-              <InfographicCarousel
+              <ImageCarousel
                 title={infographic.title}
                 slides={infographic.slides}
                 width={infographic.width}

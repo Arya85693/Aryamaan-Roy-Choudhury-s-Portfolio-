@@ -4,6 +4,7 @@ import { notFound } from "next/navigation";
 import { codeRequestHref, projects } from "@/data/content";
 import BrowserFrame from "@/components/BrowserFrame";
 import StackList from "@/components/StackList";
+import ImageCarousel from "@/components/ImageCarousel";
 import Honesty from "@/components/Honesty";
 import Reveal from "@/components/Reveal";
 import { ArrowLeft, ArrowRight, ArrowUpRight, GitHubIcon } from "@/components/Icons";
@@ -21,23 +22,6 @@ export function generateMetadata({ params }: Params): Metadata {
 }
 
 const liveHost = (url: string) => new URL(url).host.replace(/^www\./, "");
-
-// One image fills the row; two sit side by side (wide + narrow); three put the first full width with
-// two beneath it; four put the first two full width (for Matchup DNA, the home page and the calibration
-// chart) and pair the rest.
-const fullWidthCount = (count: number) => (count >= 4 ? 2 : 1);
-
-function imageSpan(count: number, i: number) {
-  if (count === 1) return "lg:col-span-12";
-  if (count === 2) return i === 0 ? "lg:col-span-7" : "lg:col-span-5";
-  return i < fullWidthCount(count) ? "lg:col-span-12" : "lg:col-span-6";
-}
-
-function imageSizes(count: number, i: number) {
-  if (count === 1 || (count > 2 && i < fullWidthCount(count))) return "(min-width: 1024px) 1200px, 100vw";
-  if (count === 2 && i === 0) return "(min-width: 1024px) 760px, 100vw";
-  return count === 2 ? "(min-width: 1024px) 460px, 100vw" : "(min-width: 1024px) 600px, 100vw";
-}
 
 export default function ProjectPage({ params }: Params) {
   const index = projects.findIndex((p) => p.slug === params.slug);
@@ -101,20 +85,25 @@ export default function ProjectPage({ params }: Params) {
           )}
         </div>
 
-        {project.images.length > 0 && (
-          <div className="mt-16 animate-fade-up [animation-delay:240ms]">
-            <div className="grid items-start gap-6 lg:grid-cols-12">
-              {project.images.map((image, i) => (
-                <BrowserFrame
-                  key={image.src}
-                  image={image}
-                  priority={i === 0}
-                  sizes={imageSizes(project.images.length, i)}
-                  className={imageSpan(project.images.length, i)}
-                />
-              ))}
-            </div>
+        {project.images.length > 1 ? (
+          // A slideshow like the infographic's: arrows sit outside the frame (hence the side padding), dots and a
+          // counter underneath, and a click opens the screenshot full screen.
+          <div className="mt-16 animate-fade-up [animation-delay:240ms] sm:px-14">
+            <ImageCarousel
+              title={`${project.title} screenshots`}
+              noun="screenshots"
+              slides={project.images}
+              width={project.images[0].width}
+              height={project.images[0].height}
+              sizes="(min-width: 1280px) 1100px, (min-width: 640px) calc(100vw - 10rem), 100vw"
+            />
           </div>
+        ) : (
+          project.images[0] && (
+            <div className="mt-16 animate-fade-up [animation-delay:240ms]">
+              <BrowserFrame image={project.images[0]} priority sizes="(min-width: 1024px) 1200px, 100vw" />
+            </div>
+          )
         )}
 
         {project.pipeline && (
