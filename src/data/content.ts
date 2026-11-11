@@ -292,6 +292,91 @@ export const projects: Project[] = [
   },
 ];
 
+// Research & Technical Communication: ENGW3302 (Advanced Writing in the Technical Professions) coursework.
+// Kept apart from `projects` on purpose: these are writing and communication pieces, not software.
+
+export const researchCourse = "ENGW3302 Advanced Writing in the Technical Professions · Northeastern University";
+
+export const researchPaper = {
+  id: "research-paper",
+  label: "Research Paper 01",
+  title: "Wearable Technology and Injury Prevention",
+  fullTitle: "From Accurate Measurements to Injury Prevention – Evaluating Wearable Sensor Reliability in Sports",
+  category: "Academic Research · Technical Writing",
+  description:
+    "An academic research paper examining the reliability and limitations of wearable sensor technology in sports biomechanics and injury-risk assessment. Drawing on six peer-reviewed studies, the research distinguishes accurate movement measurement, injury-risk prediction, and evidence of actual injury prevention.",
+  skills: ["Research Synthesis", "Technical Writing", "Sports Biomechanics", "Critical Analysis", "Academic Research"],
+  facts: [
+    { value: "6", label: "peer-reviewed studies" },
+    { value: "IEEE", label: "citation style" },
+    { value: "3", label: "claims kept separate" },
+  ],
+  pdf: "/research/wearable-tech-injury-prevention-paper.pdf",
+  preview: {
+    src: "/research/paper-preview.webp",
+    alt: "First page of the paper, From Accurate Measurements to Injury Prevention, showing its problem statement, introduction, and the start of the synthesis",
+    width: 1224,
+    height: 1584,
+  },
+};
+
+export type InfographicSlide = { src: string; alt: string };
+
+export const infographic = {
+  id: "research-infographic",
+  label: "Infographic 02",
+  title: "Can Wearable Technology Actually Prevent Injuries?",
+  category: "Multimodal Technical Communication · Data Visualization",
+  description:
+    "An eight-panel Instagram-style educational carousel adapting my academic research for athletes and coaches. It combines sports photography, diagrams, scientific findings, and data visualization to explain why collecting performance data does not automatically lead to injury prevention.",
+  skills: [
+    "Scientific Communication",
+    "Data Visualization",
+    "Information Design",
+    "Audience Adaptation",
+    "Canva",
+    "Datawrapper",
+  ],
+  pdf: "/research/wearable-tech-injury-prevention-infographic.pdf",
+  // Rendered from the original PDF at 1440 × 1800 (the PDF's own 4:5 page size, scaled uniformly; nothing cropped).
+  width: 1440,
+  height: 1800,
+  slides: [
+    {
+      src: "/research/infographic/slide-01.webp",
+      alt: "Title slide: “Can wearable tech actually prevent injuries?” over a photo of a footballer in a blue kit bent over, holding his leg. Subtitle: “More tracking data doesn’t always mean fewer injuries. Here’s what the research tells us.”",
+    },
+    {
+      src: "/research/infographic/slide-02.webp",
+      alt: "“What do wearables actually track?” Photos of three footballers wearing tracking gear above four cards: distance (how far an athlete travels during training or competition), speed (how fast an athlete runs, including high-speed efforts), acceleration (how quickly an athlete speeds up or slows down), and joint motion (estimates of joint angles and movement patterns). Footer: “Tracking movement isn’t the same as predicting injury.”",
+    },
+    {
+      src: "/research/infographic/slide-03.webp",
+      alt: "“Tracking is not prevention.” Three stacked steps: 01 Track, measure movement and training workload (what happened?); 02 Predict, use patterns to estimate potential injury risk (what might happen?); 03 Prevent?, demonstrate that data-guided decisions actually reduce injuries (did the intervention work?). Footer: “An accurate measurement is not proof of injury prevention.”",
+    },
+    {
+      src: "/research/infographic/slide-04.webp",
+      alt: "“How accurate are wearable sensors?” One study, Ekdahl et al. (2023) with 11 participants, found differences from under 0.1° to 24.1° between wearable IMU and laboratory motion-capture joint-angle measurements. Readings differ with calibration, movement, and joint or angle. Footer: “A sensor that works well for one movement may be less accurate for another.”",
+    },
+    {
+      src: "/research/infographic/slide-05.webp",
+      alt: "“When workload spikes, injury risk can rise.” A bar chart of relative non-contact injury risk at very high acute-to-chronic workload ratios among players with low chronic workloads, from Bowen et al. (2020): decelerations 6.58, accelerations 5.90, low-intensity distance 5.39. Headline figure: 5–7x higher relative risk under these conditions, in 33 professional footballers over 3 seasons. Footer: “Higher observed injury risk does not mean that wearable monitoring has been proven to prevent injuries.”",
+    },
+    {
+      src: "/research/infographic/slide-06.webp",
+      alt: "“What wearable data can and can’t tell us.” Can help: track workload, spot changes, inform decisions. Can’t guarantee: exact injury risk, universal accuracy, injury prevention. Footer: “Use wearable data as a tool for decision-making – not as a guarantee of athlete safety.”",
+    },
+    {
+      src: "/research/infographic/slide-07.webp",
+      alt: "“Use the data. Don’t blindly trust it.” Three steps: 01 check the measurements (use sensors validated for the movement and metric being tracked), 02 look at the pattern (compare recent workloads with the athlete’s training history), 03 add human judgment (consider athlete feedback and professional assessment before making changes). Closing line: “Better data + better judgment: more informed decisions – not guaranteed injury prevention.”",
+    },
+    {
+      src: "/research/infographic/slide-08.webp",
+      alt: "“The research behind the data.” Featured research: Ekdahl et al. (2023), how sensor calibration affects movement measurement accuracy (panel 4), and Bowen et al. (2020), how training workload patterns relate to injury rates (panel 5). Additional studies: Chia et al. (2021), Macadam et al. (2019), Mason et al. (2024), Kim et al. (2026). A QR code links to the full reference list.",
+    },
+  ] satisfies InfographicSlide[],
+};
+
 export type Experience = {
   company: string;
   role: string;

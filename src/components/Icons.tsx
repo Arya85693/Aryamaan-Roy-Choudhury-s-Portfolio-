@@ -108,3 +108,35 @@ export function ExpandIcon({ className = "h-4 w-4" }: IconProps) {
     </svg>
   );
 }
+
+export function ChevronLeft({ className = "h-4 w-4" }: IconProps) {
+  return (
+    <svg viewBox="0 0 24 24" className={className} {...base}>
+      <path d="M15 5l-7 7 7 7" />
+    </svg>
+  );
+}
+
+export function ChevronRight({ className = "h-4 w-4" }: IconProps) {
+  return (
+    <svg viewBox="0 0 24 24" className={className} {...base}>
+      <path d="M9 5l7 7-7 7" />
+    </svg>
+  );
+}
+
+export function ArrowDown({ className = "h-4 w-4" }: IconProps) {
+  return (
+    <svg viewBox="0 0 24 24" className={className} {...base}>
+      <path d="M12 5v14M6 13l6 6 6-6" />
+    </svg>
+  );
+}
+
+export function ArrowUp({ className = "h-4 w-4" }: IconProps) {
+  return (
+    <svg viewBox="0 0 24 24" className={className} {...base}>
+      <path d="M12 19V5M6 11l6-6 6 6" />
+    </svg>
+  );
+}

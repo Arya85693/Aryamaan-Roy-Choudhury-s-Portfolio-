@@ -9,6 +9,7 @@ import { OPEN_COMMAND_MENU } from "@/components/CommandMenu";
 
 export const sections = [
   { id: "work", label: "Work" },
+  { id: "research", label: "Research" },
   { id: "experience", label: "Experience" },
   { id: "about", label: "About" },
   { id: "skills", label: "Skills" },

@@ -35,6 +35,7 @@ export default function CommandMenu() {
     const external = (url: string) => () => window.open(url, "_blank", "noopener,noreferrer");
     return [
       { id: "work", group: "Navigate", label: "Selected work", run: go("work") },
+      { id: "research", group: "Navigate", label: "Research & technical communication", run: go("research") },
       { id: "experience", group: "Navigate", label: "Experience", run: go("experience") },
       { id: "about", group: "Navigate", label: "About", run: go("about") },
       { id: "skills", group: "Navigate", label: "Skills", run: go("skills") },
