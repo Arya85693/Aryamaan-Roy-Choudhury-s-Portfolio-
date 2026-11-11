@@ -337,8 +337,8 @@ export const infographic = {
     "Canva",
     "Datawrapper",
   ],
-  pdf: "/research/wearable-tech-injury-prevention-infographic.pdf",
-  // Rendered from the original PDF at 1440 × 1800 (the PDF's own 4:5 page size, scaled uniformly; nothing cropped).
+  // The eight panels, rendered from the original design at 1440 × 1800 (its own 4:5 page size, scaled uniformly;
+  // nothing cropped). The carousel is the only way the infographic is shown; no PDF is published.
   width: 1440,
   height: 1800,
   slides: [

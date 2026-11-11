@@ -136,9 +136,6 @@ function InfographicCard() {
           </div>
 
           <div className="mt-8 flex flex-wrap items-center gap-3 lg:mt-auto lg:pt-8">
-            <a href={infographic.pdf} target="_blank" rel="noopener noreferrer" className="btn-primary">
-              <FileIcon /> View Full Infographic PDF <ArrowUpRight />
-            </a>
             <a href={`#${researchPaper.id}`} className="btn-ghost">
               <ArrowUp /> See the original research paper
             </a>
