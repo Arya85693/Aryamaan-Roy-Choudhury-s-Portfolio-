@@ -19,7 +19,7 @@ export default function Skills() {
               key={group.label}
               delay={i * 40}
               className={`flex flex-col bg-ink p-6 transition-colors hover:bg-ink-850 sm:p-8 ${
-                i === 0 ? "md:col-span-2" : ""
+                i === 0 ? "md:col-span-2" : group.wide ? "md:col-span-2 lg:col-span-3" : ""
               }`}
             >
               <h3 className="font-display text-xl font-semibold tracking-tight text-paper">{group.label}</h3>

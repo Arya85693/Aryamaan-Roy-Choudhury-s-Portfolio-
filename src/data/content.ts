@@ -476,6 +476,8 @@ export type SkillGroup = {
   items: string[];
   featured?: string[];
   evidence: string;
+  /** Spans the full row of the grid (used for a group that would otherwise sit alone in the last row). */
+  wide?: boolean;
 };
 
 export const skills: SkillGroup[] = [
@@ -526,6 +528,21 @@ export const skills: SkillGroup[] = [
       "AutoCAD",
     ],
     evidence: "From Computer Engineering classes and labs.",
+  },
+  {
+    label: "Research & communication",
+    items: [
+      "Technical writing",
+      "Research synthesis",
+      "Scientific communication",
+      "Data visualization",
+      "Information design",
+      "Canva",
+      "Datawrapper",
+    ],
+    evidence:
+      "From my ENGW3302 research paper on wearable sports technology and the eight-panel infographic I adapted from it for athletes and coaches. Its injury-risk chart was made in Datawrapper.",
+    wide: true,
   },
 ];
 
