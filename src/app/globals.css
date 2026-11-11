@@ -138,8 +138,9 @@
     @apply btn bg-accent text-on-accent hover:bg-accent-soft;
   }
 
+  /* Outlined in the secondary color, so the filled accent button stays the one loud action. */
   .btn-secondary {
-    @apply btn bg-secondary text-on-secondary hover:bg-secondary-soft;
+    @apply btn border border-secondary text-secondary hover:bg-secondary/10;
   }
 
   .btn-ghost {

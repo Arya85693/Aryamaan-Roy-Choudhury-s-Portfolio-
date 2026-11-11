@@ -168,7 +168,7 @@ export default function Navbar() {
                   onClick={() => setMenuOpen(false)}
                   className="flex items-baseline gap-4 py-4 font-display text-3xl font-semibold tracking-tight text-paper"
                 >
-                  <span className="font-mono text-xs text-accent-fg">{`0${i + 1}`}</span>
+                  <span className="font-mono text-xs text-secondary">{`0${i + 1}`}</span>
                   {label}
                 </a>
               </li>

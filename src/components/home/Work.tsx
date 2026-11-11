@@ -88,7 +88,7 @@ function FeaturedProject({ project, flip = false }: { project: Project; flip?: b
           <ul className="mt-8 space-y-3">
             {project.highlights.map((h) => (
               <li key={h} className="flex gap-3 text-[0.95rem] leading-relaxed text-paper-muted">
-                <span aria-hidden className="mt-2.5 h-px w-3 shrink-0 bg-accent" />
+                <span aria-hidden className="mt-2.5 h-px w-3 shrink-0 bg-secondary" />
                 {h}
               </li>
             ))}
@@ -134,7 +134,7 @@ function ProjectCard({ project }: { project: Project }) {
           <ul className="mt-5 space-y-2.5">
             {project.highlights.map((h) => (
               <li key={h} className="flex gap-3 text-sm leading-relaxed text-paper-muted">
-                <span aria-hidden className="mt-2 h-px w-3 shrink-0 bg-accent" />
+                <span aria-hidden className="mt-2 h-px w-3 shrink-0 bg-secondary" />
                 {h}
               </li>
             ))}

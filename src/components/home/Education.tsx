@@ -58,7 +58,7 @@ export default function Education() {
             <h3 className="eyebrow">Certificates</h3>
             <ul className="mt-6 space-y-5">
               {education.certificates.map((c) => (
-                <li key={c.name} className="border-l border-accent/50 pl-4">
+                <li key={c.name} className="border-l border-secondary/50 pl-4">
                   <p className="text-paper">{c.name}</p>
                   <p className="mt-0.5 text-sm text-paper-dim">{c.issuer}</p>
                 </li>

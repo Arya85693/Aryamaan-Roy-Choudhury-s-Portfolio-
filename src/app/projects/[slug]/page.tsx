@@ -121,7 +121,7 @@ export default function ProjectPage({ params }: Params) {
               <ul className="mt-6 space-y-4">
                 {project.highlights.map((h) => (
                   <li key={h} className="flex gap-3 text-sm leading-relaxed text-paper-muted">
-                    <span aria-hidden className="mt-2 h-px w-3 shrink-0 bg-accent" />
+                    <span aria-hidden className="mt-2 h-px w-3 shrink-0 bg-secondary" />
                     {h}
                   </li>
                 ))}

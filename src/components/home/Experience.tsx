@@ -28,7 +28,7 @@ export default function Experience() {
                   <h3 className="font-display text-2xl font-semibold tracking-tight text-paper">
                     {job.role}
                     <span className="text-paper-dim"> · </span>
-                    <span className="text-accent-fg">{job.company}</span>
+                    <span className="text-secondary">{job.company}</span>
                   </h3>
                   <p className="mt-2 text-paper-muted">{job.summary}</p>
                   <ul className="mt-5 space-y-2.5">

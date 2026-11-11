@@ -66,7 +66,7 @@ export default function Research() {
           {/* The source paper, as a slim bar at the bottom of the card. */}
           <div className="border-t border-line bg-ink-800/40 px-5 py-6 sm:px-8 lg:px-12">
             <p className="flex items-center gap-2 text-xs text-paper-dim">
-              <ArrowUp className="h-3.5 w-3.5 text-accent-fg" />
+              <ArrowUp className="h-3.5 w-3.5 text-secondary" />
               From academic research to public communication
             </p>
             <div className="mt-4 flex flex-col gap-5 sm:flex-row sm:items-center sm:justify-between">
