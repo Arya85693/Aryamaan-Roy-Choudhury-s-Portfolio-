@@ -7,7 +7,7 @@ export default function Skills() {
     <section
       id="skills"
       aria-labelledby="skills-heading"
-      className="border-t border-line bg-ink-850/50 py-24 sm:py-32"
+      className="border-t border-line py-24 sm:py-32"
     >
       <div className="mx-auto max-w-page px-5 sm:px-8">
         <SectionHeading id="skills-heading" title="Skills" />
@@ -24,7 +24,7 @@ export default function Skills() {
             >
               <h3 className="font-display text-xl font-semibold tracking-tight text-paper">{group.label}</h3>
               <p className="mt-3 max-w-prose text-sm leading-relaxed text-paper-muted">{group.evidence}</p>
-              <ul className="mt-6 flex flex-wrap items-center gap-2 pt-1 md:mt-auto md:pt-6" aria-label={`${group.label} skills`}>
+              <ul className="mt-6 flex flex-wrap items-center gap-2" aria-label={`${group.label} skills`}>
                 {group.items.map((item) => {
                   const featured = group.featured?.includes(item);
                   return (

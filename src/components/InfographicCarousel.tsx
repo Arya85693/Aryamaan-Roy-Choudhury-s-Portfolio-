@@ -267,10 +267,11 @@ export default function InfographicCarousel({ title, slides, width, height }: In
         <button
           type="button"
           onClick={() => setEnlarged(true)}
-          className="inline-flex min-h-[1.75rem] items-center gap-1.5 rounded-full px-2 py-1 text-xs text-paper-muted transition-colors hover:text-paper"
+          aria-label="Enlarge"
+          title="Enlarge"
+          className="inline-flex h-7 w-7 items-center justify-center rounded-full text-paper-muted transition-colors hover:text-paper"
         >
-          <ExpandIcon className="h-3.5 w-3.5" />
-          Enlarge
+          <ExpandIcon className="h-4 w-4" />
         </button>
       </div>
 

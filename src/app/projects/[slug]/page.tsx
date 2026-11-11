@@ -4,6 +4,7 @@ import { notFound } from "next/navigation";
 import { codeRequestHref, projects } from "@/data/content";
 import BrowserFrame from "@/components/BrowserFrame";
 import StackList from "@/components/StackList";
+import Honesty from "@/components/Honesty";
 import Reveal from "@/components/Reveal";
 import { ArrowLeft, ArrowRight, ArrowUpRight, GitHubIcon } from "@/components/Icons";
 
@@ -21,16 +22,19 @@ export function generateMetadata({ params }: Params): Metadata {
 
 const liveHost = (url: string) => new URL(url).host.replace(/^www\./, "");
 
-// One image fills the row; two sit side by side (wide + narrow); three or more put the first
-// full width with the rest in pairs beneath it.
+// One image fills the row; two sit side by side (wide + narrow); three put the first full width with
+// two beneath it; four put the first two full width (for Matchup DNA, the home page and the calibration
+// chart) and pair the rest.
+const fullWidthCount = (count: number) => (count >= 4 ? 2 : 1);
+
 function imageSpan(count: number, i: number) {
   if (count === 1) return "lg:col-span-12";
   if (count === 2) return i === 0 ? "lg:col-span-7" : "lg:col-span-5";
-  return i === 0 ? "lg:col-span-12" : "lg:col-span-6";
+  return i < fullWidthCount(count) ? "lg:col-span-12" : "lg:col-span-6";
 }
 
 function imageSizes(count: number, i: number) {
-  if (count === 1 || (count > 2 && i === 0)) return "(min-width: 1024px) 1200px, 100vw";
+  if (count === 1 || (count > 2 && i < fullWidthCount(count))) return "(min-width: 1024px) 1200px, 100vw";
   if (count === 2 && i === 0) return "(min-width: 1024px) 760px, 100vw";
   return count === 2 ? "(min-width: 1024px) 460px, 100vw" : "(min-width: 1024px) 600px, 100vw";
 }
@@ -104,7 +108,6 @@ export default function ProjectPage({ params }: Params) {
                 <BrowserFrame
                   key={image.src}
                   image={image}
-                  url={image.frameUrl ?? (project.live ? liveHost(project.live) : undefined)}
                   priority={i === 0}
                   sizes={imageSizes(project.images.length, i)}
                   className={imageSpan(project.images.length, i)}
@@ -114,9 +117,35 @@ export default function ProjectPage({ params }: Params) {
           </div>
         )}
 
+        {project.pipeline && (
+          <Reveal as="section" aria-labelledby="pipeline-heading" className="mt-20">
+            <h2 id="pipeline-heading" className="eyebrow">
+              How the system fits together
+            </h2>
+            <ol className="mt-5 grid gap-3 lg:grid-cols-5 lg:gap-0">
+              {project.pipeline.map((stage, i) => (
+                <li key={stage.step} className="relative flex lg:pr-8 lg:last:pr-0">
+                  <div className="flex-1 rounded-xl border border-line-strong bg-ink-850 p-4">
+                    <p className="font-mono text-xs text-accent-fg">{String(i + 1).padStart(2, "0")}</p>
+                    <p className="mt-1.5 font-medium text-paper">{stage.step}</p>
+                    <p className="mt-1 text-sm leading-relaxed text-paper-muted">{stage.detail}</p>
+                  </div>
+                  {i < project.pipeline!.length - 1 && (
+                    <ArrowRight
+                      className="absolute right-1.5 top-1/2 hidden h-5 w-5 -translate-y-1/2 text-secondary lg:block"
+                    />
+                  )}
+                </li>
+              ))}
+            </ol>
+          </Reveal>
+        )}
+
         <div className="mt-24 grid gap-16 lg:grid-cols-12">
+          {/* With an honesty box, only that box stays pinned while you read (the whole sidebar would be taller than
+              a laptop screen); otherwise the highlights stay pinned. */}
           <aside className="lg:col-span-4">
-            <div className="lg:sticky lg:top-28">
+            <div className={project.honesty ? "" : "lg:sticky lg:top-28"}>
               <p className="eyebrow">Highlights</p>
               <ul className="mt-6 space-y-4">
                 {project.highlights.map((h) => (
@@ -137,6 +166,7 @@ export default function ProjectPage({ params }: Params) {
                 </dl>
               )}
             </div>
+            {project.honesty && <Honesty items={project.honesty} className="mt-8 lg:sticky lg:top-28" />}
           </aside>
 
           <div className="space-y-16 lg:col-span-7 lg:col-start-6">
@@ -190,15 +220,26 @@ export default function ProjectPage({ params }: Params) {
                       </tr>
                     </thead>
                     <tbody>
-                      {caseStudy.sampleOutput.rows.map((row) => (
-                        <tr key={row[0]} className="border-b border-line last:border-0">
-                          {row.map((cell, j) => (
-                            <td key={j} className={`px-4 py-2.5 ${j === row.length - 1 ? "text-accent-fg" : "text-paper"}`}>
-                              {cell}
-                            </td>
-                          ))}
-                        </tr>
-                      ))}
+                      {caseStudy.sampleOutput.rows.map((row, r) => {
+                        const highlighted = r === caseStudy.sampleOutput!.highlightRow;
+                        return (
+                          <tr
+                            key={row[0]}
+                            className={`border-b border-line last:border-0 ${
+                              highlighted ? "bg-secondary/[0.12] font-semibold text-paper" : "text-paper-muted"
+                            }`}
+                          >
+                            {row.map((cell, j) => (
+                              <td key={j} className="px-4 py-2.5">
+                                {cell}
+                                {highlighted && j === 0 && (
+                                  <span className="ml-2 font-sans text-xs font-normal text-secondary">my best model</span>
+                                )}
+                              </td>
+                            ))}
+                          </tr>
+                        );
+                      })}
                     </tbody>
                   </table>
                 </div>

@@ -5,6 +5,9 @@ import BrowserFrame from "@/components/BrowserFrame";
 import StackList from "@/components/StackList";
 import { ArrowUpRight } from "@/components/Icons";
 
+const current = experience.filter((job) => !job.earlier);
+const earlier = experience.filter((job) => job.earlier);
+
 export default function Experience() {
   return (
     <section
@@ -16,7 +19,7 @@ export default function Experience() {
         <SectionHeading id="experience-heading" title="Experience" />
 
         <ol className="border-t border-line">
-          {experience.map((job, i) => (
+          {current.map((job, i) => (
             <Reveal as="li" key={job.company} delay={i * 40} className="border-b border-line py-10 sm:py-12">
               <article className="grid gap-6 md:grid-cols-12 md:gap-8">
                 <div className="md:col-span-3">
@@ -42,7 +45,7 @@ export default function Experience() {
                   {job.note && <p className="mt-4 text-sm italic text-paper-dim">{job.note}</p>}
                   {(job.stack || job.link) && (
                     <div className="mt-6 flex flex-wrap items-center gap-4">
-                      {job.stack && <StackList items={job.stack} label={`${job.company} tools`} />}
+                      {job.stack && <StackList items={job.stack.slice(0, 5)} label={`${job.company} tools`} />}
                       {job.link && (
                         <a
                           href={job.link.href}
@@ -61,7 +64,6 @@ export default function Experience() {
                   <div className="md:col-span-9 md:col-start-4 lg:col-span-4 lg:col-start-auto">
                     <BrowserFrame
                       image={job.image}
-                      url="strat-edge-africa-website.vercel.app"
                       sizes="(min-width: 1024px) 380px, 100vw"
                     />
                   </div>
@@ -70,6 +72,29 @@ export default function Experience() {
             </Reveal>
           ))}
         </ol>
+
+        {earlier.length > 0 && (
+          <Reveal className="mt-10">
+            <h3 className="text-sm font-medium text-paper-dim">Earlier</h3>
+            <ul className="mt-3 space-y-3">
+              {earlier.map((job) => (
+                <li
+                  key={job.company}
+                  className="grid gap-1 text-sm md:grid-cols-12 md:gap-8"
+                >
+                  <p className="font-mono text-xs text-paper-dim md:col-span-3 md:pt-0.5">{job.period}</p>
+                  <p className="leading-relaxed text-paper-muted md:col-span-9">
+                    <span className="font-medium text-paper">{job.role}</span>
+                    <span className="text-paper-dim"> · </span>
+                    <span className="text-secondary">{job.company}</span>
+                    <span className="text-paper-dim"> · </span>
+                    {job.summary}
+                  </p>
+                </li>
+              ))}
+            </ul>
+          </Reveal>
+        )}
       </div>
     </section>
   );

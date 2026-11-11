@@ -4,14 +4,13 @@ import { useEffect, useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { profile } from "@/data/content";
-import { CloseIcon, SearchIcon } from "@/components/Icons";
-import { OPEN_COMMAND_MENU } from "@/components/CommandMenu";
+import { CloseIcon } from "@/components/Icons";
 import ThemeToggle from "@/components/ThemeToggle";
 
 export const sections = [
   { id: "work", label: "Work" },
-  { id: "research", label: "Research" },
   { id: "experience", label: "Experience" },
+  { id: "research", label: "Research" },
   { id: "about", label: "About" },
   { id: "skills", label: "Skills" },
   { id: "contact", label: "Contact" },
@@ -23,10 +22,8 @@ export default function Navbar() {
   const [activeSection, setActiveSection] = useState<string | null>(null);
   const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
-  const [isMac, setIsMac] = useState(true);
 
   useEffect(() => {
-    setIsMac(/Mac|iPhone|iPad/.test(navigator.platform));
     const onScroll = () => setScrolled(window.scrollY > 8);
     onScroll();
     window.addEventListener("scroll", onScroll, { passive: true });
@@ -86,13 +83,10 @@ export default function Navbar() {
               window.scrollTo({ top: 0, behavior: "smooth" });
             }
           }}
-          className="group flex items-center gap-3"
+          className="font-display text-[0.95rem] font-semibold tracking-tight text-paper transition-colors hover:text-accent-fg"
           aria-label={`${profile.name}, home`}
         >
-          <span className="flex h-8 w-8 items-center justify-center rounded-md border border-line-strong font-mono text-[0.7rem] font-semibold text-paper transition-colors group-hover:border-accent group-hover:text-accent-fg">
-            AR
-          </span>
-          <span className="hidden text-sm font-medium text-paper sm:inline">{profile.name}</span>
+          {profile.name}
         </Link>
 
         <div className="hidden items-center gap-1 md:flex">
@@ -117,15 +111,6 @@ export default function Navbar() {
         </div>
 
         <div className="flex items-center gap-2">
-          <button
-            type="button"
-            onClick={() => window.dispatchEvent(new Event(OPEN_COMMAND_MENU))}
-            className="hidden items-center gap-2 rounded-full border border-line px-3 py-1.5 text-xs text-paper-muted transition-colors hover:border-line-strong hover:text-paper lg:flex"
-            aria-label="Open command menu"
-          >
-            <SearchIcon className="h-3.5 w-3.5" />
-            <kbd className="font-mono text-[0.68rem]">{isMac ? "⌘K" : "Ctrl K"}</kbd>
-          </button>
           <ThemeToggle />
           <a
             href={profile.resume}

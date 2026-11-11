@@ -4,7 +4,7 @@ import Reveal from "@/components/Reveal";
 
 export default function About() {
   return (
-    <section id="about" aria-labelledby="about-heading" className="border-t border-line py-24 sm:py-32">
+    <section id="about" aria-labelledby="about-heading" className="border-t border-line bg-ink-850/50 py-24 sm:py-32">
       <div className="mx-auto max-w-page px-5 sm:px-8">
         <SectionHeading id="about-heading" title="About me" />
 
@@ -16,22 +16,11 @@ export default function About() {
             successful.
           </p>
           <p>
-            I’ve always been fascinated by untapped potential. Why do some players thrive in one environment but
-            struggle in another? Why do talented teams underperform? And how much of success comes down to ability
-            versus the decisions made around it? That curiosity is what drew me to <em>Moneyball</em> and{" "}
-            <em>Soccernomics</em>, and it’s probably why I’ve spent an unreasonable amount of time rebuilding teams,
-            scouting obscure players, and developing youth prospects in FIFA and 2K.
-          </p>
-          <p>
-            That way of thinking extends beyond sports. I enjoy breaking complicated problems into smaller pieces,
-            questioning assumptions, and figuring out why something works rather than just accepting that it does. One
-            of the biggest things I’ve learned through building software is that getting something to work and
-            genuinely understanding it are two different achievements. I’m increasingly interested in the second:
-            testing ideas, recognizing limitations, and being able to explain the reasoning behind my decisions.
-          </p>
-          <p>
-            Outside of that, I’m usually playing soccer or basketball, lifting, following far too many sports leagues,
-            or watching movies.
+            I enjoy breaking complicated problems into smaller pieces, questioning assumptions, and figuring out why
+            something works rather than just accepting that it does. One of the biggest things I’ve learned through
+            building software is that getting something to work and genuinely understanding it are two different
+            achievements. I’m increasingly interested in the second: testing ideas, recognizing limitations, and being
+            able to explain the reasoning behind my decisions.
           </p>
         </Reveal>
 

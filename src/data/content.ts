@@ -32,6 +32,10 @@ export type Project = {
   stack: string[];
   highlights: string[];
   facts?: { value: string; label: string }[];
+  /** "How I kept it honest": the testing safeguards, shown on the home page card. */
+  honesty?: string[];
+  /** Steps of the system, drawn as a flow at the top of the case study. */
+  pipeline?: { step: string; detail: string }[];
   live?: string;
   github?: string;
   codeOnRequest?: boolean;
@@ -41,7 +45,14 @@ export type Project = {
   caseStudy: {
     problem: string;
     sections: { title: string; body?: string; points?: string[] }[];
-    sampleOutput?: { title?: string; caption: string; columns: string[]; rows: string[][] };
+    sampleOutput?: {
+      title?: string;
+      caption: string;
+      columns: string[];
+      rows: string[][];
+      /** Index of the row to emphasize. */
+      highlightRow?: number;
+    };
     notes?: string;
   };
 };
@@ -57,7 +68,8 @@ export const projects: Project[] = [
     tagline: "Tennis win probabilities, locked in before the first serve.",
     summary:
       "A Python research system that rates every ATP and WTA player from their full match history and gives each upcoming match a win probability. Every forecast is stored before the match starts, and a Next.js site shows the forecasts, what drove them, and how they scored.",
-    stack: ["Python", "NumPy", "scikit-learn", "LightGBM", "SQLite", "Next.js", "TypeScript"],
+    // Home page cards show the first five; the case study shows all.
+    stack: ["Python", "scikit-learn", "LightGBM", "SQLite", "Next.js", "NumPy", "TypeScript"],
     highlights: [
       "Built calibrated ATP and WTA prediction models from Elo, surface Elo, logistic regression, and opponent-adjusted serve and return features, each tested on later years than it was trained on.",
       "Back-tested the models against betting-market prices on 13,846 matches, measuring calibration, whether the model adds anything to the price, and simulated returns.",
@@ -67,6 +79,18 @@ export const projects: Project[] = [
       { value: "361k+", label: "pro matches in the history" },
       { value: "13,846", label: "matches tested against the market" },
       { value: "65.9%", label: "winners picked, 31,791 matches" },
+    ],
+    honesty: [
+      "The test plan, keep rules, and hashes of the code and inputs were fixed before each final test.",
+      "When I found 65 matches counted twice, I published a correction and kept the original result as the official one.",
+      "The betting market still beats the model, by 0.024 log loss per match, and the site says so.",
+    ],
+    pipeline: [
+      { step: "Match history", detail: "361,571 ATP and WTA matches from audited sources" },
+      { step: "Point-in-time features", detail: "Built in date order, so nothing comes from after the match" },
+      { step: "Frozen models", detail: "Elo, then logistic regression with serve-return and round features" },
+      { step: "Locked forecasts", detail: "Append-only SQLite with a hash chain and a public Git ledger" },
+      { step: "Website", detail: "Next.js reads verified snapshots and never computes in the browser" },
     ],
     live: "https://www.matchupdna.com/",
     github: "https://github.com/Arya85693/matchup-dna",
@@ -78,6 +102,13 @@ export const projects: Project[] = [
         width: 2524,
         height: 1322,
         frameUrl: "matchupdna.com",
+      },
+      {
+        src: "/project-images/matchupdna-calibration.png",
+        alt: "Matchup DNA calibration chart, headed “Forecasts of about 75% won about 75% of the time”: observed win rate against forecast probability in 10-point bands for the Phase 4 model (2,453 held-out matches), the Phase 3 model (13,732 held-out matches), the ITF M1 model (13,537 held-out matches), and the interim ITF live record (148 matches), with the points following the diagonal of perfect calibration",
+        width: 2526,
+        height: 1258,
+        frameUrl: "matchupdna.com/lab",
       },
       {
         src: "/project-images/matchupdna-model-lab.png",
@@ -152,6 +183,7 @@ export const projects: Project[] = [
           ["Surface Elo", "64.53%", "0.6266"],
           ["Elo", "64.44%", "0.6267"],
         ],
+        highlightRow: 1,
       },
       notes:
         "Matchup DNA is a research project, not betting advice, and the betting market forecasts better than it does. The 65.9% accuracy figure pools 2021–2026, including years used to choose the model, so the pre-registered tests above are the stronger evidence.",
@@ -168,7 +200,7 @@ export const projects: Project[] = [
     tagline: "An NBA player market where prices move with real games.",
     summary:
       "Every NBA player has a stock price. A Python pipeline turns game data into player values, and a Next.js site lets you browse the market, see why a price moved, and paper-trade with simulated money.",
-    stack: ["Python", "Next.js", "TypeScript", "React", "Supabase", "PostgreSQL"],
+    stack: ["Python", "Next.js", "TypeScript", "Supabase", "PostgreSQL", "React"],
     highlights: [
       "The data pipeline has processed more than 91,000 NBA games into player prices.",
       "Each player has two prices. Fair Value moves slowly with on-court performance, and Market Price adds projection, demand, sentiment, and team context on top of it.",
@@ -245,7 +277,7 @@ export const projects: Project[] = [
     tagline: "Personalized supplement plans from a user’s profile and goals.",
     summary:
       "A full-stack app I worked on with a team. Users sign up, fill out a profile, get supplement recommendations generated through an API, and save their plans to a dashboard.",
-    stack: ["React", "Tailwind CSS", "Node.js", "Express", "MongoDB", "OpenRouter API"],
+    stack: ["React", "Node.js", "Express", "MongoDB", "OpenRouter API", "Tailwind CSS"],
     highlights: [
       "Worked on a React, Node.js, and MongoDB app that creates personalized supplement plans.",
       "Connected the recommendation logic to the OpenRouter API so suggestions are based on each user’s profile.",
@@ -379,6 +411,8 @@ export type Experience = {
   link?: { href: string; label: string };
   image?: ImageAsset;
   note?: string;
+  /** Older, less relevant roles: shown as one line under "Earlier". */
+  earlier?: boolean;
 };
 
 export const experience: Experience[] = [
@@ -394,7 +428,7 @@ export const experience: Experience[] = [
       "Developed adaptive assessment logic in TypeScript, implementing performance-based progression, targeted micro-learning, and remediation workflows.",
       "Built company registration forms using TypeScript and Zod, implementing input validation, API payload transformation, and backend registration integration.",
     ],
-    stack: ["TypeScript", "React", "Next.js", "Tailwind CSS", "Zod", "REST APIs"],
+    stack: ["TypeScript", "React", "Next.js", "Zod", "REST APIs", "Tailwind CSS"],
     note: "Additional implementation details are confidential while the product remains in development.",
   },
   {
@@ -423,7 +457,8 @@ export const experience: Experience[] = [
     role: "Investment Analyst Intern",
     location: "Boston, MA · Remote",
     period: "Jan 2022 – Feb 2022",
-    summary: "Equity research and portfolio building in a selective investment program.",
+    summary: "Built and presented a simulated $1M stock portfolio in Excel during a selective investment program.",
+    earlier: true,
     bullets: [
       "Did equity research and portfolio analysis as part of the program.",
       "Built and presented a simulated $1M stock portfolio in Excel, including the allocation strategy and risk modeling.",
@@ -466,8 +501,6 @@ export const education = {
   honors: ["Dean’s List — Fall 2025, Spring 2026", "Eta Kappa Nu — inducted March 2026"],
   certificates: [
     { name: "Machine Learning", issuer: "Crimson Data Science" },
-    { name: "3D Printing, AI & ML Fundamentals", issuer: "Singapore International Science Camp" },
-    { name: "Game Changers: AI and the Future of Live Sports", issuer: "IBM SkillsBuild" },
   ],
 };
 
@@ -510,10 +543,10 @@ export const skills: SkillGroup[] = [
     evidence: "Used for Matchup DNA, Hoops Stock Market, the StratEdge Africa website, and Supplement Recommender.",
   },
   {
-    label: "Developer & AI tools",
-    items: ["Git", "Cursor", "Claude Code", "OpenAI Codex", "NotebookLM", "OpenAI / OpenRouter APIs"],
+    label: "Developer tools",
+    items: ["Git & GitHub", "GitHub Actions", "AI-assisted development", "OpenAI / OpenRouter APIs"],
     evidence:
-      "What I use day to day for writing code, debugging, and research. Supplement Recommender uses the OpenRouter API for its suggestions.",
+      "Git and GitHub for all my projects, and GitHub Actions runs the scheduled Matchup DNA forecast jobs and tests. Supplement Recommender uses the OpenRouter API for its suggestions.",
   },
   {
     label: "Hardware & lab",

@@ -5,8 +5,9 @@ import StackList from "@/components/StackList";
 import InfographicCarousel from "@/components/InfographicCarousel";
 import { ArrowUp, ArrowUpRight, FileIcon } from "@/components/Icons";
 
-// The infographic is the main piece; the paper it adapts is linked from the bar at the bottom of the card.
-const skills = Array.from(new Set([...infographic.skills, ...researchPaper.skills]));
+// A supporting piece, so it gets a compact card: the carousel on one side, the research question,
+// finding, and paper link on the other. Five tags; the Skills section has the full list.
+const skills = ["Scientific Communication", "Data Visualization", "Technical Writing", "Research Synthesis", "Datawrapper"];
 
 export default function Research() {
   return (
@@ -24,8 +25,8 @@ export default function Research() {
           aria-labelledby={`${infographic.id}-title`}
           className="card scroll-mt-24 overflow-hidden"
         >
-          <div className="grid gap-10 p-5 sm:p-8 lg:grid-cols-12 lg:gap-12 lg:p-12">
-            <div className="mx-auto w-full max-w-[28rem] lg:col-span-5 lg:max-w-none">
+          <div className="grid gap-10 p-5 sm:p-8 lg:grid-cols-12 lg:gap-10 lg:p-10">
+            <div className="mx-auto w-full max-w-[24rem] sm:px-12 lg:col-span-5 lg:max-w-none">
               <InfographicCarousel
                 title={infographic.title}
                 slides={infographic.slides}
@@ -38,54 +39,53 @@ export default function Research() {
               <p className="text-sm text-paper-dim">{infographic.category}</p>
               <h3
                 id={`${infographic.id}-title`}
-                className="mt-2 font-display text-3xl font-semibold tracking-tight text-paper sm:text-4xl"
+                className="mt-2 font-display text-2xl font-semibold tracking-tight text-paper sm:text-3xl"
               >
                 {infographic.title}
               </h3>
 
-              <figure className="mt-6 border-l-2 border-accent pl-4">
+              <figure className="mt-5 border-l-2 border-accent pl-4">
                 <figcaption className="eyebrow">My research question</figcaption>
                 <blockquote className="mt-2 font-serif text-xl italic leading-snug text-paper">
                   {researchPaper.researchQuestion}
                 </blockquote>
               </figure>
 
-              <p className="mt-6 leading-relaxed text-paper-muted">{infographic.description}</p>
-
-              <p className="mt-4 text-[0.95rem] leading-relaxed text-paper-muted">
+              <p className="mt-5 text-[0.95rem] leading-relaxed text-paper-muted">{infographic.description}</p>
+              <p className="mt-3 text-[0.95rem] leading-relaxed text-paper-muted">
                 <span className="font-medium text-paper">What my research found: </span>
                 {researchPaper.finding}
               </p>
 
-              <div className="mt-8">
+              <div className="mt-6">
                 <StackList items={skills} label="Skills" />
               </div>
-            </div>
-          </div>
 
-          {/* The source paper, as a slim bar at the bottom of the card. */}
-          <div className="border-t border-line bg-ink-800/40 px-5 py-6 sm:px-8 lg:px-12">
-            <p className="flex items-center gap-2 text-xs text-paper-dim">
-              <ArrowUp className="h-3.5 w-3.5 text-secondary" />
-              From academic research to public communication
-            </p>
-            <div className="mt-4 flex flex-col gap-5 sm:flex-row sm:items-center sm:justify-between">
-              <div className="min-w-0">
-                <p className="text-sm text-paper-muted">Based on my research paper</p>
-                <p className="mt-1 font-serif text-lg italic leading-snug text-paper">{researchPaper.title}</p>
-                <p className="mt-2 text-sm text-paper-muted">
-                  Written by <span className="text-paper">{profile.name}</span>
+              {/* The source paper. */}
+              <div className="mt-8 border-t border-line pt-6">
+                <p className="flex items-center gap-2 text-xs text-paper-dim">
+                  <ArrowUp className="h-3.5 w-3.5 text-secondary" />
+                  From academic research to public communication
                 </p>
-                <p className="mt-1 font-mono text-xs text-paper-dim">{researchPaper.meta.join(" · ")}</p>
+                <div className="mt-3 flex flex-col gap-4 lg:flex-row lg:items-center lg:justify-between">
+                  <div className="min-w-0">
+                    <p className="text-sm text-paper-muted">Based on my research paper</p>
+                    <p className="mt-1 font-serif text-lg italic leading-snug text-paper">{researchPaper.title}</p>
+                    <p className="mt-1.5 text-sm text-paper-muted">
+                      Written by <span className="text-paper">{profile.name}</span>
+                      <span className="text-paper-dim"> · {researchPaper.meta.join(" · ")}</span>
+                    </p>
+                  </div>
+                  <a
+                    href={researchPaper.pdf}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="btn-primary shrink-0 self-start lg:self-auto"
+                  >
+                    <FileIcon /> Read Research Paper <ArrowUpRight />
+                  </a>
+                </div>
               </div>
-              <a
-                href={researchPaper.pdf}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="btn-primary shrink-0 self-start sm:self-auto"
-              >
-                <FileIcon /> Read Research Paper <ArrowUpRight />
-              </a>
             </div>
           </div>
         </Reveal>

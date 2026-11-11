@@ -4,6 +4,7 @@ import SectionHeading from "@/components/SectionHeading";
 import Reveal from "@/components/Reveal";
 import BrowserFrame from "@/components/BrowserFrame";
 import StackList from "@/components/StackList";
+import Honesty from "@/components/Honesty";
 import { ArrowRight, ArrowUpRight, GitHubIcon } from "@/components/Icons";
 
 function ProjectLinks({ project }: { project: Project }) {
@@ -37,18 +38,31 @@ function ProjectLinks({ project }: { project: Project }) {
   );
 }
 
+// Home page cards keep the tag row short; the case study lists the full stack.
+const HOME_STACK_LIMIT = 5;
+
+/** Stats: one row of three from sm up; on phones, one stat per line with its label beside it. */
 function FactGrid({ facts, className = "" }: { facts: NonNullable<Project["facts"]>; className?: string }) {
   return (
-    <dl className={`grid-cols-3 divide-x divide-line rounded-xl border border-line ${className}`}>
+    <dl
+      className={`grid-cols-1 divide-y divide-line rounded-xl border border-line sm:grid-cols-3 sm:divide-x sm:divide-y-0 ${className}`}
+    >
       {facts.map((fact) => (
-        <div key={fact.label} className="flex flex-col-reverse justify-end px-3 py-4 sm:px-5 sm:py-5">
-          <dt className="mt-1 text-xs leading-snug text-paper-dim">{fact.label}</dt>
-          <dd className="font-display text-xl font-semibold text-paper sm:text-3xl">{fact.value}</dd>
+        <div
+          key={fact.label}
+          className="flex flex-row-reverse items-baseline justify-end gap-3 px-4 py-3 sm:flex-col-reverse sm:items-start sm:gap-0 sm:px-5 sm:py-5"
+        >
+          <dt className="text-sm leading-snug text-paper-dim sm:mt-1 sm:text-xs">{fact.label}</dt>
+          <dd className="w-[4.5rem] shrink-0 font-display text-xl font-semibold text-paper sm:w-auto sm:text-3xl">
+            {fact.value}
+          </dd>
         </div>
       ))}
     </dl>
   );
 }
+
+
 
 function FeaturedProject({ project, flip = false }: { project: Project; flip?: boolean }) {
   const [primary, secondary] = project.images;
@@ -57,12 +71,11 @@ function FeaturedProject({ project, flip = false }: { project: Project; flip?: b
       <div className="grid gap-10 p-5 sm:p-8 lg:grid-cols-12 lg:gap-12 lg:p-12">
         <div className={`relative lg:col-span-7 lg:self-start lg:pt-2 ${flip ? "lg:order-2" : ""}`}>
           {primary && (
-            <BrowserFrame image={primary} url={primary.frameUrl} sizes="(min-width: 1024px) 640px, 100vw" />
+            <BrowserFrame image={primary} sizes="(min-width: 1024px) 640px, 100vw" />
           )}
           {secondary && (
             <BrowserFrame
               image={secondary}
-              url={secondary.frameUrl}
               sizes="(min-width: 1024px) 420px, 100vw"
               className={`relative mt-4 lg:-mt-16 lg:w-[66%] ${flip ? "lg:-ml-6 lg:mr-auto" : "lg:-mr-6 lg:ml-auto"}`}
             />
@@ -94,8 +107,10 @@ function FeaturedProject({ project, flip = false }: { project: Project; flip?: b
             ))}
           </ul>
 
+          {project.honesty && <Honesty items={project.honesty} className="mt-8" />}
+
           <div className="mt-8">
-            <StackList items={project.stack} />
+            <StackList items={project.stack.slice(0, HOME_STACK_LIMIT)} />
           </div>
           <div className="mt-8 lg:mt-auto lg:pt-8">
             <ProjectLinks project={project} />
@@ -118,7 +133,7 @@ function ProjectCard({ project }: { project: Project }) {
       <div className="grid lg:grid-cols-12">
         {image && (
           <div className="border-b border-line bg-ink-800/40 p-5 sm:p-6 lg:col-span-5 lg:border-b-0 lg:border-r lg:p-8">
-            <BrowserFrame image={image} url={image.frameUrl} sizes="(min-width: 1024px) 460px, 100vw" />
+            <BrowserFrame image={image} sizes="(min-width: 1024px) 460px, 100vw" />
           </div>
         )}
         <div className={`flex flex-col p-5 sm:p-7 lg:p-8 ${image ? "lg:col-span-7" : "lg:col-span-12"}`}>
@@ -140,7 +155,7 @@ function ProjectCard({ project }: { project: Project }) {
             ))}
           </ul>
           <div className="mt-6">
-            <StackList items={project.stack} />
+            <StackList items={project.stack.slice(0, HOME_STACK_LIMIT)} />
           </div>
           <div className="mt-auto pt-8">
             <ProjectLinks project={project} />
