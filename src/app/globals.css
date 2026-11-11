@@ -2,10 +2,86 @@
 @tailwind components;
 @tailwind utilities;
 
+/*
+ * Theme tokens, as RGB channels so Tailwind opacity modifiers work (bg-ink/80).
+ * Dark:  Egyptian blue #03203D, stone blue #639CC5, scarlet red #EB2F33.
+ * Light: soft sand #F0E5DB, mocha green #474329, watermelon pink #C75B7A.
+ * The other shades are derived from those so every text color passes WCAG AA.
+ * An inline script in layout.tsx sets data-theme before paint (saved choice,
+ * else the system setting); the media query covers visitors without JS.
+ */
+:root,
+:root[data-theme="dark"] {
+  color-scheme: dark;
+  --ink-900: 3 32 61; /* Egyptian blue */
+  --ink-850: 7 38 69;
+  --ink-800: 11 45 80;
+  --ink-700: 18 55 93;
+  --ink-600: 28 67 107;
+  --paper: 238 244 249;
+  --paper-muted: 179 202 221;
+  --paper-dim: 99 156 197; /* stone blue */
+  --line-rgb: 99 156 197;
+  --line-alpha: 0.16;
+  --line-strong-alpha: 0.3;
+  --accent: 235 47 51; /* scarlet red */
+  --accent-soft: 240 78 81;
+  --accent-fg: 255 99 102;
+  --on-accent: 255 255 255;
+  --up: 91 196 138;
+  --down: 255 99 102;
+  --frame-shadow: rgba(0, 8, 20, 0.8);
+}
+
+:root[data-theme="light"] {
+  color-scheme: light;
+  --ink-900: 240 229 219; /* soft sand */
+  --ink-850: 247 240 233;
+  --ink-800: 232 218 204;
+  --ink-700: 223 207 191;
+  --ink-600: 210 191 173;
+  --paper: 71 67 41; /* mocha green */
+  --paper-muted: 94 90 63;
+  --paper-dim: 101 96 63;
+  --line-rgb: 71 67 41;
+  --line-alpha: 0.13;
+  --line-strong-alpha: 0.24;
+  --accent: 199 91 122; /* watermelon pink */
+  --accent-soft: 184 79 109;
+  --accent-fg: 155 59 86;
+  --on-accent: 255 255 255;
+  --up: 47 125 79;
+  --down: 155 59 86;
+  --frame-shadow: rgba(71, 67, 41, 0.28);
+}
+
+@media (prefers-color-scheme: light) {
+  :root:not([data-theme]) {
+    color-scheme: light;
+    --ink-900: 240 229 219;
+    --ink-850: 247 240 233;
+    --ink-800: 232 218 204;
+    --ink-700: 223 207 191;
+    --ink-600: 210 191 173;
+    --paper: 71 67 41;
+    --paper-muted: 94 90 63;
+    --paper-dim: 101 96 63;
+    --line-rgb: 71 67 41;
+    --line-alpha: 0.13;
+    --line-strong-alpha: 0.24;
+    --accent: 199 91 122;
+    --accent-soft: 184 79 109;
+    --accent-fg: 155 59 86;
+    --on-accent: 255 255 255;
+    --up: 47 125 79;
+    --down: 155 59 86;
+    --frame-shadow: rgba(71, 67, 41, 0.28);
+  }
+}
+
 @layer base {
   html {
     scroll-behavior: smooth;
-    color-scheme: dark;
     -webkit-text-size-adjust: 100%;
   }
 
@@ -16,12 +92,12 @@
   }
 
   ::selection {
-    background: rgba(242, 169, 59, 0.3);
-    color: #fff;
+    background: rgb(var(--accent) / 0.3);
+    color: rgb(var(--paper));
   }
 
   :focus-visible {
-    outline: 2px solid #f2a93b;
+    outline: 2px solid rgb(var(--accent));
     outline-offset: 3px;
     border-radius: 4px;
   }
@@ -50,11 +126,11 @@
   }
 
   .btn-primary {
-    @apply btn bg-accent text-ink hover:bg-accent-soft;
+    @apply btn bg-accent text-on-accent hover:bg-accent-soft;
   }
 
   .btn-ghost {
-    @apply btn border border-line-strong text-paper hover:border-paper/40 hover:bg-white/[0.03];
+    @apply btn border border-line-strong text-paper hover:border-paper/40 hover:bg-paper/[0.04];
   }
 
   .card {
@@ -62,6 +138,17 @@
   }
 
   /* Horizontal scrollers (the infographic carousel) keep native swipe but hide the scrollbar. */
+  /* The theme toggle draws both icons and shows the one for the current theme, so it never mismatches on load. */
+  .theme-icon-light {
+    display: none;
+  }
+  :root[data-theme="light"] .theme-icon-light {
+    display: block;
+  }
+  :root[data-theme="light"] .theme-icon-dark {
+    display: none;
+  }
+
   .no-scrollbar {
     scrollbar-width: none;
   }
@@ -70,8 +157,8 @@
   }
 
   .hairline-grid {
-    background-image: linear-gradient(rgba(236, 232, 223, 0.045) 1px, transparent 1px),
-      linear-gradient(90deg, rgba(236, 232, 223, 0.045) 1px, transparent 1px);
+    background-image: linear-gradient(rgb(var(--line-rgb) / 0.07) 1px, transparent 1px),
+      linear-gradient(90deg, rgb(var(--line-rgb) / 0.07) 1px, transparent 1px);
     background-size: 56px 56px;
   }
 }

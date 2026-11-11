@@ -12,7 +12,7 @@ type BrowserFrameProps = {
 export default function BrowserFrame({ image, url, className = "", sizes, priority }: BrowserFrameProps) {
   return (
     <figure
-      className={`overflow-hidden rounded-xl border border-line-strong bg-ink-800 shadow-[0_30px_80px_-30px_rgba(0,0,0,0.8)] ${className}`}
+      className={`overflow-hidden rounded-xl border border-line-strong bg-ink-800 shadow-[0_30px_80px_-30px_var(--frame-shadow)] ${className}`}
     >
       <div className="flex items-center gap-2 border-b border-line px-3.5 py-2.5">
         <span aria-hidden className="flex gap-1.5">

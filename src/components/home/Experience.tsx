@@ -28,7 +28,7 @@ export default function Experience() {
                   <h3 className="font-display text-2xl font-semibold tracking-tight text-paper">
                     {job.role}
                     <span className="text-paper-dim"> · </span>
-                    <span className="text-accent">{job.company}</span>
+                    <span className="text-accent-fg">{job.company}</span>
                   </h3>
                   <p className="mt-2 text-paper-muted">{job.summary}</p>
                   <ul className="mt-5 space-y-2.5">
@@ -48,7 +48,7 @@ export default function Experience() {
                           href={job.link.href}
                           target="_blank"
                           rel="noopener noreferrer"
-                          className="inline-flex items-center gap-1.5 text-sm font-medium text-paper transition-colors hover:text-accent"
+                          className="inline-flex items-center gap-1.5 text-sm font-medium text-paper transition-colors hover:text-accent-fg"
                         >
                           {job.link.label} <ArrowUpRight className="h-3.5 w-3.5" />
                         </a>

@@ -6,6 +6,7 @@ import { usePathname } from "next/navigation";
 import { profile } from "@/data/content";
 import { CloseIcon, SearchIcon } from "@/components/Icons";
 import { OPEN_COMMAND_MENU } from "@/components/CommandMenu";
+import ThemeToggle from "@/components/ThemeToggle";
 
 export const sections = [
   { id: "work", label: "Work" },
@@ -88,7 +89,7 @@ export default function Navbar() {
           className="group flex items-center gap-3"
           aria-label={`${profile.name}, home`}
         >
-          <span className="flex h-8 w-8 items-center justify-center rounded-md border border-line-strong font-mono text-[0.7rem] font-semibold text-paper transition-colors group-hover:border-accent group-hover:text-accent">
+          <span className="flex h-8 w-8 items-center justify-center rounded-md border border-line-strong font-mono text-[0.7rem] font-semibold text-paper transition-colors group-hover:border-accent group-hover:text-accent-fg">
             AR
           </span>
           <span className="hidden text-sm font-medium text-paper sm:inline">{profile.name}</span>
@@ -107,7 +108,7 @@ export default function Navbar() {
                 }`}
               >
                 {active && (
-                  <span aria-hidden className="absolute inset-0 rounded-full bg-white/[0.06] ring-1 ring-line" />
+                  <span aria-hidden className="absolute inset-0 rounded-full bg-paper/[0.06] ring-1 ring-line" />
                 )}
                 <span className="relative">{label}</span>
               </a>
@@ -125,11 +126,12 @@ export default function Navbar() {
             <SearchIcon className="h-3.5 w-3.5" />
             <kbd className="font-mono text-[0.68rem]">{isMac ? "⌘K" : "Ctrl K"}</kbd>
           </button>
+          <ThemeToggle />
           <a
             href={profile.resume}
             target="_blank"
             rel="noopener noreferrer"
-            className="hidden rounded-full bg-paper px-4 py-1.5 text-sm font-medium text-ink transition-colors hover:bg-accent sm:inline-flex"
+            className="hidden rounded-full bg-paper px-4 py-1.5 text-sm font-medium text-ink transition-colors hover:bg-accent hover:text-on-accent sm:inline-flex"
           >
             Résumé
           </a>
@@ -166,7 +168,7 @@ export default function Navbar() {
                   onClick={() => setMenuOpen(false)}
                   className="flex items-baseline gap-4 py-4 font-display text-3xl font-semibold tracking-tight text-paper"
                 >
-                  <span className="font-mono text-xs text-accent">{`0${i + 1}`}</span>
+                  <span className="font-mono text-xs text-accent-fg">{`0${i + 1}`}</span>
                   {label}
                 </a>
               </li>

@@ -58,7 +58,7 @@ export default function Hero() {
                   key={label}
                   href={href}
                   {...(href.startsWith("http") ? { target: "_blank", rel: "noopener noreferrer" } : {})}
-                  className="flex h-10 w-10 items-center justify-center rounded-full text-paper-muted transition-colors hover:bg-white/[0.05] hover:text-paper"
+                  className="flex h-10 w-10 items-center justify-center rounded-full text-paper-muted transition-colors hover:bg-paper/[0.05] hover:text-paper"
                   aria-label={label}
                 >
                   <Icon className="h-[18px] w-[18px]" />
@@ -95,7 +95,7 @@ export default function Hero() {
                 </div>
               </div>
               <p className="mt-6 font-mono text-xs text-paper-dim">
-                <span className="text-accent">$</span> whoami
+                <span className="text-accent-fg">$</span> whoami
               </p>
               <dl className="mt-3 space-y-2 font-mono text-[0.8rem]">
                 {spec.map(({ key, value }) => (
@@ -106,7 +106,7 @@ export default function Hero() {
                 ))}
               </dl>
               <p className="mt-4 font-mono text-xs text-paper-dim">
-                <span className="text-accent">$</span>{" "}
+                <span className="text-accent-fg">$</span>{" "}
                 <span aria-hidden className="inline-block h-3.5 w-1.5 translate-y-0.5 bg-paper/70 motion-safe:animate-blink" />
               </p>
             </div>

@@ -83,7 +83,7 @@ export default function LightboxImage({
             ref={closeRef}
             type="button"
             onClick={() => setOpen(false)}
-            className="absolute right-4 top-4 flex h-10 w-10 items-center justify-center rounded-full border border-line-strong bg-ink-800 text-paper transition-colors hover:text-accent"
+            className="absolute right-4 top-4 flex h-10 w-10 items-center justify-center rounded-full border border-line-strong bg-ink-800 text-paper transition-colors hover:text-accent-fg"
             aria-label="Close expanded image"
           >
             <CloseIcon />

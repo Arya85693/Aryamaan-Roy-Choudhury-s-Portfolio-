@@ -153,9 +153,9 @@ export default function InfographicCarousel({ title, slides, width, height }: In
   // From sm up the arrows sit just outside the frame, so they never cover the slide. On phones there is no room
   // beside it, so they move into the indicator row underneath instead.
   const arrowClass =
-    "absolute top-1/2 z-10 hidden h-10 w-10 -translate-y-1/2 items-center justify-center rounded-full border border-line-strong bg-ink/85 text-paper backdrop-blur transition-colors hover:text-accent disabled:pointer-events-none disabled:opacity-0 sm:flex";
+    "absolute top-1/2 z-10 hidden h-10 w-10 -translate-y-1/2 items-center justify-center rounded-full border border-line-strong bg-ink/85 text-paper backdrop-blur transition-colors hover:text-accent-fg disabled:pointer-events-none disabled:opacity-0 sm:flex";
   const rowArrowClass =
-    "flex h-9 w-9 shrink-0 items-center justify-center rounded-full border border-line-strong text-paper transition-colors hover:text-accent disabled:opacity-30 sm:hidden";
+    "flex h-9 w-9 shrink-0 items-center justify-center rounded-full border border-line-strong text-paper transition-colors hover:text-accent-fg disabled:opacity-30 sm:hidden";
 
   return (
     <div ref={rootRef} className="w-full">
@@ -169,7 +169,7 @@ export default function InfographicCarousel({ title, slides, width, height }: In
           onKeyDown={onTrackKeyDown}
           onClick={onTrackClick}
           title="Click to enlarge"
-          className="no-scrollbar flex cursor-zoom-in snap-x snap-mandatory overflow-x-auto overscroll-x-contain rounded-xl border border-line-strong bg-ink-800 shadow-[0_30px_80px_-30px_rgba(0,0,0,0.8)]"
+          className="no-scrollbar flex cursor-zoom-in snap-x snap-mandatory overflow-x-auto overscroll-x-contain rounded-xl border border-line-strong bg-ink-800 shadow-[0_30px_80px_-30px_var(--frame-shadow)]"
         >
           {slides.map((slide, i) => (
             <div
@@ -361,7 +361,7 @@ function EnlargedSlides({
 
   const slide = slides[index];
   const navClass =
-    "flex h-11 w-11 shrink-0 items-center justify-center rounded-full border border-line-strong bg-ink-800 text-paper transition-colors hover:text-accent disabled:opacity-30 disabled:hover:text-paper";
+    "flex h-11 w-11 shrink-0 items-center justify-center rounded-full border border-line-strong bg-ink-800 text-paper transition-colors hover:text-accent-fg disabled:opacity-30 disabled:hover:text-paper";
 
   return (
     <div
@@ -385,7 +385,7 @@ function EnlargedSlides({
           ref={closeRef}
           type="button"
           onClick={onClose}
-          className="flex h-10 w-10 items-center justify-center rounded-full border border-line-strong bg-ink-800 text-paper transition-colors hover:text-accent"
+          className="flex h-10 w-10 items-center justify-center rounded-full border border-line-strong bg-ink-800 text-paper transition-colors hover:text-accent-fg"
           aria-label="Close enlarged infographic"
         >
           <CloseIcon />

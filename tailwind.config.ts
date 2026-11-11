@@ -16,29 +16,34 @@ const config: Config = {
         mono: ["var(--font-mono)", "ui-monospace", "SFMono-Regular", "monospace"],
       },
       colors: {
+        // Every color is a CSS variable (RGB channels) set per theme in globals.css.
+        // "ink" = surfaces, "paper" = text, "accent" = the theme's highlight color.
         ink: {
-          DEFAULT: "#0C0D10",
-          900: "#0C0D10",
-          850: "#111318",
-          800: "#15181E",
-          700: "#1C2028",
-          600: "#272C36",
+          DEFAULT: "rgb(var(--ink-900) / <alpha-value>)",
+          900: "rgb(var(--ink-900) / <alpha-value>)",
+          850: "rgb(var(--ink-850) / <alpha-value>)",
+          800: "rgb(var(--ink-800) / <alpha-value>)",
+          700: "rgb(var(--ink-700) / <alpha-value>)",
+          600: "rgb(var(--ink-600) / <alpha-value>)",
         },
         line: {
-          DEFAULT: "rgba(236, 232, 223, 0.08)",
-          strong: "rgba(236, 232, 223, 0.16)",
+          DEFAULT: "rgb(var(--line-rgb) / var(--line-alpha))",
+          strong: "rgb(var(--line-rgb) / var(--line-strong-alpha))",
         },
         paper: {
-          DEFAULT: "#ECE8DF",
-          muted: "#A3A39C",
-          dim: "#6E6F6B",
+          DEFAULT: "rgb(var(--paper) / <alpha-value>)",
+          muted: "rgb(var(--paper-muted) / <alpha-value>)",
+          dim: "rgb(var(--paper-dim) / <alpha-value>)",
         },
         accent: {
-          DEFAULT: "#F2A93B",
-          soft: "#F6C47A",
+          DEFAULT: "rgb(var(--accent) / <alpha-value>)",
+          soft: "rgb(var(--accent-soft) / <alpha-value>)",
+          // A readable shade of the accent for text and small marks on the page background.
+          fg: "rgb(var(--accent-fg) / <alpha-value>)",
         },
-        up: "#5BC48A",
-        down: "#E5736A",
+        "on-accent": "rgb(var(--on-accent) / <alpha-value>)",
+        up: "rgb(var(--up) / <alpha-value>)",
+        down: "rgb(var(--down) / <alpha-value>)",
       },
       maxWidth: {
         page: "76rem",

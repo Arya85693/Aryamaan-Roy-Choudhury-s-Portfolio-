@@ -16,8 +16,8 @@ export default function OpengraphImage() {
           flexDirection: "column",
           justifyContent: "space-between",
           padding: "72px 80px",
-          background: "#0C0D10",
-          color: "#ECE8DF",
+          background: "#03203D",
+          color: "#EEF4F9",
           fontFamily: "sans-serif",
         }}
       >
@@ -30,14 +30,14 @@ export default function OpengraphImage() {
               width: 64,
               height: 64,
               borderRadius: 14,
-              border: "2px solid rgba(236,232,223,0.16)",
+              border: "2px solid rgba(99,156,197,0.3)",
               fontSize: 26,
               fontWeight: 700,
             }}
           >
             AR
           </div>
-          <div style={{ fontSize: 26, color: "#A3A39C" }}>
+          <div style={{ fontSize: 26, color: "#B3CADD" }}>
             Northeastern University · Computer Engineering & Computer Science
           </div>
         </div>
@@ -46,12 +46,12 @@ export default function OpengraphImage() {
           <div style={{ fontSize: 76, fontWeight: 700, letterSpacing: -2, lineHeight: 1.05 }}>
             Aryamaan Roy Choudhury
           </div>
-          <div style={{ display: "flex", marginTop: 24, fontSize: 40, color: "#A3A39C" }}>
+          <div style={{ display: "flex", marginTop: 24, fontSize: 40, color: "#B3CADD" }}>
             Software, data, and sports analytics
           </div>
         </div>
 
-        <div style={{ display: "flex", alignItems: "center", gap: 14, fontSize: 26, color: "#A3A39C" }}>
+        <div style={{ display: "flex", alignItems: "center", gap: 14, fontSize: 26, color: "#B3CADD" }}>
           <div style={{ width: 14, height: 14, borderRadius: 7, background: "#5BC48A" }} />
           Looking for a Spring 2027 co-op or Summer 2027 internship
         </div>

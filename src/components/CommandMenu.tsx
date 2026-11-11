@@ -4,6 +4,7 @@ import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { useRouter } from "next/navigation";
 import { profile, projects } from "@/data/content";
 import { SearchIcon } from "@/components/Icons";
+import { getTheme, toggleTheme } from "@/lib/theme";
 
 export const OPEN_COMMAND_MENU = "open-command-menu";
 
@@ -82,6 +83,16 @@ export default function CommandMenu() {
         label: "Hoops Stock Market (live)",
         hint: "hoopsstockmarket.com",
         run: external("https://hoopsstockmarket.com/"),
+      },
+      {
+        id: "theme",
+        group: "Preferences",
+        label: "Toggle light / dark theme",
+        hint: "theme",
+        run: () => {
+          toggleTheme();
+          setToast(getTheme() === "light" ? "Light theme on" : "Dark theme on");
+        },
       },
     ];
   }, [router]);
@@ -204,7 +215,7 @@ export default function CommandMenu() {
                       onMouseMove={() => setActiveIndex(i)}
                       onClick={() => runCommand(command)}
                       className={`flex cursor-pointer items-center justify-between gap-4 rounded-lg px-3 py-2.5 text-sm ${
-                        i === activeIndex ? "bg-white/[0.06] text-paper" : "text-paper-muted"
+                        i === activeIndex ? "bg-paper/[0.06] text-paper" : "text-paper-muted"
                       }`}
                     >
                       <span>{command.label}</span>

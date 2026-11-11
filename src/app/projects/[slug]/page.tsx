@@ -153,7 +153,7 @@ export default function ProjectPage({ params }: Params) {
                   id={`section-${i}`}
                   className="flex items-baseline gap-3 font-display text-2xl font-semibold tracking-tight text-paper"
                 >
-                  <span className="font-mono text-xs text-accent">{String(i + 1).padStart(2, "0")}</span>
+                  <span className="font-mono text-xs text-accent-fg">{String(i + 1).padStart(2, "0")}</span>
                   {section.title}
                 </h2>
                 {section.body && <p className="mt-4 leading-relaxed text-paper-muted">{section.body}</p>}
@@ -193,7 +193,7 @@ export default function ProjectPage({ params }: Params) {
                       {caseStudy.sampleOutput.rows.map((row) => (
                         <tr key={row[0]} className="border-b border-line last:border-0">
                           {row.map((cell, j) => (
-                            <td key={j} className={`px-4 py-2.5 ${j === row.length - 1 ? "text-accent" : "text-paper"}`}>
+                            <td key={j} className={`px-4 py-2.5 ${j === row.length - 1 ? "text-accent-fg" : "text-paper"}`}>
                               {cell}
                             </td>
                           ))}
@@ -217,7 +217,7 @@ export default function ProjectPage({ params }: Params) {
         <nav aria-label="Next project" className="mt-28 border-t border-line pt-10">
           <Link href={`/projects/${next.slug}`} className="group block">
             <p className="eyebrow">Next project</p>
-            <p className="mt-4 flex items-center gap-4 font-display text-3xl font-semibold tracking-tight text-paper transition-colors group-hover:text-accent sm:text-5xl">
+            <p className="mt-4 flex items-center gap-4 font-display text-3xl font-semibold tracking-tight text-paper transition-colors group-hover:text-accent-fg sm:text-5xl">
               {next.title}
               <ArrowRight className="h-7 w-7 shrink-0 transition-transform group-hover:translate-x-1" />
             </p>

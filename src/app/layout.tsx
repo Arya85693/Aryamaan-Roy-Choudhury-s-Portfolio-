@@ -3,6 +3,7 @@ import { Inter, Inter_Tight, Instrument_Serif, JetBrains_Mono } from "next/font/
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import CommandMenu from "@/components/CommandMenu";
+import { themeColors, themeInitScript } from "@/lib/theme";
 import "./globals.css";
 
 const sans = Inter({ subsets: ["latin"], variable: "--font-sans", display: "swap" });
@@ -45,7 +46,10 @@ export const metadata: Metadata = {
 };
 
 export const viewport: Viewport = {
-  themeColor: "#0C0D10",
+  themeColor: [
+    { media: "(prefers-color-scheme: dark)", color: themeColors.dark },
+    { media: "(prefers-color-scheme: light)", color: themeColors.light },
+  ],
 };
 
 export default function RootLayout({
@@ -60,12 +64,12 @@ export default function RootLayout({
       suppressHydrationWarning
     >
       <head>
-        <script dangerouslySetInnerHTML={{ __html: "document.documentElement.classList.add('js')" }} />
+        <script dangerouslySetInnerHTML={{ __html: themeInitScript }} />
       </head>
       <body>
         <a
           href="#main"
-          className="sr-only z-[100] rounded-md bg-accent px-4 py-2 text-sm font-medium text-ink focus:not-sr-only focus:fixed focus:left-4 focus:top-4"
+          className="sr-only z-[100] rounded-md bg-accent px-4 py-2 text-sm font-medium text-on-accent focus:not-sr-only focus:fixed focus:left-4 focus:top-4"
         >
           Skip to content
         </a>

@@ -22,7 +22,7 @@ export default function Contact() {
 
         <a
           href={`mailto:${profile.email}`}
-          className="group mt-10 inline-flex max-w-full items-center gap-3 break-all font-display text-xl font-medium text-paper transition-colors hover:text-accent sm:text-3xl"
+          className="group mt-10 inline-flex max-w-full items-center gap-3 break-all font-display text-xl font-medium text-paper transition-colors hover:text-accent-fg sm:text-3xl"
         >
           <span className="link-underline">{profile.email}</span>
           <ArrowUpRight className="h-5 w-5 shrink-0 transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5 sm:h-6 sm:w-6" />
