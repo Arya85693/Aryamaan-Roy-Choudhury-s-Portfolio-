@@ -297,34 +297,25 @@ export const projects: Project[] = [
 
 export const researchCourse = "ENGW3302 Advanced Writing in the Technical Professions · Northeastern University";
 
+// The paper the infographic adapts. On the site it is the supporting piece: linked from the bottom of the
+// infographic card, with its research question shown up front.
 export const researchPaper = {
-  id: "research-paper",
-  label: "Research Paper 01",
-  title: "Wearable Technology and Injury Prevention",
-  fullTitle: "From Accurate Measurements to Injury Prevention – Evaluating Wearable Sensor Reliability in Sports",
-  category: "Academic Research · Technical Writing",
-  description:
-    "An academic research paper examining the reliability and limitations of wearable sensor technology in sports biomechanics and injury-risk assessment. Drawing on six peer-reviewed studies, the research distinguishes accurate movement measurement, injury-risk prediction, and evidence of actual injury prevention.",
+  title: "From Accurate Measurements to Injury Prevention – Evaluating Wearable Sensor Reliability in Sports",
+  // From the paper's problem statement: "...whether those measurements are reliable enough to support
+  // injury-prevention decisions."
+  researchQuestion: "Are wearable sensor measurements reliable enough to support injury-prevention decisions?",
+  // The paper's answer, in its own terms (Analysis section).
+  finding:
+    "Accurate measurement, useful prediction, and demonstrated injury prevention are different claims. Better sensor accuracy is necessary but not sufficient, and none of the six studies shows that adjusting training based on wearable data reduces injuries.",
   skills: ["Research Synthesis", "Technical Writing", "Sports Biomechanics", "Critical Analysis", "Academic Research"],
-  facts: [
-    { value: "6", label: "peer-reviewed studies" },
-    { value: "IEEE", label: "citation style" },
-    { value: "3", label: "claims kept separate" },
-  ],
+  meta: ["6 peer-reviewed studies", "IEEE citations", "6 pages"],
   pdf: "/research/wearable-tech-injury-prevention-paper.pdf",
-  preview: {
-    src: "/research/paper-preview.webp",
-    alt: "First page of the paper, From Accurate Measurements to Injury Prevention, showing its problem statement, introduction, and the start of the synthesis",
-    width: 1224,
-    height: 1584,
-  },
 };
 
 export type InfographicSlide = { src: string; alt: string };
 
 export const infographic = {
-  id: "research-infographic",
-  label: "Infographic 02",
+  id: "wearables-research",
   title: "Can Wearable Technology Actually Prevent Injuries?",
   category: "Multimodal Technical Communication · Data Visualization",
   description:
