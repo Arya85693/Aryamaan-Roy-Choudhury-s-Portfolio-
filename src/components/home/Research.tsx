@@ -1,4 +1,4 @@
-import { infographic, researchCourse, researchPaper } from "@/data/content";
+import { infographic, profile, researchCourse, researchPaper } from "@/data/content";
 import SectionHeading from "@/components/SectionHeading";
 import Reveal from "@/components/Reveal";
 import StackList from "@/components/StackList";
@@ -44,7 +44,7 @@ export default function Research() {
               </h3>
 
               <figure className="mt-6 border-l-2 border-accent pl-4">
-                <figcaption className="eyebrow">Research question</figcaption>
+                <figcaption className="eyebrow">My research question</figcaption>
                 <blockquote className="mt-2 font-serif text-xl italic leading-snug text-paper">
                   {researchPaper.researchQuestion}
                 </blockquote>
@@ -53,7 +53,7 @@ export default function Research() {
               <p className="mt-6 leading-relaxed text-paper-muted">{infographic.description}</p>
 
               <p className="mt-4 text-[0.95rem] leading-relaxed text-paper-muted">
-                <span className="font-medium text-paper">What the research found: </span>
+                <span className="font-medium text-paper">What my research found: </span>
                 {researchPaper.finding}
               </p>
 
@@ -71,9 +71,12 @@ export default function Research() {
             </p>
             <div className="mt-4 flex flex-col gap-5 sm:flex-row sm:items-center sm:justify-between">
               <div className="min-w-0">
-                <p className="text-sm text-paper-muted">Based on the research paper</p>
+                <p className="text-sm text-paper-muted">Based on my research paper</p>
                 <p className="mt-1 font-serif text-lg italic leading-snug text-paper">{researchPaper.title}</p>
-                <p className="mt-2 font-mono text-xs text-paper-dim">{researchPaper.meta.join(" · ")}</p>
+                <p className="mt-2 text-sm text-paper-muted">
+                  Written by <span className="text-paper">{profile.name}</span>
+                </p>
+                <p className="mt-1 font-mono text-xs text-paper-dim">{researchPaper.meta.join(" · ")}</p>
               </div>
               <a
                 href={researchPaper.pdf}

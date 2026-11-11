@@ -40,8 +40,12 @@ export default function InfographicCarousel({ title, slides, width, height }: In
   const scrollToSlide = useCallback((i: number, smooth = true) => {
     const track = trackRef.current;
     if (!track) return;
-    targetRef.current = i;
-    track.scrollTo({ left: i * track.clientWidth, behavior: smooth && !prefersReducedMotion() ? "smooth" : "auto" });
+    const left = i * track.clientWidth;
+    const animate = smooth && !prefersReducedMotion() && Math.abs(track.scrollLeft - left) > 2;
+    // Only an animated scroll passes through other slides on its way. An instant jump (or one to where the track
+    // already is) fires no in-between scroll events, so it must not leave a target behind to be cleared.
+    targetRef.current = animate ? i : null;
+    track.scrollTo({ left, behavior: animate ? "smooth" : "auto" });
   }, []);
 
   const goTo = useCallback(
@@ -115,7 +119,24 @@ export default function InfographicCarousel({ title, slides, width, height }: In
     return () => observer.disconnect();
   }, []);
 
+  // Tapping or clicking a slide opens it enlarged. A swipe never produces a click, and a tap that only stops a
+  // slide still moving (or lands mid-way between two slides) is ignored.
+  const onTrackClick = () => {
+    const track = trackRef.current;
+    if (!track || !track.clientWidth || targetRef.current !== null) return;
+    const exact = track.scrollLeft / track.clientWidth;
+    const i = Math.round(exact);
+    if (Math.abs(exact - i) > 0.02) return;
+    setIndex(i);
+    setEnlarged(true);
+  };
+
   const onTrackKeyDown = (e: KeyboardEvent<HTMLDivElement>) => {
+    if (e.key === "Enter" || e.key === " ") {
+      e.preventDefault();
+      setEnlarged(true);
+      return;
+    }
     const from = targetRef.current ?? index;
     const moves: Record<string, number> = { ArrowRight: from + 1, ArrowLeft: from - 1, Home: 0, End: total - 1 };
     if (e.key in moves) {
@@ -143,10 +164,12 @@ export default function InfographicCarousel({ title, slides, width, height }: In
           ref={trackRef}
           role="region"
           aria-roledescription="carousel"
-          aria-label={`${title}, ${total}-panel infographic. Use the left and right arrow keys to change slides.`}
+          aria-label={`${title}, ${total}-panel infographic. Use the left and right arrow keys to change slides, and Enter to enlarge.`}
           tabIndex={0}
           onKeyDown={onTrackKeyDown}
-          className="no-scrollbar flex snap-x snap-mandatory overflow-x-auto overscroll-x-contain rounded-xl border border-line-strong bg-ink-800 shadow-[0_30px_80px_-30px_rgba(0,0,0,0.8)]"
+          onClick={onTrackClick}
+          title="Click to enlarge"
+          className="no-scrollbar flex cursor-zoom-in snap-x snap-mandatory overflow-x-auto overscroll-x-contain rounded-xl border border-line-strong bg-ink-800 shadow-[0_30px_80px_-30px_rgba(0,0,0,0.8)]"
         >
           {slides.map((slide, i) => (
             <div
