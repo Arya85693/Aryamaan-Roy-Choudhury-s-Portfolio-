@@ -95,16 +95,16 @@ export default function Hero() {
           </dl>
 
           <div className="lg:col-span-2">
-            {/* The photo is a cut-out on a transparent background, so a solid tile behind it makes the square,
-                and anchoring it to the bottom keeps the shoulders running flat along the bottom edge. */}
+            {/* A transparent cut-out (cropped from headshot.png above its circular edge) on a solid tile, so the
+                photo's background is the tile color and the shoulders run flat across the bottom edge. */}
             <Image
-              src="/headshot.png"
+              src="/headshot-portrait.png"
               alt={`Portrait of ${profile.name}`}
-              width={1353}
-              height={1163}
+              width={360}
+              height={360}
               sizes="(min-width: 1024px) 180px, 144px"
               priority
-              className="aspect-square w-28 bg-ink-800 object-cover object-bottom sm:w-36 lg:w-full"
+              className="aspect-square w-28 bg-ink-800 object-cover sm:w-36 lg:w-full"
             />
           </div>
         </div>
