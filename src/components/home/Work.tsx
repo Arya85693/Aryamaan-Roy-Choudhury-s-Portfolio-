@@ -44,15 +44,15 @@ const HOME_STACK_LIMIT = 5;
 function FactGrid({ facts, className = "" }: { facts: NonNullable<Project["facts"]>; className?: string }) {
   return (
     <dl
-      className={`grid-cols-1 divide-y divide-line rounded-xl border border-line sm:grid-cols-3 sm:divide-x sm:divide-y-0 ${className}`}
+      className={`grid-cols-1 divide-y divide-line border-y border-line sm:grid-cols-3 sm:divide-x sm:divide-y-0 ${className}`}
     >
       {facts.map((fact) => (
         <div
           key={fact.label}
-          className="flex flex-row-reverse items-baseline justify-end gap-3 px-4 py-3 sm:flex-col-reverse sm:items-start sm:gap-0 sm:px-5 sm:py-5"
+          className="flex flex-row-reverse items-baseline justify-end gap-3 py-3 sm:flex-col-reverse sm:items-start sm:gap-0 sm:px-5 sm:py-5 sm:first:pl-0"
         >
           <dt className="text-sm leading-snug text-paper-dim sm:mt-1 sm:text-xs">{fact.label}</dt>
-          <dd className="w-[4.5rem] shrink-0 font-display text-xl font-semibold text-paper sm:w-auto sm:text-3xl">
+          <dd className="figures w-[4.5rem] shrink-0 font-display text-xl font-bold tracking-tight text-paper sm:w-auto sm:text-4xl">
             {fact.value}
           </dd>
         </div>
@@ -61,14 +61,12 @@ function FactGrid({ facts, className = "" }: { facts: NonNullable<Project["facts
   );
 }
 
-
-
 function FeaturedProject({ project, flip = false }: { project: Project; flip?: boolean }) {
   const [primary, secondary] = project.images;
   return (
-    <Reveal as="article" className="card relative overflow-hidden" aria-labelledby={`${project.slug}-title`}>
-      <div className="grid gap-10 p-5 sm:p-8 lg:grid-cols-12 lg:gap-12 lg:p-12">
-        <div className={`relative lg:col-span-7 lg:self-start lg:pt-2 ${flip ? "lg:order-2" : ""}`}>
+    <Reveal as="article" className="py-14 first:pt-0 sm:py-20" aria-labelledby={`${project.slug}-title`}>
+      <div className="grid gap-10 lg:grid-cols-12 lg:gap-8">
+        <div className={`lg:col-span-6 lg:self-start ${flip ? "lg:order-2 lg:col-start-7" : ""}`}>
           {primary && (
             <BrowserFrame image={primary} sizes="(min-width: 1024px) 640px, 100vw" />
           )}
@@ -76,19 +74,19 @@ function FeaturedProject({ project, flip = false }: { project: Project; flip?: b
             <BrowserFrame
               image={secondary}
               sizes="(min-width: 1024px) 420px, 100vw"
-              className={`relative mt-4 lg:-mt-16 lg:w-[66%] ${flip ? "lg:-ml-6 lg:mr-auto" : "lg:-mr-6 lg:ml-auto"}`}
+              className={`mt-4 lg:w-2/3 ${flip ? "lg:mr-auto" : "lg:ml-auto"}`}
             />
           )}
           {project.facts && <FactGrid facts={project.facts} className="mt-10 hidden lg:grid" />}
         </div>
 
-        <div className={`flex flex-col lg:col-span-5 ${flip ? "lg:order-1" : ""}`}>
+        <div className={`flex flex-col lg:col-span-5 ${flip ? "lg:order-1" : "lg:col-start-8"}`}>
           <p className="text-sm text-paper-dim">
             {project.kind} · {project.period}
           </p>
           <h3
             id={`${project.slug}-title`}
-            className="mt-2 font-display text-3xl font-semibold tracking-tight text-paper sm:text-4xl"
+            className="mt-2 font-display text-4xl font-bold tracking-tightest text-paper sm:text-5xl"
           >
             {project.title}
           </h3>
@@ -118,26 +116,26 @@ function FeaturedProject({ project, flip = false }: { project: Project; flip?: b
   );
 }
 
-/** A full-width card for the projects below the featured ones: screenshot on one side, details on the other. */
+/** A row for the projects below the featured ones: screenshot on one side, details on the other. */
 function ProjectCard({ project }: { project: Project }) {
   const [image] = project.images;
   return (
     <Reveal
       as="article"
-      className="card group overflow-hidden transition-colors duration-300 hover:border-line-strong"
+      className="py-14 last:pb-0 sm:py-16"
       aria-labelledby={`${project.slug}-title`}
     >
-      <div className="grid lg:grid-cols-12">
+      <div className="grid gap-8 lg:grid-cols-12">
         {image && (
-          <div className="border-b border-line bg-ink-800/40 p-5 sm:p-6 lg:col-span-5 lg:border-b-0 lg:border-r lg:p-8">
+          <div className="lg:col-span-5">
             <BrowserFrame image={image} sizes="(min-width: 1024px) 460px, 100vw" />
           </div>
         )}
-        <div className={`flex flex-col p-5 sm:p-7 lg:p-8 ${image ? "lg:col-span-7" : "lg:col-span-12"}`}>
+        <div className={`flex flex-col ${image ? "lg:col-span-6 lg:col-start-7" : "lg:col-span-12"}`}>
           <p className="text-sm text-paper-dim">
             {project.kind} · {project.period}
           </p>
-          <h3 id={`${project.slug}-title`} className="mt-2 font-display text-2xl font-semibold tracking-tight text-paper">
+          <h3 id={`${project.slug}-title`} className="mt-2 font-display text-3xl font-bold tracking-tight text-paper">
             <Link href={`/projects/${project.slug}`} className="link-underline">
               {project.title}
             </Link>
@@ -167,14 +165,14 @@ export default function Work() {
   const featured = projects.filter((p) => p.featured);
   const rest = projects.filter((p) => !p.featured);
   return (
-    <section id="work" aria-labelledby="work-heading" className="py-24 sm:py-32">
+    <section id="work" aria-labelledby="work-heading" className="py-20 sm:py-28">
       <div className="mx-auto max-w-page px-5 sm:px-8">
         <SectionHeading
           id="work-heading"
           title="Projects"
           intro="Each one has a case study if you want more detail on how it works."
         />
-        <div className="space-y-6">
+        <div className="divide-y divide-line">
           {featured.map((project, i) => (
             <FeaturedProject key={project.slug} project={project} flip={i % 2 === 1} />
           ))}

@@ -34,7 +34,6 @@
   --on-secondary: 240 225 206;
   --up: 24 100 58;
   --down: 177 23 34;
-  --frame-shadow: rgba(26, 40, 65, 0.28);
 }
 
 :root[data-theme="dark"] {
@@ -59,7 +58,6 @@
   --on-secondary: 2 31 47;
   --up: 110 214 160;
   --down: 253 108 99;
-  --frame-shadow: rgba(0, 10, 18, 0.8);
 }
 
 @layer base {
@@ -105,7 +103,7 @@
   }
 
   .btn {
-    @apply inline-flex items-center justify-center gap-2 rounded-full px-5 py-2.5 text-sm font-medium transition-all duration-200;
+    @apply inline-flex items-center justify-center gap-2 px-5 py-2.5 text-sm font-medium transition-colors duration-200;
   }
 
   .btn-primary {
@@ -119,10 +117,6 @@
 
   .btn-ghost {
     @apply btn border border-line-strong text-paper hover:border-paper/40 hover:bg-paper/[0.04];
-  }
-
-  .card {
-    @apply rounded-2xl border border-line bg-ink-850;
   }
 
   /* Horizontal scrollers (the infographic carousel) keep native swipe but hide the scrollbar. */
@@ -144,10 +138,9 @@
     display: none;
   }
 
-  .hairline-grid {
-    background-image: linear-gradient(rgb(var(--line-rgb) / 0.07) 1px, transparent 1px),
-      linear-gradient(90deg, rgb(var(--line-rgb) / 0.07) 1px, transparent 1px);
-    background-size: 56px 56px;
+  /* Stats and dates line up digit for digit. */
+  .figures {
+    font-variant-numeric: tabular-nums;
   }
 }
 

@@ -64,10 +64,8 @@ export default function Navbar() {
 
   return (
     <header
-      className={`fixed inset-x-0 top-0 z-50 transition-[background-color,border-color,backdrop-filter] duration-300 ${
-        scrolled || menuOpen
-          ? "border-b border-line bg-ink/80 backdrop-blur-md"
-          : "border-b border-transparent"
+      className={`fixed inset-x-0 top-0 z-50 transition-[background-color,border-color] duration-300 ${
+        scrolled || menuOpen ? "border-b border-line bg-ink" : "border-b border-transparent"
       }`}
     >
       <nav
@@ -97,14 +95,12 @@ export default function Navbar() {
                 key={id}
                 href={href(id)}
                 aria-current={active ? "true" : undefined}
-                className={`relative rounded-full px-3.5 py-1.5 text-sm transition-colors ${
+                className={`relative px-3 py-1.5 text-sm transition-colors ${
                   active ? "text-paper" : "text-paper-muted hover:text-paper"
                 }`}
               >
-                {active && (
-                  <span aria-hidden className="absolute inset-0 rounded-full bg-paper/[0.06] ring-1 ring-line" />
-                )}
-                <span className="relative">{label}</span>
+                {label}
+                {active && <span aria-hidden className="absolute inset-x-3 -bottom-px h-0.5 bg-accent" />}
               </a>
             );
           })}
@@ -116,13 +112,13 @@ export default function Navbar() {
             href={profile.resume}
             target="_blank"
             rel="noopener noreferrer"
-            className="hidden rounded-full bg-secondary px-4 py-1.5 text-sm font-medium text-on-secondary transition-colors hover:bg-secondary-soft sm:inline-flex"
+            className="hidden bg-secondary px-4 py-1.5 text-sm font-medium text-on-secondary transition-colors hover:bg-secondary-soft sm:inline-flex"
           >
             Résumé
           </a>
           <button
             type="button"
-            className="flex h-9 w-9 items-center justify-center rounded-full border border-line-strong text-paper md:hidden"
+            className="flex h-9 w-9 items-center justify-center border border-line-strong text-paper md:hidden"
             onClick={() => setMenuOpen((o) => !o)}
             aria-expanded={menuOpen}
             aria-controls="mobile-menu"

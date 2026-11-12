@@ -40,10 +40,10 @@ export default function ProjectPage({ params }: Params) {
           <ArrowLeft /> All work
         </Link>
 
-        <header className="mt-10 grid gap-10 lg:grid-cols-12">
+        <header className="mt-10 grid gap-10 lg:grid-cols-12 lg:gap-8">
           <div className="animate-fade-up lg:col-span-8">
             <p className="eyebrow">{project.kind}</p>
-            <h1 className="mt-3 font-display text-[clamp(2.4rem,6vw,4.75rem)] font-semibold leading-[1] tracking-tightest text-paper">
+            <h1 className="mt-3 font-display text-[clamp(2.75rem,8vw,7rem)] font-extrabold leading-[0.9] tracking-[-0.05em] text-paper">
               {project.title}
             </h1>
             <p className="mt-6 max-w-2xl text-xl leading-relaxed text-paper-muted">{project.summary}</p>
@@ -114,7 +114,7 @@ export default function ProjectPage({ params }: Params) {
             <ol className="mt-5 grid gap-3 lg:grid-cols-5 lg:gap-0">
               {project.pipeline.map((stage, i) => (
                 <li key={stage.step} className="relative flex lg:pr-8 lg:last:pr-0">
-                  <div className="flex-1 rounded-xl border border-line-strong bg-ink-850 p-4">
+                  <div className="flex-1 border-t-2 border-paper pt-3 lg:pr-2">
                     <p className="font-mono text-xs text-accent-fg">{String(i + 1).padStart(2, "0")}</p>
                     <p className="mt-1.5 font-medium text-paper">{stage.step}</p>
                     <p className="mt-1 text-sm leading-relaxed text-paper-muted">{stage.detail}</p>
@@ -149,7 +149,7 @@ export default function ProjectPage({ params }: Params) {
                   {project.facts.map((f) => (
                     <div key={f.label} className="flex flex-col-reverse justify-end">
                       <dt className="mt-1 text-xs text-paper-dim">{f.label}</dt>
-                      <dd className="font-display text-xl font-semibold text-paper">{f.value}</dd>
+                      <dd className="figures font-display text-xl font-bold text-paper">{f.value}</dd>
                     </div>
                   ))}
                 </dl>
@@ -194,7 +194,7 @@ export default function ProjectPage({ params }: Params) {
                 <h2 id="output-heading" className="font-display text-2xl font-semibold tracking-tight text-paper">
                   {caseStudy.sampleOutput.title ?? "Sample output"}
                 </h2>
-                <div className="mt-5 overflow-x-auto rounded-xl border border-line">
+                <div className="mt-5 overflow-x-auto border-y border-line">
                   <table className="w-full min-w-[30rem] text-left font-mono text-sm">
                     <caption className="border-b border-line px-4 py-3 text-left text-xs text-paper-dim">
                       {caseStudy.sampleOutput.caption}
@@ -236,7 +236,7 @@ export default function ProjectPage({ params }: Params) {
             )}
 
             {caseStudy.notes && (
-              <Reveal as="aside" className="rounded-xl border border-line bg-ink-850 p-5 text-sm leading-relaxed text-paper-muted">
+              <Reveal as="aside" className="border-l-2 border-secondary py-1 pl-5 text-sm leading-relaxed text-paper-muted">
                 <span className="font-medium text-paper">Note: </span>
                 {caseStudy.notes}
               </Reveal>
@@ -244,10 +244,10 @@ export default function ProjectPage({ params }: Params) {
           </div>
         </div>
 
-        <nav aria-label="Next project" className="mt-28 border-t border-line pt-10">
+        <nav aria-label="Next project" className="mt-28 border-t-2 border-paper pt-6">
           <Link href={`/projects/${next.slug}`} className="group block">
             <p className="eyebrow">Next project</p>
-            <p className="mt-4 flex items-center gap-4 font-display text-3xl font-semibold tracking-tight text-paper transition-colors group-hover:text-accent-fg sm:text-5xl">
+            <p className="mt-4 flex items-center gap-4 font-display text-4xl font-bold tracking-tightest text-paper transition-colors group-hover:text-accent-fg sm:text-6xl">
               {next.title}
               <ArrowRight className="h-7 w-7 shrink-0 transition-transform group-hover:translate-x-1" />
             </p>

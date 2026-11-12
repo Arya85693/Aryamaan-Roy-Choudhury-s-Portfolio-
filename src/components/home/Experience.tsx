@@ -10,22 +10,22 @@ export default function Experience() {
     <section
       id="experience"
       aria-labelledby="experience-heading"
-      className="border-t border-line bg-ink-850/50 py-24 sm:py-32"
+      className="py-20 sm:py-28"
     >
       <div className="mx-auto max-w-page px-5 sm:px-8">
         <SectionHeading id="experience-heading" title="Experience" />
 
-        <ol className="border-t border-line">
+        <ol>
           {experience.map((job, i) => (
-            <Reveal as="li" key={job.company} delay={i * 40} className="border-b border-line py-10 sm:py-12">
+            <Reveal as="li" key={job.company} delay={i * 40} className="border-b border-line py-10 first:pt-0 sm:py-12 sm:first:pt-0">
               <article className="grid gap-6 md:grid-cols-12 md:gap-8">
                 <div className="md:col-span-3">
-                  <p className="font-mono text-xs text-paper">{job.period}</p>
+                  <p className="figures text-sm font-medium text-paper">{job.period}</p>
                   <p className="mt-1.5 text-sm text-paper-dim">{job.location}</p>
                 </div>
 
                 <div className={job.image ? "md:col-span-9 lg:col-span-5" : "md:col-span-9 lg:col-span-7"}>
-                  <h3 className="font-display text-2xl font-semibold tracking-tight text-paper">
+                  <h3 className="font-display text-2xl font-bold tracking-tight text-paper">
                     {job.role}
                     <span className="text-paper-dim"> · </span>
                     <span className="text-secondary">{job.company}</span>

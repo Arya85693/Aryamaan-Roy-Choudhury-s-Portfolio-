@@ -11,7 +11,7 @@ const skills = ["Scientific Communication", "Data Visualization", "Technical Wri
 
 export default function Research() {
   return (
-    <section id="research" aria-labelledby="research-heading" className="border-t border-line py-24 sm:py-32">
+    <section id="research" aria-labelledby="research-heading" className="py-20 sm:py-28">
       <div className="mx-auto max-w-page px-5 sm:px-8">
         <SectionHeading
           id="research-heading"
@@ -23,10 +23,10 @@ export default function Research() {
           as="article"
           id={infographic.id}
           aria-labelledby={`${infographic.id}-title`}
-          className="card scroll-mt-24 overflow-hidden"
+          className="scroll-mt-24"
         >
-          <div className="grid gap-10 p-5 sm:p-8 lg:grid-cols-12 lg:gap-10 lg:p-10">
-            <div className="mx-auto w-full max-w-[24rem] sm:px-12 lg:col-span-5 lg:max-w-none">
+          <div className="grid gap-10 lg:grid-cols-12 lg:gap-8">
+            <div className="mx-auto w-full max-w-[24rem] sm:px-12 lg:col-span-5 lg:max-w-none lg:px-12">
               <ImageCarousel
                 title={infographic.title}
                 slides={infographic.slides}
@@ -35,18 +35,18 @@ export default function Research() {
               />
             </div>
 
-            <div className="flex flex-col lg:col-span-7">
+            <div className="flex flex-col lg:col-span-6 lg:col-start-7">
               <p className="text-sm text-paper-dim">{infographic.category}</p>
               <h3
                 id={`${infographic.id}-title`}
-                className="mt-2 font-display text-2xl font-semibold tracking-tight text-paper sm:text-3xl"
+                className="mt-2 font-display text-3xl font-bold tracking-tight text-paper sm:text-4xl"
               >
                 {infographic.title}
               </h3>
 
               <figure className="mt-5 border-l-2 border-accent pl-4">
                 <figcaption className="eyebrow">My research question</figcaption>
-                <blockquote className="mt-2 font-serif text-xl italic leading-snug text-paper">
+                <blockquote className="mt-2 font-display text-xl font-medium leading-snug text-paper">
                   {researchPaper.researchQuestion}
                 </blockquote>
               </figure>
@@ -70,7 +70,7 @@ export default function Research() {
                 <div className="mt-3 flex flex-col gap-4 lg:flex-row lg:items-center lg:justify-between">
                   <div className="min-w-0">
                     <p className="text-sm text-paper-muted">Based on my research paper</p>
-                    <p className="mt-1 font-serif text-lg italic leading-snug text-paper">{researchPaper.title}</p>
+                    <p className="mt-1 font-display text-lg font-semibold leading-snug text-paper">{researchPaper.title}</p>
                     <p className="mt-1.5 text-sm text-paper-muted">
                       Written by <span className="text-paper">{profile.name}</span>
                       <span className="text-paper-dim"> · {researchPaper.meta.join(" · ")}</span>

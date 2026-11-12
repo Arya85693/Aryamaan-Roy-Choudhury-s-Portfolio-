@@ -8,17 +8,22 @@ export default function Contact() {
     <section
       id="contact"
       aria-labelledby="contact-heading"
-      className="border-t border-line py-24 sm:py-32"
+      className="py-20 sm:py-28"
     >
       <Reveal className="mx-auto max-w-page px-5 sm:px-8">
-        <h2 id="contact-heading" className="font-display text-3xl font-semibold tracking-tight text-paper sm:text-4xl">
-          Contact
-        </h2>
-        <p className="mt-4 max-w-xl text-lg leading-relaxed text-paper-muted">
+        <div className="grid gap-4 border-t-2 border-paper pt-5 lg:grid-cols-12 lg:gap-8">
+          <h2
+            id="contact-heading"
+            className="font-display text-4xl font-bold leading-[0.95] tracking-tightest text-paper sm:text-6xl lg:col-span-7"
+          >
+            Contact
+          </h2>
+          <p className="max-w-xl text-lg leading-relaxed text-paper-muted lg:col-span-5 lg:pt-2">
           I’m looking for a Spring 2027 co-op or Summer 2027 internship in software engineering, data or sports
           analytics, or quant. I’m also happy to help with short projects over winter break in December 2026. Email
-          is the best way to reach me.
-        </p>
+            is the best way to reach me.
+          </p>
+        </div>
 
         <a
           href={`mailto:${profile.email}`}

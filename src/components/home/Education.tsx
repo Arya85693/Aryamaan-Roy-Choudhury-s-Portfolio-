@@ -7,27 +7,27 @@ export default function Education() {
     <section
       id="education"
       aria-labelledby="education-heading"
-      className="border-t border-line bg-ink-850/50 py-24 sm:py-32"
+      className="py-20 sm:py-28"
     >
       <div className="mx-auto max-w-page px-5 sm:px-8">
         <SectionHeading id="education-heading" title="Education" />
 
-        <div className="grid gap-6 lg:grid-cols-12">
-          <Reveal className="card p-6 sm:p-8 lg:col-span-7">
+        <div className="grid gap-12 lg:grid-cols-12 lg:gap-8">
+          <Reveal className="lg:col-span-7">
             <div className="flex flex-wrap items-start justify-between gap-4">
               <div>
-                <h3 className="font-display text-2xl font-semibold tracking-tight text-paper">{education.school}</h3>
+                <h3 className="font-display text-2xl font-bold tracking-tight text-paper">{education.school}</h3>
                 <p className="mt-1 text-paper-muted">{education.degree}</p>
               </div>
-              <p className="rounded-full border border-line px-3 py-1 font-mono text-xs text-paper">
+              <p className="figures text-sm font-medium text-paper">
                 Expected {education.graduation}
               </p>
             </div>
 
-            <dl className="mt-8 grid gap-6 sm:grid-cols-2">
+            <dl className="mt-8 grid gap-6 border-t border-line pt-6 sm:grid-cols-2">
               <div>
                 <dt className="eyebrow">GPA</dt>
-                <dd className="mt-2 font-display text-3xl font-semibold text-paper">{education.gpa}</dd>
+                <dd className="figures mt-2 font-display text-4xl font-bold tracking-tight text-paper">{education.gpa}</dd>
               </div>
               <div>
                 <dt className="eyebrow">Honors</dt>
@@ -45,7 +45,7 @@ export default function Education() {
                 <dt className="eyebrow">Relevant coursework</dt>
                 <dd className="mt-3 flex flex-wrap gap-1.5">
                   {education.coursework.map((c) => (
-                    <span key={c} className="rounded-md border border-line px-2.5 py-1 text-sm text-paper-muted">
+                    <span key={c} className="border border-line-strong px-2.5 py-1 text-sm text-paper-muted">
                       {c}
                     </span>
                   ))}
@@ -54,11 +54,11 @@ export default function Education() {
             </dl>
           </Reveal>
 
-          <Reveal delay={100} className="card p-6 sm:p-8 lg:col-span-5">
-            <h3 className="eyebrow">Certificates</h3>
-            <ul className="mt-6 space-y-5">
+          <Reveal delay={100} className="lg:col-span-4 lg:col-start-9">
+            <h3 className="font-display text-2xl font-bold tracking-tight text-paper">Certificates</h3>
+            <ul className="mt-8 space-y-5 border-t border-line pt-6">
               {education.certificates.map((c) => (
-                <li key={c.name} className="border-l border-secondary/50 pl-4">
+                <li key={c.name}>
                   <p className="text-paper">{c.name}</p>
                   <p className="mt-0.5 text-sm text-paper-dim">{c.issuer}</p>
                 </li>
@@ -67,8 +67,8 @@ export default function Education() {
           </Reveal>
         </div>
 
-        <Reveal className="mt-16">
-          <h3 className="eyebrow">Leadership & community</h3>
+        <Reveal className="mt-20">
+          <h3 className="font-display text-2xl font-bold tracking-tight text-paper">Leadership & community</h3>
         </Reveal>
         <ul className="mt-6 border-t border-line">
           {leadership.map((item, i) => (
@@ -78,7 +78,7 @@ export default function Education() {
               delay={i * 40}
               className="grid gap-2 border-b border-line py-6 md:grid-cols-12 md:gap-8"
             >
-              <p className="font-mono text-xs text-paper-dim md:col-span-3 md:pt-1">{item.period}</p>
+              <p className="figures text-sm text-paper-dim md:col-span-3">{item.period}</p>
               <div className="md:col-span-4">
                 <p className="font-medium text-paper">{item.role}</p>
                 <p className="text-sm text-paper-muted">{item.org}</p>

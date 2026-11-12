@@ -4,7 +4,7 @@ import Reveal from "@/components/Reveal";
 
 export default function About() {
   return (
-    <section id="about" aria-labelledby="about-heading" className="border-t border-line bg-ink-850/50 py-24 sm:py-32">
+    <section id="about" aria-labelledby="about-heading" className="py-20 sm:py-28">
       <div className="mx-auto max-w-page px-5 sm:px-8">
         <SectionHeading id="about-heading" title="About me" />
 
@@ -26,7 +26,7 @@ export default function About() {
 
         <div className="mt-16">
           <Reveal>
-            <h3 className="font-display text-xl font-semibold tracking-tight text-paper">What I’m interested in</h3>
+            <h3 className="font-display text-2xl font-bold tracking-tight text-paper">What I’m interested in</h3>
           </Reveal>
           <ul className="mt-6 grid gap-6 md:grid-cols-3">
             {interests.map((item, i) => (

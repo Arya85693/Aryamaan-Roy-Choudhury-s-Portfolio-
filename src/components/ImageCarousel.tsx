@@ -168,9 +168,9 @@ export default function ImageCarousel({
   // From sm up the arrows sit just outside the frame, so they never cover the slide. On phones there is no room
   // beside it, so they move into the indicator row underneath instead.
   const arrowClass =
-    "absolute top-1/2 z-10 hidden h-10 w-10 -translate-y-1/2 items-center justify-center rounded-full border border-line-strong bg-ink/85 text-paper backdrop-blur transition-colors hover:text-accent-fg disabled:pointer-events-none disabled:opacity-0 sm:flex";
+    "absolute top-1/2 z-10 hidden h-10 w-10 -translate-y-1/2 items-center justify-center border border-line-strong bg-ink text-paper transition-colors hover:text-accent-fg disabled:pointer-events-none disabled:opacity-0 sm:flex";
   const rowArrowClass =
-    "flex h-9 w-9 shrink-0 items-center justify-center rounded-full border border-line-strong text-paper transition-colors hover:text-accent-fg disabled:opacity-30 sm:hidden";
+    "flex h-9 w-9 shrink-0 items-center justify-center border border-line-strong text-paper transition-colors hover:text-accent-fg disabled:opacity-30 sm:hidden";
 
   return (
     <div ref={rootRef} className="w-full">
@@ -184,7 +184,7 @@ export default function ImageCarousel({
           onKeyDown={onTrackKeyDown}
           onClick={onTrackClick}
           title="Click to enlarge"
-          className="no-scrollbar flex cursor-zoom-in snap-x snap-mandatory overflow-x-auto overscroll-x-contain rounded-xl border border-line-strong bg-ink-800 shadow-[0_30px_80px_-30px_var(--frame-shadow)]"
+          className="no-scrollbar flex cursor-zoom-in snap-x snap-mandatory overflow-x-auto overscroll-x-contain border border-line-strong bg-ink-800"
         >
           {slides.map((slide, i) => (
             <div
@@ -285,7 +285,7 @@ export default function ImageCarousel({
           onClick={() => setEnlarged(true)}
           aria-label="Enlarge"
           title="Enlarge"
-          className="inline-flex h-7 w-7 items-center justify-center rounded-full text-paper-muted transition-colors hover:text-paper"
+          className="inline-flex h-7 w-7 items-center justify-center text-paper-muted transition-colors hover:text-paper"
         >
           <ExpandIcon className="h-4 w-4" />
         </button>
@@ -388,7 +388,7 @@ function EnlargedSlides({
   // Width that lets the whole slide fit under the header (and the phone arrows).
   const ratio = slideWidth / slideHeight;
   const navClass =
-    "flex h-11 w-11 shrink-0 items-center justify-center rounded-full border border-line-strong bg-ink-800 text-paper transition-colors hover:text-accent-fg disabled:opacity-30 disabled:hover:text-paper";
+    "flex h-11 w-11 shrink-0 items-center justify-center border border-line-strong bg-ink-800 text-paper transition-colors hover:text-accent-fg disabled:opacity-30 disabled:hover:text-paper";
 
   return (
     <div
@@ -396,7 +396,7 @@ function EnlargedSlides({
       role="dialog"
       aria-modal="true"
       aria-label={`${title}, enlarged`}
-      className="fixed inset-0 z-[100] flex animate-fade-in flex-col bg-ink/95 backdrop-blur-sm"
+      className="fixed inset-0 z-[100] flex animate-fade-in flex-col bg-ink/95"
       onClick={onClose}
     >
       <div className="flex items-center justify-between px-4 py-3 sm:px-6" onClick={(e) => e.stopPropagation()}>
@@ -412,7 +412,7 @@ function EnlargedSlides({
           ref={closeRef}
           type="button"
           onClick={onClose}
-          className="flex h-10 w-10 items-center justify-center rounded-full border border-line-strong bg-ink-800 text-paper transition-colors hover:text-accent-fg"
+          className="flex h-10 w-10 items-center justify-center border border-line-strong bg-ink-800 text-paper transition-colors hover:text-accent-fg"
           aria-label={`Close enlarged ${noun}`}
         >
           <CloseIcon />
@@ -449,7 +449,7 @@ function EnlargedSlides({
             priority
             sizes={ratio > 1 ? "100vw" : "(orientation: landscape) 75vh, 100vw"}
             style={{ "--ratio": ratio } as CSSProperties}
-            className="h-auto w-[min(100%,calc((100dvh_-_10rem)*var(--ratio)))] rounded-lg shadow-2xl sm:w-[min(100%,calc((100dvh_-_7rem)*var(--ratio)))]"
+            className="h-auto w-[min(100%,calc((100dvh_-_10rem)*var(--ratio)))] sm:w-[min(100%,calc((100dvh_-_7rem)*var(--ratio)))]"
             draggable={false}
           />
         </div>

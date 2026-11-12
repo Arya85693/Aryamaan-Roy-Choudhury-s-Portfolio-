@@ -1,5 +1,5 @@
 import type { Metadata, Viewport } from "next";
-import { Inter, Inter_Tight, Instrument_Serif, JetBrains_Mono } from "next/font/google";
+import { Inter, Inter_Tight, JetBrains_Mono } from "next/font/google";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import CommandMenu from "@/components/CommandMenu";
@@ -10,14 +10,7 @@ const sans = Inter({ subsets: ["latin"], variable: "--font-sans", display: "swap
 const display = Inter_Tight({
   subsets: ["latin"],
   variable: "--font-display",
-  weight: ["500", "600", "700"],
-  display: "swap",
-});
-const serif = Instrument_Serif({
-  subsets: ["latin"],
-  variable: "--font-serif",
-  weight: "400",
-  style: ["normal", "italic"],
+  weight: ["500", "600", "700", "800"],
   display: "swap",
 });
 const mono = JetBrains_Mono({ subsets: ["latin"], variable: "--font-mono", display: "swap" });
@@ -58,7 +51,7 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${sans.variable} ${display.variable} ${serif.variable} ${mono.variable} antialiased`}
+      className={`${sans.variable} ${display.variable} ${mono.variable} antialiased`}
       suppressHydrationWarning
     >
       <head>
@@ -67,7 +60,7 @@ export default function RootLayout({
       <body>
         <a
           href="#main"
-          className="sr-only z-[100] rounded-md bg-accent px-4 py-2 text-sm font-medium text-on-accent focus:not-sr-only focus:fixed focus:left-4 focus:top-4"
+          className="sr-only z-[100] bg-accent px-4 py-2 text-sm font-medium text-on-accent focus:not-sr-only focus:fixed focus:left-4 focus:top-4"
         >
           Skip to content
         </a>

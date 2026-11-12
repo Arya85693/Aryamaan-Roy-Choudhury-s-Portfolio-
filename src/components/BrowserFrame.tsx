@@ -8,11 +8,11 @@ type BrowserFrameProps = {
   priority?: boolean;
 };
 
-/** A screenshot with a thin border and rounded corners (no fake browser chrome). */
+/** A screenshot with a thin square border (no fake browser chrome, no shadow). */
 export default function BrowserFrame({ image, className = "", sizes, priority }: BrowserFrameProps) {
   return (
     <figure
-      className={`overflow-hidden rounded-xl border border-line-strong bg-ink-800 shadow-[0_24px_60px_-30px_var(--frame-shadow)] ${className}`}
+      className={`overflow-hidden border border-line-strong bg-ink-800 ${className}`}
     >
       <LightboxImage
         src={image.src}

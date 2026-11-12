@@ -166,14 +166,14 @@ export default function CommandMenu() {
     <>
       {open && (
         <div
-          className="fixed inset-0 z-[90] flex animate-fade-in items-start justify-center bg-ink/70 px-4 pt-[14vh] backdrop-blur-sm"
+          className="fixed inset-0 z-[90] flex animate-fade-in items-start justify-center bg-ink/80 px-4 pt-[14vh]"
           onMouseDown={close}
         >
           <div
             role="dialog"
             aria-modal="true"
             aria-label="Command menu"
-            className="w-full max-w-lg overflow-hidden rounded-2xl border border-line-strong bg-ink-850 shadow-2xl"
+            className="w-full max-w-lg overflow-hidden border border-line-strong bg-ink-850"
             onMouseDown={(e) => e.stopPropagation()}
           >
             <div className="flex items-center gap-3 border-b border-line px-4">
@@ -191,7 +191,7 @@ export default function CommandMenu() {
                 aria-activedescendant={filtered[activeIndex] ? `cmd-${filtered[activeIndex].id}` : undefined}
                 aria-autocomplete="list"
               />
-              <kbd className="rounded border border-line px-1.5 py-0.5 font-mono text-[0.65rem] text-paper-dim">
+              <kbd className="border border-line px-1.5 py-0.5 font-mono text-[0.65rem] text-paper-dim">
                 esc
               </kbd>
             </div>
@@ -214,7 +214,7 @@ export default function CommandMenu() {
                       aria-selected={i === activeIndex}
                       onMouseMove={() => setActiveIndex(i)}
                       onClick={() => runCommand(command)}
-                      className={`flex cursor-pointer items-center justify-between gap-4 rounded-lg px-3 py-2.5 text-sm ${
+                      className={`flex cursor-pointer items-center justify-between gap-4 px-3 py-2.5 text-sm ${
                         i === activeIndex ? "bg-paper/[0.06] text-paper" : "text-paper-muted"
                       }`}
                     >
@@ -232,7 +232,7 @@ export default function CommandMenu() {
       )}
       <div aria-live="polite" className="pointer-events-none fixed inset-x-0 bottom-6 z-[95] flex justify-center">
         {toast && (
-          <p className="animate-fade-in rounded-full border border-line-strong bg-ink-800 px-4 py-2 text-sm text-paper shadow-xl">
+          <p className="animate-fade-in border border-line-strong bg-ink-800 px-4 py-2 text-sm text-paper">
             {toast}
           </p>
         )}
