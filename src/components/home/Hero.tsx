@@ -95,8 +95,8 @@ export default function Hero() {
           </dl>
 
           <div className="lg:col-span-2">
-            {/* A transparent cut-out (cropped from headshot.png above its circular edge) on a solid tile, so the
-                photo's background is the tile color and the shoulders run flat across the bottom edge. */}
+            {/* A transparent cut-out (cropped from headshot.png above its circular edge), so the page color shows
+                behind it and the shoulders run flat across the bottom edge. */}
             <Image
               src="/headshot-portrait.png"
               alt={`Portrait of ${profile.name}`}
@@ -104,7 +104,7 @@ export default function Hero() {
               height={360}
               sizes="(min-width: 1024px) 180px, 144px"
               priority
-              className="aspect-square w-28 bg-ink-800 object-cover sm:w-36 lg:w-full"
+              className="aspect-square w-28 object-cover sm:w-36 lg:w-full"
             />
           </div>
         </div>
