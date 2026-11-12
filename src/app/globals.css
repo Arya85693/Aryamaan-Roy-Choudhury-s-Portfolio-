@@ -4,88 +4,62 @@
 
 /*
  * Theme tokens, as RGB channels so Tailwind opacity modifiers work (bg-ink/80).
- * Dark:  Egyptian blue #03203D, stone blue #639CC5, scarlet red #EB2F33.
- * Light: soft sand #F0E5DB, mocha green #474329, watermelon pink #C75B7A.
+ * "Varsity" palette.
+ * Light (default): old cream #F0E1CE, midnight navy #1A2841, vintage red #B11722.
+ * Dark:            ocean navy #021F2F, soft azure #B7E3F4, rose coral #FD6C63.
  * The other shades are derived from those so every text color passes WCAG AA.
  * An inline script in layout.tsx sets data-theme before paint (saved choice,
- * else the system setting); the media query covers visitors without JS.
+ * else light); visitors without JS get the light theme.
  */
 :root,
-:root[data-theme="dark"] {
-  color-scheme: dark;
-  --ink-900: 3 32 61; /* Egyptian blue */
-  --ink-850: 7 38 69;
-  --ink-800: 11 45 80;
-  --ink-700: 18 55 93;
-  --ink-600: 28 67 107;
-  --paper: 238 244 249;
-  --paper-muted: 179 202 221;
-  --paper-dim: 99 156 197; /* stone blue */
-  --line-rgb: 99 156 197;
-  --line-alpha: 0.16;
-  --line-strong-alpha: 0.3;
-  --accent: 235 47 51; /* scarlet red */
-  --accent-soft: 240 78 81;
-  --accent-fg: 255 99 102;
-  --on-accent: 255 255 255;
-  --secondary: 99 156 197; /* stone blue */
-  --secondary-soft: 127 176 211;
-  --on-secondary: 3 32 61;
-  --up: 91 196 138;
-  --down: 255 99 102;
-  --frame-shadow: rgba(0, 8, 20, 0.8);
-}
-
 :root[data-theme="light"] {
   color-scheme: light;
-  --ink-900: 240 229 219; /* soft sand */
-  --ink-850: 247 240 233;
-  --ink-800: 232 218 204;
-  --ink-700: 223 207 191;
-  --ink-600: 210 191 173;
-  --paper: 71 67 41; /* mocha green */
-  --paper-muted: 94 90 63;
-  --paper-dim: 101 96 63;
-  --line-rgb: 71 67 41;
-  --line-alpha: 0.13;
-  --line-strong-alpha: 0.24;
-  --accent: 199 91 122; /* watermelon pink */
-  --accent-soft: 184 79 109;
-  --accent-fg: 155 59 86;
+  --ink-900: 240 225 206; /* old cream */
+  --ink-850: 247 238 226;
+  --ink-800: 232 215 193;
+  --ink-700: 222 203 178;
+  --ink-600: 208 187 160;
+  --paper: 26 40 65; /* midnight navy */
+  --paper-muted: 52 66 94;
+  --paper-dim: 78 90 116;
+  --line-rgb: 26 40 65;
+  --line-alpha: 0.14;
+  --line-strong-alpha: 0.26;
+  --accent: 177 23 34; /* vintage red */
+  --accent-soft: 150 18 28;
+  --accent-fg: 177 23 34;
   --on-accent: 255 255 255;
-  --secondary: 71 67 41; /* mocha green */
-  --secondary-soft: 90 85 54;
-  --on-secondary: 240 229 219;
-  --up: 47 125 79;
-  --down: 155 59 86;
-  --frame-shadow: rgba(71, 67, 41, 0.28);
+  --secondary: 26 40 65; /* midnight navy */
+  --secondary-soft: 44 60 92;
+  --on-secondary: 240 225 206;
+  --up: 24 100 58;
+  --down: 177 23 34;
+  --frame-shadow: rgba(26, 40, 65, 0.28);
 }
 
-@media (prefers-color-scheme: light) {
-  :root:not([data-theme]) {
-    color-scheme: light;
-    --ink-900: 240 229 219;
-    --ink-850: 247 240 233;
-    --ink-800: 232 218 204;
-    --ink-700: 223 207 191;
-    --ink-600: 210 191 173;
-    --paper: 71 67 41;
-    --paper-muted: 94 90 63;
-    --paper-dim: 101 96 63;
-    --line-rgb: 71 67 41;
-    --line-alpha: 0.13;
-    --line-strong-alpha: 0.24;
-    --accent: 199 91 122;
-    --accent-soft: 184 79 109;
-    --accent-fg: 155 59 86;
-    --on-accent: 255 255 255;
-    --secondary: 71 67 41;
-    --secondary-soft: 90 85 54;
-    --on-secondary: 240 229 219;
-    --up: 47 125 79;
-    --down: 155 59 86;
-    --frame-shadow: rgba(71, 67, 41, 0.28);
-  }
+:root[data-theme="dark"] {
+  color-scheme: dark;
+  --ink-900: 2 31 47; /* ocean navy */
+  --ink-850: 6 39 57;
+  --ink-800: 10 47 68;
+  --ink-700: 17 58 82;
+  --ink-600: 27 71 97;
+  --paper: 228 243 250;
+  --paper-muted: 183 227 244; /* soft azure */
+  --paper-dim: 122 172 196;
+  --line-rgb: 183 227 244;
+  --line-alpha: 0.14;
+  --line-strong-alpha: 0.28;
+  --accent: 253 108 99; /* rose coral */
+  --accent-soft: 254 136 128;
+  --accent-fg: 253 108 99;
+  --on-accent: 2 31 47;
+  --secondary: 183 227 244; /* soft azure */
+  --secondary-soft: 208 237 249;
+  --on-secondary: 2 31 47;
+  --up: 110 214 160;
+  --down: 253 108 99;
+  --frame-shadow: rgba(0, 10, 18, 0.8);
 }
 
 @layer base {

@@ -3,7 +3,7 @@ import { Inter, Inter_Tight, Instrument_Serif, JetBrains_Mono } from "next/font/
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import CommandMenu from "@/components/CommandMenu";
-import { themeColors, themeInitScript } from "@/lib/theme";
+import { DEFAULT_THEME, themeColors, themeInitScript } from "@/lib/theme";
 import "./globals.css";
 
 const sans = Inter({ subsets: ["latin"], variable: "--font-sans", display: "swap" });
@@ -46,10 +46,8 @@ export const metadata: Metadata = {
 };
 
 export const viewport: Viewport = {
-  themeColor: [
-    { media: "(prefers-color-scheme: dark)", color: themeColors.dark },
-    { media: "(prefers-color-scheme: light)", color: themeColors.light },
-  ],
+  // The page opens in the default theme; ThemeToggle re-syncs this when the visitor switches.
+  themeColor: themeColors[DEFAULT_THEME],
 };
 
 export default function RootLayout({

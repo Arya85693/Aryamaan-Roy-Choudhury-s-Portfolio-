@@ -4,11 +4,14 @@ export const THEME_STORAGE_KEY = "theme";
 export const THEME_CHANGE = "themechange";
 
 // Browser-bar colors (the page background of each theme).
-export const themeColors: Record<Theme, string> = { dark: "#03203D", light: "#F0E5DB" };
+export const themeColors: Record<Theme, string> = { dark: "#021F2F", light: "#F0E1CE" };
+
+// The theme every first-time visitor sees, whatever their system setting.
+export const DEFAULT_THEME: Theme = "light";
 
 // Runs inline in <head> before first paint so the page never flashes the wrong theme.
-// Uses the visitor's saved choice, else their system setting.
-export const themeInitScript = `(function(){var d=document.documentElement;d.classList.add('js');var t=null;try{t=localStorage.getItem('${THEME_STORAGE_KEY}')}catch(e){}if(t!=='light'&&t!=='dark'){t=window.matchMedia&&matchMedia('(prefers-color-scheme: light)').matches?'light':'dark'}d.setAttribute('data-theme',t)})()`;
+// Uses the visitor's saved choice, else the default theme.
+export const themeInitScript = `(function(){var d=document.documentElement;d.classList.add('js');var t=null;try{t=localStorage.getItem('${THEME_STORAGE_KEY}')}catch(e){}if(t!=='light'&&t!=='dark'){t='${DEFAULT_THEME}'}d.setAttribute('data-theme',t)})()`;
 
 export function getTheme(): Theme {
   return document.documentElement.getAttribute("data-theme") === "light" ? "light" : "dark";
@@ -38,13 +41,4 @@ export function setTheme(theme: Theme) {
 
 export function toggleTheme() {
   setTheme(getTheme() === "dark" ? "light" : "dark");
-}
-
-export function hasSavedTheme() {
-  try {
-    const saved = localStorage.getItem(THEME_STORAGE_KEY);
-    return saved === "light" || saved === "dark";
-  } catch {
-    return false;
-  }
 }

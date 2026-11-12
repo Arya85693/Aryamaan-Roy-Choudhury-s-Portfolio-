@@ -4,9 +4,7 @@ import { useEffect, useState } from "react";
 import { MoonIcon, SunIcon } from "@/components/Icons";
 import {
   THEME_CHANGE,
-  applyTheme,
   getTheme,
-  hasSavedTheme,
   syncThemeColorMeta,
   toggleTheme,
   type Theme,
@@ -21,17 +19,7 @@ export default function ThemeToggle({ className = "" }: { className?: string }) 
     sync();
     syncThemeColorMeta(getTheme());
     window.addEventListener(THEME_CHANGE, sync);
-
-    // Follow the system setting live until the visitor picks a theme themselves.
-    const media = window.matchMedia("(prefers-color-scheme: light)");
-    const onSystemChange = () => {
-      if (!hasSavedTheme()) applyTheme(media.matches ? "light" : "dark");
-    };
-    media.addEventListener("change", onSystemChange);
-    return () => {
-      window.removeEventListener(THEME_CHANGE, sync);
-      media.removeEventListener("change", onSystemChange);
-    };
+    return () => window.removeEventListener(THEME_CHANGE, sync);
   }, []);
 
   const label = theme === "light" ? "Switch to dark theme" : theme === "dark" ? "Switch to light theme" : "Toggle color theme";
