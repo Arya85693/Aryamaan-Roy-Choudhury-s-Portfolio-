@@ -19,16 +19,25 @@ export default function Hero() {
   return (
     <section aria-labelledby="hero-title" className="pt-28 sm:pt-32">
       <div className="mx-auto max-w-page px-5 sm:px-8">
-        {/* The one oversized moment on the page; everything after it stays on the quiet grid. */}
+        {/* The one oversized moment on the page, and its one load sequence: each line of the name rises out
+            of a mask, the rule draws under it, then the rest fades in. Everything after it stays quiet. */}
         <h1
           id="hero-title"
-          className="animate-fade-up font-display text-[clamp(2.75rem,12vw,10.5rem)] font-extrabold leading-[0.86] tracking-[-0.055em] text-paper"
+          className="font-display text-[clamp(2.75rem,12vw,10.5rem)] font-extrabold leading-[0.86] tracking-[-0.055em] text-paper"
         >
-          <span className="block">{firstName}</span>
-          <span className="block">{restOfName.join(" ")}</span>
+          {[firstName, restOfName.join(" ")].map((line, i) => (
+            // The padding gives descenders room inside the mask; the negative margin cancels it in the layout.
+            <span key={line} className="-my-[0.08em] block overflow-hidden py-[0.08em]">
+              <span className="block animate-line-up" style={{ animationDelay: `${i * 110}ms` }}>
+                {line}
+              </span>
+            </span>
+          ))}
         </h1>
 
-        <div className="mt-10 grid animate-fade-up gap-10 border-t-2 border-paper pt-6 [animation-delay:120ms] sm:mt-14 lg:grid-cols-12 lg:gap-8">
+        <div aria-hidden className="mt-10 h-0.5 origin-left animate-rule-draw bg-paper [animation-delay:350ms] sm:mt-14" />
+
+        <div className="grid animate-fade gap-10 pt-6 [animation-delay:700ms] lg:grid-cols-12 lg:gap-8">
           <div className="lg:col-span-6">
             <p className="max-w-xl text-lg leading-relaxed text-paper-muted">
               I study Computer Engineering and Computer Science at Northeastern. Most of what I build has to do with
@@ -48,9 +57,9 @@ export default function Hero() {
             </p>
 
             <div className="mt-10 flex flex-wrap items-center gap-3">
-              <a href="#work" className="btn-primary group">
+              <a href="#work" className="btn-primary">
                 See my projects
-                <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" />
+                <ArrowRight className="nudge-r h-4 w-4" />
               </a>
               <a href={profile.resume} target="_blank" rel="noopener noreferrer" className="btn-ghost">
                 Résumé
@@ -86,14 +95,16 @@ export default function Hero() {
           </dl>
 
           <div className="lg:col-span-2">
+            {/* The photo is a cut-out on a transparent background, so a solid tile behind it makes the square,
+                and anchoring it to the bottom keeps the shoulders running flat along the bottom edge. */}
             <Image
               src="/headshot.png"
               alt={`Portrait of ${profile.name}`}
-              width={320}
-              height={320}
+              width={1353}
+              height={1163}
               sizes="(min-width: 1024px) 180px, 144px"
               priority
-              className="aspect-square w-28 object-cover sm:w-36 lg:w-full"
+              className="aspect-square w-28 bg-ink-800 object-cover object-bottom sm:w-36 lg:w-full"
             />
           </div>
         </div>

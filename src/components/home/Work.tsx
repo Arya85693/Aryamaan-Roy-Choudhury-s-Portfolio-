@@ -4,6 +4,7 @@ import SectionHeading from "@/components/SectionHeading";
 import Reveal from "@/components/Reveal";
 import BrowserFrame from "@/components/BrowserFrame";
 import StackList from "@/components/StackList";
+import CountUp from "@/components/CountUp";
 import { ArrowRight, ArrowUpRight, GitHubIcon } from "@/components/Icons";
 
 function ProjectLinks({ project }: { project: Project }) {
@@ -11,7 +12,7 @@ function ProjectLinks({ project }: { project: Project }) {
     <div className="flex flex-wrap items-center gap-3">
       {project.live && (
         <a href={project.live} target="_blank" rel="noopener noreferrer" className="btn-primary">
-          Live site <ArrowUpRight />
+          Live site <ArrowUpRight className="nudge-ur h-4 w-4" />
         </a>
       )}
       {project.github && (
@@ -26,7 +27,7 @@ function ProjectLinks({ project }: { project: Project }) {
         </a>
       )}
       <Link href={`/projects/${project.slug}`} className="btn-ghost">
-        Case study <ArrowRight />
+        Case study <ArrowRight className="nudge-r h-4 w-4" />
       </Link>
       {project.codeOnRequest && (
         <a href={codeRequestHref(project.title)} className="btn-ghost">
@@ -53,7 +54,7 @@ function FactGrid({ facts, className = "" }: { facts: NonNullable<Project["facts
         >
           <dt className="text-sm leading-snug text-paper-dim sm:mt-1 sm:text-xs">{fact.label}</dt>
           <dd className="figures w-[4.5rem] shrink-0 font-display text-xl font-bold tracking-tight text-paper sm:w-auto sm:text-4xl">
-            {fact.value}
+            <CountUp value={fact.value} />
           </dd>
         </div>
       ))}
@@ -88,7 +89,9 @@ function FeaturedProject({ project, flip = false }: { project: Project; flip?: b
             id={`${project.slug}-title`}
             className="mt-2 font-display text-4xl font-bold tracking-tightest text-paper sm:text-5xl"
           >
-            {project.title}
+            <Link href={`/projects/${project.slug}`} className="link-underline">
+              {project.title}
+            </Link>
           </h3>
           <p className="mt-3 text-lg text-paper">{project.tagline}</p>
           <p className="mt-4 leading-relaxed text-paper-muted">{project.summary}</p>

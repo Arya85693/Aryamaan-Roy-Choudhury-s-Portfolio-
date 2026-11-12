@@ -82,7 +82,7 @@ export default function Research() {
                     rel="noopener noreferrer"
                     className="btn-primary shrink-0 self-start lg:self-auto"
                   >
-                    <FileIcon /> Read Research Paper <ArrowUpRight />
+                    <FileIcon /> Read Research Paper <ArrowUpRight className="nudge-ur h-4 w-4" />
                   </a>
                 </div>
               </div>

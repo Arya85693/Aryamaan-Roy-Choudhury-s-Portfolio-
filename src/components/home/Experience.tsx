@@ -50,7 +50,7 @@ export default function Experience() {
                           rel="noopener noreferrer"
                           className="inline-flex items-center gap-1.5 text-sm font-medium text-paper transition-colors hover:text-accent-fg"
                         >
-                          {job.link.label} <ArrowUpRight className="h-3.5 w-3.5" />
+                          {job.link.label} <ArrowUpRight className="nudge-ur h-3.5 w-3.5" />
                         </a>
                       )}
                     </div>

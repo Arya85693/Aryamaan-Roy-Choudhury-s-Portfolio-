@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { profile } from "@/data/content";
@@ -22,6 +22,9 @@ export default function Navbar() {
   const [activeSection, setActiveSection] = useState<string | null>(null);
   const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
+  // One underline for the current section that slides between links instead of jumping.
+  const linkRefs = useRef<Record<string, HTMLAnchorElement | null>>({});
+  const [bar, setBar] = useState<{ left: number; width: number } | null>(null);
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 8);
@@ -48,6 +51,17 @@ export default function Navbar() {
     });
     return () => observer.disconnect();
   }, [isHome]);
+
+  useEffect(() => {
+    const active = isHome && activeSection ? linkRefs.current[activeSection] : null;
+    if (!active) return;
+    const measure = () => setBar({ left: active.offsetLeft + 12, width: active.offsetWidth - 24 });
+    measure();
+    // Link widths change once the web font loads and when the window resizes.
+    document.fonts?.ready.then(measure);
+    window.addEventListener("resize", measure);
+    return () => window.removeEventListener("resize", measure);
+  }, [isHome, activeSection]);
 
   useEffect(() => {
     if (!menuOpen) return;
@@ -87,23 +101,34 @@ export default function Navbar() {
           {profile.name}
         </Link>
 
-        <div className="hidden items-center gap-1 md:flex">
+        <div className="relative hidden items-center gap-1 md:flex">
           {sections.map(({ id, label }) => {
             const active = isHome && activeSection === id;
             return (
               <a
                 key={id}
+                ref={(el) => {
+                  linkRefs.current[id] = el;
+                }}
                 href={href(id)}
                 aria-current={active ? "true" : undefined}
-                className={`relative px-3 py-1.5 text-sm transition-colors ${
+                className={`px-3 py-1.5 text-sm transition-colors ${
                   active ? "text-paper" : "text-paper-muted hover:text-paper"
                 }`}
               >
                 {label}
-                {active && <span aria-hidden className="absolute inset-x-3 -bottom-px h-0.5 bg-accent" />}
               </a>
             );
           })}
+          {bar && (
+            <span
+              aria-hidden
+              className={`absolute -bottom-px left-0 h-0.5 bg-accent transition-[transform,width,opacity] duration-300 ease-out ${
+                isHome && activeSection ? "opacity-100" : "opacity-0"
+              }`}
+              style={{ width: bar.width, transform: `translateX(${bar.left}px)` }}
+            />
+          )}
         </div>
 
         <div className="flex items-center gap-2">

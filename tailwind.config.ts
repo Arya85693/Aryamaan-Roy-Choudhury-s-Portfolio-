@@ -65,15 +65,23 @@ const config: Config = {
           "0%": { opacity: "0" },
           "100%": { opacity: "1" },
         },
-        blink: {
-          "0%, 49%": { opacity: "1" },
-          "50%, 100%": { opacity: "0" },
+        // A line of type rising out of a mask (the mask is an overflow-hidden parent).
+        "line-up": {
+          "0%": { transform: "translateY(105%)" },
+          "100%": { transform: "translateY(0)" },
+        },
+        // A rule drawing itself from the left edge.
+        "rule-draw": {
+          "0%": { transform: "scaleX(0)" },
+          "100%": { transform: "scaleX(1)" },
         },
       },
       animation: {
         "fade-up": "fade-up 0.7s cubic-bezier(0.22, 1, 0.36, 1) both",
         "fade-in": "fade-in 0.2s ease-out both",
-        blink: "blink 1.1s steps(1) 5",
+        fade: "fade-in 0.8s ease-out both",
+        "line-up": "line-up 0.9s cubic-bezier(0.22, 1, 0.36, 1) both",
+        "rule-draw": "rule-draw 0.9s cubic-bezier(0.65, 0, 0.35, 1) both",
       },
     },
   },

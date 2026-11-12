@@ -7,6 +7,7 @@ import StackList from "@/components/StackList";
 import ImageCarousel from "@/components/ImageCarousel";
 import Honesty from "@/components/Honesty";
 import Reveal from "@/components/Reveal";
+import CountUp from "@/components/CountUp";
 import { ArrowLeft, ArrowRight, ArrowUpRight, GitHubIcon } from "@/components/Icons";
 
 type Params = { params: { slug: string } };
@@ -70,7 +71,7 @@ export default function ProjectPage({ params }: Params) {
         <div className="mt-10 flex animate-fade-up flex-wrap gap-3 [animation-delay:180ms]">
           {project.live && (
             <a href={project.live} target="_blank" rel="noopener noreferrer" className="btn-primary">
-              Visit {liveHost(project.live)} <ArrowUpRight />
+              Visit {liveHost(project.live)} <ArrowUpRight className="nudge-ur h-4 w-4" />
             </a>
           )}
           {project.github && (
@@ -149,7 +150,9 @@ export default function ProjectPage({ params }: Params) {
                   {project.facts.map((f) => (
                     <div key={f.label} className="flex flex-col-reverse justify-end">
                       <dt className="mt-1 text-xs text-paper-dim">{f.label}</dt>
-                      <dd className="figures font-display text-xl font-bold text-paper">{f.value}</dd>
+                      <dd className="figures font-display text-xl font-bold text-paper">
+                        <CountUp value={f.value} />
+                      </dd>
                     </div>
                   ))}
                 </dl>
@@ -249,7 +252,7 @@ export default function ProjectPage({ params }: Params) {
             <p className="eyebrow">Next project</p>
             <p className="mt-4 flex items-center gap-4 font-display text-4xl font-bold tracking-tightest text-paper transition-colors group-hover:text-accent-fg sm:text-6xl">
               {next.title}
-              <ArrowRight className="h-7 w-7 shrink-0 transition-transform group-hover:translate-x-1" />
+              <ArrowRight className="nudge-r h-7 w-7 shrink-0" />
             </p>
           </Link>
         </nav>
