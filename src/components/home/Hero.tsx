@@ -25,14 +25,33 @@ export default function Hero() {
           id="hero-title"
           className="font-display text-[clamp(2.75rem,12vw,10.5rem)] font-extrabold leading-[0.86] tracking-[-0.055em] text-paper"
         >
-          {[firstName, restOfName.join(" ")].map((line, i) => (
+          {[firstName, restOfName.join(" ")].map((line, i) => {
             // The padding gives descenders room inside the mask; the negative margin cancels it in the layout.
-            <span key={line} className="-my-[0.08em] block overflow-hidden py-[0.08em]">
-              <span className="block animate-line-up" style={{ animationDelay: `${i * 110}ms` }}>
-                {line}
+            const masked = (
+              <span className="-my-[0.08em] block overflow-hidden py-[0.08em]">
+                <span className="block animate-line-up" style={{ animationDelay: `${i * 110}ms` }}>
+                  {line}
+                </span>
               </span>
-            </span>
-          ))}
+            );
+            if (i > 0) return <span key={line}>{masked}</span>;
+            // Below lg the photo sits in the open space beside the first, shorter line of the name; sized in em,
+            // it scales with the name. On lg it moves to its own column under the rule instead.
+            return (
+              <span key={line} className="flex items-end justify-between gap-4">
+                {masked}
+                <Image
+                  src="/headshot-portrait.png"
+                  alt=""
+                  width={360}
+                  height={360}
+                  sizes="(min-width: 640px) 160px, 80px"
+                  priority
+                  className="aspect-square h-[1.55em] w-[1.55em] shrink-0 animate-fade object-cover [animation-delay:500ms] lg:hidden"
+                />
+              </span>
+            );
+          })}
         </h1>
 
         <div aria-hidden className="mt-10 h-0.5 origin-left animate-rule-draw bg-paper [animation-delay:350ms] sm:mt-14" />
@@ -94,7 +113,7 @@ export default function Hero() {
             ))}
           </dl>
 
-          <div className="lg:col-span-2">
+          <div className="hidden lg:col-span-2 lg:block">
             {/* A transparent cut-out (cropped from headshot.png above its circular edge), so the page color shows
                 behind it and the shoulders run flat across the bottom edge. */}
             <Image
@@ -102,9 +121,9 @@ export default function Hero() {
               alt={`Portrait of ${profile.name}`}
               width={360}
               height={360}
-              sizes="(min-width: 1024px) 180px, 144px"
+              sizes="180px"
               priority
-              className="aspect-square w-28 object-cover sm:w-36 lg:w-full"
+              className="aspect-square w-full object-cover"
             />
           </div>
         </div>
