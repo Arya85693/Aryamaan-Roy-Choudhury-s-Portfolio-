@@ -63,21 +63,13 @@ function FactGrid({ facts, className = "" }: { facts: NonNullable<Project["facts
 }
 
 function FeaturedProject({ project, flip = false }: { project: Project; flip?: boolean }) {
-  const [primary, secondary] = project.images;
+  // One screenshot per project on the home page; the rest are in the case study's slideshow.
+  const [primary] = project.images;
   return (
     <Reveal as="article" className="py-14 first:pt-0 sm:py-20" aria-labelledby={`${project.slug}-title`}>
       <div className="grid gap-10 lg:grid-cols-12 lg:gap-8">
         <div className={`lg:col-span-6 lg:self-start ${flip ? "lg:order-2 lg:col-start-7" : ""}`}>
-          {primary && (
-            <BrowserFrame image={primary} sizes="(min-width: 1024px) 640px, 100vw" />
-          )}
-          {secondary && (
-            <BrowserFrame
-              image={secondary}
-              sizes="(min-width: 1024px) 420px, 100vw"
-              className={`mt-4 lg:w-2/3 ${flip ? "lg:mr-auto" : "lg:ml-auto"}`}
-            />
-          )}
+          {primary && <BrowserFrame image={primary} sizes="(min-width: 1024px) 640px, 100vw" />}
           {project.facts && <FactGrid facts={project.facts} className="mt-10 hidden lg:grid" />}
         </div>
 
