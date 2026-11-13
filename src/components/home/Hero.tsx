@@ -20,39 +20,32 @@ export default function Hero() {
     <section aria-labelledby="hero-title" className="pt-28 sm:pt-32">
       <div className="mx-auto max-w-page px-5 sm:px-8">
         {/* The one oversized moment on the page, and its one load sequence: each line of the name rises out
-            of a mask, the rule draws under it, then the rest fades in. Everything after it stays quiet. */}
-        <h1
-          id="hero-title"
-          className="font-display text-[clamp(2.75rem,12vw,10.5rem)] font-extrabold leading-[0.86] tracking-[-0.055em] text-paper"
-        >
-          {[firstName, restOfName.join(" ")].map((line, i) => {
-            // The padding gives descenders room inside the mask; the negative margin cancels it in the layout.
-            const masked = (
-              <span className="-my-[0.08em] block overflow-hidden py-[0.08em]">
+            of a mask, the rule draws under it, then the rest fades in. Everything after it stays quiet.
+            Below lg the photo sits to the right of both lines of the name, bottom-aligned with the second line,
+            and the name is sized from the viewport width so "Roy Choudhury" always stops short of the photo.
+            The h1 inherits its size from this wrapper so the em-sized photo and gap scale with it. From lg up
+            the wrapper is a plain block at the original size and the photo moves to its own column below. */}
+        <div className="flex items-end justify-between gap-[0.3em] text-[length:min(calc((100vw_-_40px)/9.7),7rem)] sm:text-[length:min(calc((100vw_-_64px)/9.7),7rem)] lg:block lg:text-[clamp(2.75rem,12vw,10.5rem)]">
+          <h1 id="hero-title" className="font-display font-extrabold leading-[0.86] tracking-[-0.055em] text-paper">
+            {[firstName, restOfName.join(" ")].map((line, i) => (
+              // The padding gives descenders room inside the mask; the negative margin cancels it in the layout.
+              <span key={line} className="-my-[0.08em] block overflow-hidden py-[0.08em]">
                 <span className="block animate-line-up" style={{ animationDelay: `${i * 110}ms` }}>
                   {line}
                 </span>
               </span>
-            );
-            if (i > 0) return <span key={line}>{masked}</span>;
-            // Below lg the photo sits in the open space beside the first, shorter line of the name; sized in em,
-            // it scales with the name. On lg it moves to its own column under the rule instead.
-            return (
-              <span key={line} className="flex items-end justify-between gap-4">
-                {masked}
-                <Image
-                  src="/headshot-portrait.png"
-                  alt=""
-                  width={360}
-                  height={360}
-                  sizes="(min-width: 640px) 160px, 80px"
-                  priority
-                  className="aspect-square h-[1.55em] w-[1.55em] shrink-0 animate-fade object-cover [animation-delay:500ms] lg:hidden"
-                />
-              </span>
-            );
-          })}
-        </h1>
+            ))}
+          </h1>
+          <Image
+            src="/headshot-portrait.png"
+            alt={`Portrait of ${profile.name}`}
+            width={360}
+            height={360}
+            sizes="(min-width: 640px) 220px, 110px"
+            priority
+            className="aspect-square h-[2.6em] w-[2.6em] shrink-0 animate-fade object-cover [animation-delay:500ms] lg:hidden"
+          />
+        </div>
 
         <div aria-hidden className="mt-10 h-0.5 origin-left animate-rule-draw bg-paper [animation-delay:350ms] sm:mt-14" />
 
